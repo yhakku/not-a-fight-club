@@ -1,0 +1,11 @@
+@use 'helpers' as *;
+@use 'variables' as root;
+
+.container {
+  max-width: root.$container-width;
+  margin-inline: auto;
+}
+
+.hidden {
+  @include visually-hidden;
+}

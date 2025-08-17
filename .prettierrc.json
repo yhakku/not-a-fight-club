@@ -1,0 +1,24 @@
+{
+  "plugins": ["@awmottaz/prettier-plugin-void-html"],
+  "voidElements": [
+    "area",
+    "base",
+    "br",
+    "col",
+    "embed",
+    "hr",
+    "img",
+    "input",
+    "link",
+    "meta",
+    "param",
+    "source",
+    "track",
+    "wbr"
+  ],
+  "singleAttributePerLine": false,
+  "htmlWhitespaceSensitivity": "ignore",
+  "bracketSameLine": false,
+  "semi": false,
+  "singleQuote": true
+}
