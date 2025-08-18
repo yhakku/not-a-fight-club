@@ -2,6 +2,7 @@
 @use 'variables' as root;
 
 body {
+  height: 100%;
   font-family: root.$font-family-base;
   font-size: rem(20);
   line-height: 1;
@@ -10,6 +11,10 @@ body {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+}
+
+main {
+  height: calc(100% - 164px);
 }
 
 h1,
