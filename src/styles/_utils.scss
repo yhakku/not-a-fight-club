@@ -6,6 +6,24 @@
   margin-inline: auto;
 }
 
+.button {
+  display: flex;
+  justify-self: center;
+  align-items: center;
+  padding-block: rem(17);
+  background-color: root.$color-ligth;
+  border: root.$border-default;
+  border-radius: rem(30);
+  transition: root.$transition-duration;
+
+  @include hover(false) {
+    & {
+      background-color: root.$color-dark;
+      color: root.$color-ligth;
+    }
+  }
+}
+
 .hidden {
   @include visually-hidden;
 }
