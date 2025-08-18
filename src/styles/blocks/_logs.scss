@@ -1,0 +1,15 @@
+@use '../helpers/' as *;
+@use '../variables/' as root;
+
+.logs {
+  max-width: rem(1120);
+  width: 100%;
+  height: auto;
+  padding: rem(20) rem(30);
+  border: root.$border-default;
+  background-color: root.$color-ligth;
+
+  &__list {
+    height: rem(190);
+  }
+}

@@ -1,0 +1,28 @@
+@use '../helpers/' as *;
+@use '../variables/' as root;
+
+.hp-control {
+  display: flex;
+  flex-direction: column;
+  row-gap: rem(10);
+
+  &__full {
+    height: rem(12);
+    border: root.$border-light;
+  }
+
+  &__hp {
+    display: flex;
+    width: 90%;
+    height: rem(10);
+    background-color: root.$color-dark;
+  }
+
+  &__amount {
+    font-size: rem(16);
+  }
+
+  &__count {
+    font-size: rem(16);
+  }
+}
