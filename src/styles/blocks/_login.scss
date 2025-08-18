@@ -1,0 +1,34 @@
+@use '../helpers/' as *;
+@use '../variables/' as root;
+
+.login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: rem(100);
+
+  &__title {
+    max-width: rem(332);
+    width: 100%;
+    text-align: center;
+    padding-bottom: rem(35);
+  }
+
+  &__body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  &__button-chars {
+    max-width: rem(270);
+    width: 100%;
+    margin-bottom: rem(15);
+  }
+
+  &__button-settings {
+    max-width: rem(270);
+    width: 100%;
+  }
+}
