@@ -5,6 +5,10 @@ body {
   font-family: root.$font-family-base;
   font-size: rem(20);
   color: root.$color-dark;
+  background: url(../assets/images/backgrounds/background-1.webp);
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 h1,
