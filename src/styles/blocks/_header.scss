@@ -19,6 +19,7 @@
     background-color: root.$color-dark;
     border-radius: rem(50);
     padding-block: rem(30);
+    z-index: 2;
   }
 
   &__list {

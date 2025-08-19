@@ -7,13 +7,24 @@ body {
   font-size: rem(20);
   line-height: 1;
   color: root.$color-dark;
-  background: url(../assets/images/backgrounds/background-2.webp);
+  background: url(../assets/images/backgrounds/background-1.webp);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+
+  &::before {
+    display: none;
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-color: rgba($color: root.$color-dark, $alpha: 0.3);
+  }
 }
 
 main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: calc(100% - 164px);
 }
 
