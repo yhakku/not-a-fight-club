@@ -1,0 +1,29 @@
+@use '../helpers/' as *;
+@use '../variables/' as root;
+
+.change-name {
+  display: flex;
+  flex-direction: column;
+  row-gap: rem(20);
+
+  &__form {
+    display: flex;
+    column-gap: rem(20);
+  }
+
+  &__input {
+    width: rem(270);
+    height: rem(42);
+    padding-left: rem(20);
+    border: root.$border-light;
+    border-radius: rem(5);
+    font-family: root.$font-family-accent;
+    font-size: rem(20);
+    outline: none;
+  }
+
+  &__submit {
+    max-width: rem(74);
+    width: 100%;
+  }
+}

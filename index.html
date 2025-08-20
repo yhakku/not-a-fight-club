@@ -160,7 +160,7 @@
           <ul class="logs__list"></ul>
         </div>
       </section>
-      <div class="characters" role="dialog" data-route="characters">
+      <div class="characters hidden" role="dialog" data-route="characters">
         <h2 class="characters__title-hidden hidden">Character title</h2>
         <h3 class="characters__title">Change a characters</h3>
         <ul class="characters__list">
@@ -224,6 +224,48 @@
           </li>
         </ul>
         <button class="characters__button-close button" type="button">
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 20 20"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <line
+              x1="0.353553"
+              y1="0.647423"
+              x2="18.7383"
+              y2="19.0322"
+              stroke="white"
+            />
+            <line
+              x1="0.647057"
+              y1="19.0312"
+              x2="19.0318"
+              y2="0.646436"
+              stroke="white"
+            />
+          </svg>
+        </button>
+      </div>
+      <div class="settings" role="dialog" data-route="settings">
+        <h2 class="settings__title hidden">Settings title</h2>
+        <div class="settings__change-name change-name">
+          <h3 class="change-name__title">Change name</h3>
+          <form class="change-name__form">
+            <input
+              class="change-name__input"
+              type="text"
+              id="nickname-input"
+              placeholder="Change name"
+              required
+            >
+            <button class="change-name__submit button" type="submit">
+              Edit
+            </button>
+          </form>
+        </div>
+        <button class="settings__button-close button" type="button">
           <svg
             width="20"
             height="20"
