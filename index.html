@@ -160,7 +160,7 @@
           <ul class="logs__list"></ul>
         </div>
       </section>
-      <div class="characters hidden" role="dialog" data-route="characters">
+      <div class="characters" role="dialog" data-route="characters">
         <h2 class="characters__title-hidden hidden">Character title</h2>
         <h3 class="characters__title">Change a characters</h3>
         <ul class="characters__list">
@@ -183,6 +183,19 @@
               id="gojo-char"
               checked
             >
+            <div class="characters__statistics">
+              <span class="characters__nickname h3">Nickname</span>
+              <div class="characters__result-container">
+                <span class="characters__result">
+                  W:
+                  <span class="characters__result-w">1</span>
+                </span>
+                <span class="characters__result">
+                  L:
+                  <span class="characters__result-l">0</span>
+                </span>
+              </div>
+            </div>
           </li>
           <li class="characters__item">
             <img
@@ -202,6 +215,19 @@
               name="itadori-char"
               id="itadori-char"
             >
+            <div class="characters__statistics">
+              <span class="characters__nickname h3">Nickname</span>
+              <div class="characters__result-container">
+                <span class="characters__result">
+                  W:
+                  <span class="characters__result-w">1</span>
+                </span>
+                <span class="characters__result">
+                  L:
+                  <span class="characters__result-l">0</span>
+                </span>
+              </div>
+            </div>
           </li>
           <li class="characters__item">
             <img
@@ -221,6 +247,19 @@
               name="nanami-char"
               id="nanami-char"
             >
+            <div class="characters__statistics">
+              <span class="characters__nickname h3">Nickname</span>
+              <div class="characters__result-container">
+                <span class="characters__result">
+                  W:
+                  <span class="characters__result-w">1</span>
+                </span>
+                <span class="characters__result">
+                  L:
+                  <span class="characters__result-l">0</span>
+                </span>
+              </div>
+            </div>
           </li>
         </ul>
         <button class="characters__button-close button" type="button">
@@ -248,7 +287,7 @@
           </svg>
         </button>
       </div>
-      <div class="settings" role="dialog" data-route="settings">
+      <div class="settings hidden" role="dialog" data-route="settings">
         <h2 class="settings__title hidden">Settings title</h2>
         <div class="settings__change-name change-name">
           <h3 class="change-name__title">Change name</h3>

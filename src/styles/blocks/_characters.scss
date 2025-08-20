@@ -27,6 +27,7 @@
   }
 
   &__item {
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -48,6 +49,10 @@
       pointer-events: none;
     }
 
+    &:has(.characters__selected:checked) .characters__statistics {
+      opacity: 1;
+    }
+
     @include hover(false) {
       .characters__image + .characters__label {
         opacity: 1;
@@ -56,6 +61,10 @@
 
       .characters__image {
         filter: brightness(0.8);
+      }
+
+      .characters__statistics {
+        opacity: 1;
       }
     }
   }
@@ -95,5 +104,26 @@
     max-width: rem(26);
     width: 100%;
     height: rem(1);
+  }
+
+  &__statistics {
+    position: absolute;
+    bottom: 40px;
+    left: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: rem(258);
+    width: 100%;
+    opacity: 0;
+  }
+
+  &__nickname {
+    display: flex;
+  }
+
+  &__result-container {
+    display: flex;
+    column-gap: rem(10);
   }
 }
