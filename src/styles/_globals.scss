@@ -19,6 +19,10 @@ body {
     inset: 0;
     background-color: rgba($color: root.$color-dark, $alpha: 0.3);
   }
+
+  &.overlay::before {
+    display: block;
+  }
 }
 
 main {

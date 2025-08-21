@@ -19,6 +19,5 @@
   "singleAttributePerLine": false,
   "htmlWhitespaceSensitivity": "ignore",
   "bracketSameLine": false,
-  "semi": false,
   "singleQuote": true
 }
