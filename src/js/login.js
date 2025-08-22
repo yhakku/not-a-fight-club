@@ -1,13 +1,33 @@
+import { saveState, loadState } from './state.js';
+import { state } from './storage.js';
+import {
+  showGreeting,
+  toggleFormVisible,
+  toggleButtons,
+  setInvalidState,
+} from './ui.js';
+
 const initLogin = () => {
   const title = document.querySelector('.login__title');
   const form = document.querySelector('.form');
   const formContainer = document.querySelector('.form__form-container');
   const input = document.querySelector('.form__input');
-  const formError = document.querySelector('.form__error');
+  const messageError = document.querySelector('.form__error');
+  const buttonFight = document.querySelector('.login__button-fight');
   const buttonChars = document.querySelector('.login__button-chars');
   const buttonSettings = document.querySelector('.login__button-settings');
 
-  let nickname = null;
+  const data = loadState();
+  let nickname = data.player.nickname;
+
+  if (nickname === null) {
+    formContainer.style.paddingBottom = '10px';
+    input.focus();
+    toggleButtons([buttonFight, buttonChars, buttonSettings], false);
+  } else {
+    toggleFormVisible(form, true);
+    showGreeting(title, nickname);
+  }
 
   form.addEventListener('submit', (event) => {
     event.preventDefault();
@@ -15,63 +35,24 @@ const initLogin = () => {
     if (!nickname) {
       return;
     } else {
-      form.classList.add('hidden');
-      createElementP(nickname);
-      buttonChars.classList.remove('hidden');
-      buttonSettings.classList.remove('hidden');
+      toggleFormVisible(form, true);
+      showGreeting(title, nickname);
+      toggleButtons([buttonFight, buttonChars, buttonSettings], true);
     }
 
-    saveState(nickname);
+    state.player.nickname = nickname;
+    saveState(state);
   });
-
-  const saveState = (nickname) => {
-    const data = {
-      nickname,
-    };
-
-    localStorage.setItem('data', JSON.stringify(data));
-  };
-
-  const loadState = () => {
-    const loadData = localStorage.getItem('data');
-
-    if (loadData) {
-      const data = JSON.parse(loadData);
-      nickname = data.nickname;
-    }
-  };
-
-  loadState();
-
-  const createElementP = (nickname) => {
-    const greeting = document.createElement('p');
-    greeting.className = 'login__greeting h2';
-    greeting.textContent = `Konnichiwa, ${nickname}!`;
-
-    title.insertAdjacentElement('afterend', greeting);
-  };
-
-  if (nickname === null) {
-    formContainer.style.paddingBottom = '10px';
-    buttonChars.classList.add('hidden');
-    buttonSettings.classList.add('hidden');
-  } else {
-    form.classList.add('hidden');
-    createElementP(nickname);
-  }
 
   input.addEventListener('input', () => {
     const validityState = input.validity;
-    console.log(validityState);
 
     input.setCustomValidity(' ');
 
     if (validityState.patternMismatch) {
-      input.classList.add('invalid');
-      formError.classList.add('invalid');
+      setInvalidState(input, messageError, true);
     } else {
-      input.classList.remove('invalid');
-      formError.classList.remove('invalid');
+      setInvalidState(input, messageError, false);
       input.setCustomValidity('');
     }
   });

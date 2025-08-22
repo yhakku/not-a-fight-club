@@ -21,6 +21,12 @@
     flex-direction: column;
   }
 
+  &__button-fight {
+    max-width: rem(270);
+    width: 100%;
+    margin-bottom: rem(15);
+  }
+
   &__button-chars {
     max-width: rem(270);
     width: 100%;
