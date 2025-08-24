@@ -1,0 +1,29 @@
+@use 'helpers' as *;
+@use 'variables' as root;
+
+.container {
+  max-width: root.$container-width;
+  margin-inline: auto;
+}
+
+.button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-block: rem(10);
+  background-color: root.$color-ligth;
+  border: root.$border-default;
+  border-radius: rem(30);
+  transition: root.$transition-duration;
+
+  @include hover(false) {
+    & {
+      background-color: root.$color-dark;
+      color: root.$color-ligth;
+    }
+  }
+}
+
+.hidden {
+  @include visually-hidden;
+}

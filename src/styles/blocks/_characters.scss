@@ -1,0 +1,129 @@
+@use '../helpers/' as *;
+@use '../variables/' as root;
+
+.characters {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: flex-start;
+  max-width: rem(956);
+  width: 100%;
+  max-height: rem(481);
+  height: 100%;
+  margin: 0 auto;
+  padding-top: rem(60);
+  padding-inline: rem(60);
+  background-color: root.$color-ligth;
+  border: root.$border-default;
+
+  &__title {
+    padding-bottom: rem(30);
+  }
+
+  &__list {
+    display: flex;
+    column-gap: rem(30);
+  }
+
+  &__item {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+
+    &:has(.characters__selected:checked) .characters__label {
+      position: relative;
+      opacity: 1;
+      transform: translateY(-90px);
+      background-color: root.$color-dark;
+      color: root.$color-ligth;
+    }
+
+    &:has(.characters__selected:checked) .characters__image {
+      filter: brightness(0.8);
+    }
+
+    &:has(.characters__selected:checked) {
+      pointer-events: none;
+    }
+
+    &:has(.characters__selected:checked) .characters__statistics {
+      opacity: 1;
+    }
+
+    @include hover(false) {
+      .characters__image + .characters__label {
+        opacity: 1;
+        transform: translateY(-90px);
+      }
+
+      .characters__image {
+        filter: brightness(0.8);
+      }
+
+      .characters__statistics {
+        opacity: 1;
+      }
+    }
+  }
+
+  &__image {
+    position: relative;
+    border: root.$border-default;
+    transition: root.$transition-duration;
+  }
+
+  &__label {
+    opacity: 0;
+    max-width: rem(180);
+    width: 100%;
+    height: rem(66);
+    background-color: root.$color-ligth;
+    color: root.$color-dark;
+    transform: translateY(-40px);
+
+    @include hover(false) {
+      background-color: root.$color-dark;
+      color: root.$color-ligth;
+    }
+  }
+
+  &__button-close {
+    position: absolute;
+
+    @include square(rem(44));
+
+    right: -2.5%;
+    top: -4.5%;
+  }
+
+  &__line {
+    display: flex;
+    max-width: rem(26);
+    width: 100%;
+    height: rem(1);
+  }
+
+  &__statistics {
+    position: absolute;
+    bottom: 40px;
+    left: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: rem(258);
+    width: 100%;
+    opacity: 0;
+  }
+
+  &__nickname {
+    display: flex;
+  }
+
+  &__result-container {
+    display: flex;
+    column-gap: rem(10);
+  }
+}

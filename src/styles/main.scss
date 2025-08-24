@@ -1,0 +1,17 @@
+@use 'normalize';
+@use 'globals';
+@use 'variables';
+@use 'fonts';
+@use 'utils';
+
+@use './blocks/header';
+@use './blocks/login';
+@use './blocks/form';
+@use './blocks/fight';
+@use './blocks/hp-control';
+@use './blocks/attack-panel';
+@use './blocks/defence-panel';
+@use './blocks/logs';
+@use './blocks/characters';
+@use './blocks/settings';
+@use './blocks/change-name';

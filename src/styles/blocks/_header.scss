@@ -1,0 +1,41 @@
+@use '../helpers/' as *;
+@use '../variables/' as root;
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: rem(70);
+
+  &__logo {
+    max-width: rem(126);
+    text-align: center;
+    line-height: 1;
+  }
+
+  &__nav {
+    max-width: rem(252);
+    width: 100%;
+    background-color: root.$color-dark;
+    border-radius: rem(50);
+    padding-block: rem(30);
+    z-index: 2;
+  }
+
+  &__list {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: rem(30);
+  }
+
+  &__item {
+    display: flex;
+
+    @include square(34);
+  }
+
+  &__link {
+    width: 100%;
+  }
+}

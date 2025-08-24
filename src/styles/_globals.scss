@@ -1,0 +1,89 @@
+@use 'helpers' as *;
+@use 'variables' as root;
+
+body {
+  height: 100%;
+  font-family: root.$font-family-base;
+  font-size: rem(20);
+  line-height: 1;
+  color: root.$color-dark;
+  background: url(../assets/images/backgrounds/background-1.webp);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  &::before {
+    display: none;
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-color: rgba($color: root.$color-dark, $alpha: 0.3);
+  }
+
+  &.overlay::before {
+    display: block;
+  }
+}
+
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100% - 164px);
+}
+
+h1,
+.h1 {
+  font-size: rem(64);
+}
+
+h2,
+.h2 {
+  font-family: root.$font-family-accent;
+  font-size: rem(32);
+}
+
+h3,
+.h3 {
+  font-size: rem(20);
+}
+
+h4,
+.h4 {
+  font-size: rem(18);
+}
+
+h5,
+.h5 {
+  font-size: rem(16);
+}
+
+.logo {
+  font-size: rem(24);
+}
+
+a,
+button,
+label,
+input,
+textarea,
+select,
+svg * {
+  transition-duration: root.$transition-duration;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  color: inherit;
+
+  &[class] {
+    text-decoration: none;
+  }
+}
+
+:focus-visible {
+  outline: rem(2) solid root.$color-dark;
+  outline-offset: rem(4);
+  transition-duration: 0s !important;
+}
