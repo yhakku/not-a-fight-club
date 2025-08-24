@@ -2,7 +2,7 @@ import { state } from './storage.js';
 
 const STORAGE_KEY = 'data';
 
-export const saveState = ({ ...state }, nickname) => {
+export const saveState = (state) => {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
 };
 

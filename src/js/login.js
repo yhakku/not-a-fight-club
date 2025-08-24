@@ -6,6 +6,7 @@ import {
   toggleButtons,
   setInvalidState,
 } from './ui.js';
+import initChars from './characters.js';
 
 const initLogin = () => {
   const title = document.querySelector('.login__title');
@@ -18,7 +19,7 @@ const initLogin = () => {
   const buttonSettings = document.querySelector('.login__button-settings');
 
   const data = loadState();
-  let nickname = data.player.nickname;
+  let nickname = data.user.nickname;
 
   if (nickname === null) {
     formContainer.style.paddingBottom = '10px';
@@ -40,8 +41,9 @@ const initLogin = () => {
       toggleButtons([buttonFight, buttonChars, buttonSettings], true);
     }
 
-    state.player.nickname = nickname;
+    state.user.nickname = nickname;
     saveState(state);
+    initChars();
   });
 
   input.addEventListener('input', () => {

@@ -1,10 +1,29 @@
 export const state = {
-  player: {
+  user: {
     nickname: null,
-    avatarID: 1,
-    stats: {
-      win: 0,
-      lose: 0,
-    },
+    avatarId: 0,
+    characters: [
+      {
+        id: 1,
+        stats: {
+          win: 0,
+          lose: 0,
+        },
+      },
+      {
+        id: 2,
+        stats: {
+          win: 0,
+          lose: 0,
+        },
+      },
+      {
+        id: 3,
+        stats: {
+          win: 0,
+          lose: 0,
+        },
+      },
+    ],
   },
 };
