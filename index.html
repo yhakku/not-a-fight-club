@@ -1,0 +1,350 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Not Fight Club</title>
+    <script type="module" crossorigin src="/not-a-fight-club/assets/index-AYdoyzwg.js"></script>
+    <link rel="stylesheet" crossorigin href="/not-a-fight-club/assets/index-CTGiux-4.css">
+  </head>
+  <body>
+    <header class="header container">
+      <a class="header__logo logo" href="#">Not a Fight Club</a>
+      <nav class="header__nav hidden">
+        <ul class="header__list">
+          <li class="header__item">
+            <a class="header__link" href="#login">
+              <img
+                class="header__icon"
+                src="data:image/svg+xml,%3csvg%20width='34'%20height='34'%20viewBox='0%200%2034%2034'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M26.0701%207.31112C29.7798%206.66667%2032.6216%205.66666%2034%204.46666L31.5495%200C28.4184%202.55556%2023.0751%204.42223%2017%204.42223C10.9249%204.42223%205.58158%202.55556%202.45045%200L0%204.46666C1.37838%205.66666%204.22023%206.68889%207.92993%207.31112V9.82221H4.59459V11H7.92993V25.1111H7.64064V24.0889H6.17718V25.1111H5.05405V26.2889H6.17718V34H7.64064V26.2889H7.91291V34H9.37638V26.2889H9.76777V25.1111H9.37638V11H24.5896V25.1111H24.1982V26.2889H24.5896V34H26.0531V26.2889H26.3253V34H27.7888V26.2889H28.9119V25.1111H27.7888V24.0889H26.3253V25.1111H26.0531V11H29.3884V9.82221H26.0531V7.31112H26.0701ZM9.39339%209.84443V7.55556C10.959%207.77778%2012.6436%207.91111%2014.4134%208V9.86667H9.39339V9.84443ZM15.1281%209.84443V8C15.2813%208%2015.4514%207.99999%2015.6046%208.02222V9.84443H15.1281ZM18.3103%209.84443V8.02222C18.4975%208.02222%2018.6847%208.02222%2018.8719%208V9.84443H18.3103ZM19.5866%209.84443V7.97778C21.3564%207.91112%2023.041%207.75556%2024.6066%207.53334V9.82221H19.5866V9.84443Z'%20fill='white'/%3e%3c/svg%3e"
+                alt=""
+                width="34"
+                height="34"
+                loading="lazy"
+              >
+            </a>
+          </li>
+          <li class="header__item">
+            <a class="header__link" href="#characters">
+              <img
+                class="header__icon"
+                src="/not-a-fight-club/assets/chars-CZypCY27.svg"
+                alt=""
+                width="34"
+                height="34"
+                loading="lazy"
+              >
+            </a>
+          </li>
+          <li class="header__item">
+            <a class="header__link" href="#settings">
+              <img
+                class="header__icon"
+                src="data:image/svg+xml,%3csvg%20width='34'%20height='34'%20viewBox='0%200%2034%2034'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M29.6053%2011.1611L25.0177%2016.5238L34.0001%2016.6599L29.6053%2011.1611Z'%20fill='%23A6A6A6'/%3e%3cpath%20d='M20.4086%2015.1355L23.0883%2027.113L29.6053%2011.1611L20.4086%2015.1355Z'%20fill='white'/%3e%3cpath%20d='M1.97225%2025.9424L7.22446%2028.1473L0%2032.4211L1.97225%2025.9424Z'%20fill='%23A6A6A6'/%3e%3cpath%20d='M18.522%206.72378L13.6342%2018.5652L9.53967%200L18.522%206.72378Z'%20fill='white'/%3e%3cpath%20d='M7.09583%2034L1.95081%2025.9424L13.6129%2027.9568L7.09583%2034Z'%20fill='white'/%3e%3cpath%20d='M23.0883%2027.1126L7.09583%2033.9997L18.5435%206.72363L23.0883%2027.1126Z'%20fill='%23A6A6A6'/%3e%3c/svg%3e"
+                alt=""
+                width="34"
+                height="34"
+                loading="lazy"
+              >
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <section
+        class="login container"
+        data-route="login"
+        aria-labelledby="login-title"
+        id="login"
+      >
+        <div class="login__body">
+          <h1 class="login__title" id="login-title">Not a Fight Club</h1>
+          <form class="login__form form">
+            <label class="form__label h2" for="username">
+              What's your name?
+            </label>
+            <div class="form__form-container">
+              <input
+                class="form__input"
+                type="text"
+                id="username"
+                placeholder="Name"
+                autofocus
+                required
+                minlength="2"
+                maxlength="11"
+                pattern="^[A-Za-z0-9]{2,11}$"
+              >
+              <button class="form__submit button h4" type="submit">Ok</button>
+            </div>
+            <p class="form__error h2">Format: A-Z, a-z, 0-9, length: 2-11</p>
+          </form>
+          <a class="login__button-fight button" href="#fight">Fight!</a>
+          <a class="login__button-chars button" href="#characters">
+            Character Selection
+          </a>
+          <a class="login__button-settings button" href="#settings">Settings</a>
+        </div>
+      </section>
+      <section
+        class="fight container"
+        data-route="fight"
+        aria-labelledby="fight-title"
+        login="fight"
+      >
+        <h2 class="fight__title hidden" id="fight-title">Fight title</h2>
+        <div class="fight__body">
+          <div class="fight__card fight__card--protagonist">
+            <div class="fight__image-container">
+              <img
+                class="fight__image"
+                src="/not-a-fight-club/assets/Gojo-Bcl_rzc8.webp"
+                alt="Gojo"
+                width="260"
+                height="320"
+                loading="lazy"
+              >
+            </div>
+            <div class="fight__hp-control hp-control">
+              <div class="hp-control__full">
+                <span class="hp-control__hp"></span>
+              </div>
+              <span class="hp-control__amount">
+                <span class="hp-control__count">90</span>
+                /100
+              </span>
+            </div>
+          </div>
+          <div class="fight__panel attack-panel">
+            <h3 class="fight__panel-title">Attack Zones</h3>
+            <div class="fight__buttons">
+              <button class="fight__button button" type="button">Head</button>
+              <button class="fight__button button" type="button">Neck</button>
+              <button class="fight__button button" type="button">Body</button>
+              <button class="fight__button button" type="button">Belly</button>
+              <button class="fight__button button" type="button">Legs</button>
+            </div>
+          </div>
+          <button class="fight__fight-button" type="button">
+            <img
+              class="fight__button-icon"
+              src="/not-a-fight-club/assets/attack-icon-CpNC9D27.svg"
+              alt=""
+              width="51"
+              height="61"
+              loading="lazy"
+            >
+          </button>
+          <div class="fight__panel defence-panel">
+            <h3 class="fight__panel-title">Defence Zones</h3>
+            <div class="fight__buttons">
+              <button class="fight__button button" type="button">Head</button>
+              <button class="fight__button button" type="button">Neck</button>
+              <button class="fight__button button" type="button">Body</button>
+              <button class="fight__button button" type="button">Belly</button>
+              <button class="fight__button button" type="button">Legs</button>
+            </div>
+          </div>
+          <div class="fight__card fight__card--antagonist">
+            <div class="fight__image-container">
+              <img
+                class="fight__image"
+                src="/not-a-fight-club/assets/Ken-BK2qzEHh.webp"
+                alt="Gojo"
+                width="260"
+                height="320"
+                loading="lazy"
+              >
+            </div>
+            <div class="fight__hp-control hp-control">
+              <div class="hp-control__full">
+                <span class="hp-control__hp"></span>
+              </div>
+              <span class="hp-control__amount">
+                <span class="hp-control__count">80</span>
+                /100
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="fight__logs logs">
+          <ul class="logs__list"></ul>
+        </div>
+      </section>
+      <div
+        class="characters"
+        role="dialog"
+        data-route="characters"
+        id="characters"
+      >
+        <h2 class="characters__title hidden">Character title</h2>
+        <h3 class="characters__title">Change a characters</h3>
+        <ul class="characters__list">
+          <li class="characters__item">
+            <img
+              class="characters__image"
+              src="/not-a-fight-club/assets/Gojo-Bcl_rzc8.webp"
+              alt="Gojo"
+              width="260"
+              height="320"
+              loading="lazy"
+            >
+            <label class="characters__label button" for="gojo-char">
+              Gojo Satoru
+            </label>
+            <input
+              class="characters__selected hidden"
+              type="radio"
+              name="gojo-char"
+              id="gojo-char"
+            >
+            <div class="characters__statistics">
+              <span class="characters__nickname h3"></span>
+              <div class="characters__result-container">
+                <span class="characters__result">
+                  W:
+                  <span class="characters__result-w"></span>
+                </span>
+                <span class="characters__result">
+                  L:
+                  <span class="characters__result-l"></span>
+                </span>
+              </div>
+            </div>
+          </li>
+          <li class="characters__item">
+            <img
+              class="characters__image"
+              src="/not-a-fight-club/assets/Itadori-CVvoJYGM.webp"
+              alt="Itadori"
+              width="260"
+              height="320"
+              loading="lazy"
+            >
+            <label class="characters__label button" for="itadori-char">
+              Yuji Itadori
+            </label>
+            <input
+              class="characters__selected hidden"
+              type="radio"
+              name="itadori-char"
+              id="itadori-char"
+            >
+            <div class="characters__statistics">
+              <span class="characters__nickname h3"></span>
+              <div class="characters__result-container">
+                <span class="characters__result">
+                  W:
+                  <span class="characters__result-w"></span>
+                </span>
+                <span class="characters__result">
+                  L:
+                  <span class="characters__result-l"></span>
+                </span>
+              </div>
+            </div>
+          </li>
+          <li class="characters__item">
+            <img
+              class="characters__image"
+              src="/not-a-fight-club/assets/Nanami-ClGyfAf8.webp"
+              alt="Nanami"
+              width="260"
+              height="320"
+              loading="lazy"
+            >
+            <label class="characters__label button" for="nanami-char">
+              Kento Nanami
+            </label>
+            <input
+              class="characters__selected hidden"
+              type="radio"
+              name="nanami-char"
+              id="nanami-char"
+            >
+            <div class="characters__statistics">
+              <span class="characters__nickname h3"></span>
+              <div class="characters__result-container">
+                <span class="characters__result">
+                  W:
+                  <span class="characters__result-w"></span>
+                </span>
+                <span class="characters__result">
+                  L:
+                  <span class="characters__result-l"></span>
+                </span>
+              </div>
+            </div>
+          </li>
+        </ul>
+        <button class="characters__button-close button" type="button">
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 20 20"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <line
+              x1="0.353553"
+              y1="0.647423"
+              x2="18.7383"
+              y2="19.0322"
+              stroke="white"
+            />
+            <line
+              x1="0.647057"
+              y1="19.0312"
+              x2="19.0318"
+              y2="0.646436"
+              stroke="white"
+            />
+          </svg>
+        </button>
+      </div>
+      <div class="settings" role="dialog" data-route="settings" id="settings">
+        <h2 class="settings__title hidden">Settings title</h2>
+        <div class="settings__change-name change-name">
+          <h3 class="change-name__title">Change name</h3>
+          <form class="change-name__form">
+            <input
+              class="change-name__input"
+              type="text"
+              id="nickname-input"
+              placeholder="Change name"
+              required
+            >
+            <button class="change-name__submit button" type="submit">
+              Edit
+            </button>
+          </form>
+        </div>
+        <button class="settings__button-close button" type="button">
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 20 20"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <line
+              x1="0.353553"
+              y1="0.647423"
+              x2="18.7383"
+              y2="19.0322"
+              stroke="white"
+            />
+            <line
+              x1="0.647057"
+              y1="19.0312"
+              x2="19.0318"
+              y2="0.646436"
+              stroke="white"
+            />
+          </svg>
+        </button>
+      </div>
+    </main>
+  </body>
+</html>
