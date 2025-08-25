@@ -7,6 +7,7 @@ import {
   setInvalidState,
 } from './ui.js';
 import initChars from './characters.js';
+import initSettings from './settings.js';
 
 const initLogin = () => {
   const title = document.querySelector('.login__title');
@@ -44,6 +45,7 @@ const initLogin = () => {
     state.user.nickname = nickname;
     saveState(state);
     initChars();
+    initSettings();
   });
 
   input.addEventListener('input', () => {
