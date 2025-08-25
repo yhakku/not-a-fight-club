@@ -18,6 +18,7 @@ body {
     position: absolute;
     inset: 0;
     background-color: rgba($color: root.$color-dark, $alpha: 0.3);
+    cursor: pointer;
   }
 
   &.overlay::before {

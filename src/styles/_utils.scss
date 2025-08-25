@@ -27,3 +27,7 @@
 .hidden {
   @include visually-hidden;
 }
+
+.disabled {
+  pointer-events: none;
+}
