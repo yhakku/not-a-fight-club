@@ -1,4 +1,4 @@
-import { loadState } from './state';
+import { loadState, saveState } from './state';
 
 const initChars = () => {
   const body = document.querySelector('body');
@@ -41,6 +41,7 @@ const initChars = () => {
           });
         }
         data.user.avatarId = index;
+        saveState(data);
       });
     });
   }
