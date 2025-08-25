@@ -64,11 +64,7 @@ const initChars = () => {
     body.classList.remove('overlay');
     logo.classList.remove('hidden');
 
-    if (prevHash === '#settings') {
-      history.go(-2);
-    } else {
-      history.back();
-    }
+    history.back();
   };
 
   if (buttonClose) {
