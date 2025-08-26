@@ -1,4 +1,5 @@
 const router = () => {
+  const body = document.querySelector('body');
   const menu = document.querySelector('.header__nav');
   const logo = document.querySelector('.logo');
 
@@ -24,23 +25,25 @@ const router = () => {
     case 'fight':
       hiddenUi('fight');
       menu.classList.remove('hidden');
+      body.classList.add('fight-background');
       break;
     case 'characters':
       hiddenUi('characters');
       logo.classList.add('hidden');
       menu.classList.remove('hidden');
       menu.style.marginLeft = 'auto';
-      document.querySelector('body').classList.add('overlay');
+      body.classList.add('overlay');
       break;
     case 'settings':
       hiddenUi('settings');
       logo.classList.add('hidden');
       menu.classList.remove('hidden');
       menu.style.marginLeft = 'auto';
-      document.querySelector('body').classList.add('overlay');
+      body.classList.add('overlay');
       break;
     default:
       hiddenUi('login');
+      body.classList.remove('fight-background');
       backToLogin();
       break;
   }
