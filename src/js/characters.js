@@ -1,4 +1,5 @@
 import { loadState, saveState } from './state';
+import initOverlayClose from './modal-overlay';
 
 const initChars = () => {
   const body = document.querySelector('body');
@@ -64,17 +65,18 @@ const initChars = () => {
     body.classList.remove('overlay');
     logo.classList.remove('hidden');
 
-    history.back();
+    if (prevHash && prevHash !== currentHash) {
+      location.hash = prevHash;
+    } else {
+      location.hash = '#login';
+    }
   };
 
   if (buttonClose) {
     buttonClose.addEventListener('click', closeModal);
   }
-  if (overlay) {
-    overlay.addEventListener('click', (event) => {
-      if (event.target === overlay) closeModal();
-    });
-  }
+
+  initOverlayClose(closeModal);
 };
 
 export default initChars;

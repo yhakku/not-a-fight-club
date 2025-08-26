@@ -6,7 +6,6 @@ import { changeGreeting, toggleSectionVisible } from './ui.js';
 const initSettings = () => {
   const body = document.querySelector('body');
   const logo = document.querySelector('.logo');
-  const overlay = document.querySelector('.overlay');
   const buttonClose = document.querySelector('.settings__button-close');
   const settingsLink = document.querySelector('a[href="#characters"]');
   const form = document.querySelector('.change-name__form');
