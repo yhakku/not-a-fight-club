@@ -4,21 +4,39 @@ export const state = {
     avatarId: 0,
     characters: [
       {
-        id: 1,
+        name: 'Gojo Satoru',
+        maxHealth: 110,
+        health: 110,
+        damage: 25,
+        img: 'src/assets/images/fight/Gojo.webp',
+        attackChoice: null,
+        defenceChoice: [],
         stats: {
           win: 0,
           lose: 0,
         },
       },
       {
-        id: 2,
+        name: 'Yuji Itadori',
+        maxHealth: 100,
+        health: 100,
+        damage: 20,
+        img: 'src/assets/images/fight/Itadori.webp',
+        attackChoice: null,
+        defenceChoice: [],
         stats: {
           win: 0,
           lose: 0,
         },
       },
       {
-        id: 3,
+        name: 'Kento Nanami',
+        maxHealth: 100,
+        health: 100,
+        damage: 20,
+        img: 'src/assets/images/fight/Nanami.webp',
+        attackChoice: null,
+        defenceChoice: [],
         stats: {
           win: 0,
           lose: 0,
@@ -26,4 +44,5 @@ export const state = {
       },
     ],
   },
+  battle: null,
 };

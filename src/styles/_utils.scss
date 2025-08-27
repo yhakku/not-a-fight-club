@@ -31,3 +31,8 @@
 .disabled {
   pointer-events: none;
 }
+
+.selected {
+  background-color: root.$color-dark;
+  color: root.$color-ligth;
+}

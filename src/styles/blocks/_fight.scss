@@ -61,4 +61,18 @@
     border: none;
     border-radius: rem(50);
   }
+
+  &__reset-button {
+    display: flex;
+    align-self: center;
+    background-color: root.$color-dark;
+    padding: rem(20) rem(26) rem(21) rem(25);
+    background-image: url(/not-a-fight-club/src/assets/images/fight/spiral.svg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: rem(51);
+    border: none;
+    border-radius: rem(50);
+  }
 }

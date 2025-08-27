@@ -12,13 +12,14 @@ const initChars = () => {
   const selectedChars = document.querySelectorAll('.characters__selected');
   const settingsLink = document.querySelector('a[href="#settings"]');
 
-  const data = loadState();
+  let data = loadState();
 
   if (data.user.nickname) {
     nicknames.forEach((nickname) => {
       nickname.innerHTML = data.user.nickname;
     });
 
+    data = loadState();
     data.user.characters.forEach((char, index) => {
       if (wins[index]) {
         wins[index].innerHTML = char.stats.win;

@@ -11,5 +11,20 @@
 
   &__list {
     height: rem(190);
+    overflow-y: auto;
+  }
+
+  &__item {
+    font-family: root.$font-family-accent;
+    margin-bottom: rem(10);
+  }
+
+  &__item:last-child {
+    margin-bottom: 0;
+  }
+
+  &__accent {
+    font-family: root.$font-family-base;
+    font-size: rem(18);
   }
 }

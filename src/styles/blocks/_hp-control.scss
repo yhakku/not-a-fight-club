@@ -8,10 +8,19 @@
 
   &__full {
     height: rem(12);
+    background-color: root.$color-ligth;
     border: root.$border-light;
+    overflow-x: hidden;
   }
 
-  &__hp {
+  &__hp-player {
+    display: flex;
+    width: 90%;
+    height: rem(10);
+    background-color: root.$color-dark;
+  }
+
+  &__hp-enemy {
     display: flex;
     width: 90%;
     height: rem(10);
@@ -22,7 +31,11 @@
     font-size: rem(16);
   }
 
-  &__count {
+  &__count-player {
+    font-size: rem(16);
+  }
+
+  &__count-enemy {
     font-size: rem(16);
   }
 }
