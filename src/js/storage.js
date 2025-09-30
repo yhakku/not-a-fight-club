@@ -1,3 +1,7 @@
+import GojoImg from '/src/assets/images/fight/Gojo.webp';
+import ItadoriImg from '/src/assets/images/fight/Itadori.webp';
+import NanamiImg from '/src/assets/images/fight/Nanami.webp';
+
 export const state = {
   user: {
     nickname: null,
@@ -8,7 +12,7 @@ export const state = {
         maxHealth: 110,
         health: 110,
         damage: 25,
-        img: 'src/assets/images/fight/Gojo.webp',
+        img: GojoImg,
         attackChoice: null,
         defenceChoice: [],
         stats: {
@@ -21,7 +25,7 @@ export const state = {
         maxHealth: 100,
         health: 100,
         damage: 20,
-        img: 'src/assets/images/fight/Itadori.webp',
+        img: ItadoriImg,
         attackChoice: null,
         defenceChoice: [],
         stats: {
@@ -34,7 +38,7 @@ export const state = {
         maxHealth: 100,
         health: 100,
         damage: 20,
-        img: 'src/assets/images/fight/Nanami.webp',
+        img: NanamiImg,
         attackChoice: null,
         defenceChoice: [],
         stats: {

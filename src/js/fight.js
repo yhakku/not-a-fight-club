@@ -1,6 +1,9 @@
 import { state } from './storage.js';
 import { saveState, loadState } from './state.js';
 import initChar from './characters.js';
+import KenImg from '/src/assets/images/fight/Ken.webp';
+import SukunaImg from '/src/assets/images/fight/Sukuna.webp';
+import TojiImg from '/src/assets/images/fight/Todzi.webp';
 
 const initFight = () => {
   const startFightButton = document.querySelector('.login__button-fight');
@@ -24,7 +27,7 @@ const initFight = () => {
       damage: 20,
       attackZone: 1,
       defenceZone: 2,
-      img: 'src/assets/images/fight/Ken.webp',
+      img: KenImg,
     },
     {
       name: 'Sukuna',
@@ -33,7 +36,7 @@ const initFight = () => {
       damage: 25,
       attackZone: 2,
       defenceZone: 2,
-      img: 'src/assets/images/fight/Sukuna.webp',
+      img: SukunaImg,
     },
     {
       name: 'Fushiguro Toji',
@@ -42,7 +45,7 @@ const initFight = () => {
       damage: 20,
       attackZone: 1,
       defenceZone: 3,
-      img: 'src/assets/images/fight/Todzi.webp',
+      img: TojiImg,
     },
   ];
 
@@ -180,7 +183,7 @@ const initFight = () => {
 
     const randomNumber = Math.floor(Math.random() * 100);
 
-    if (randomNumber < criticalHitRate) {
+    if (randomNumber <= criticalHitRate) {
       return true;
     } else {
       return false;
@@ -263,31 +266,20 @@ const initFight = () => {
     hpCountPlayer.innerHTML = `${player.health}`;
     hpCountEnemy.innerHTML = `${enemy.health}`;
 
-    const createAttackLogs = (
-      attacker,
-      defender,
-      attackZones,
-      damage,
-      crit,
-    ) => {
+    const createAttackLogs = (attacker, defender, attackZones, damage) => {
       attackZones.forEach((zone) => {
-        // const critText = crit ? ' (Crit!)' : '';
+        const critText = damage > 25 ? ' (Crit!)' : '';
+
         log.unshift(
           `<span class="logs__accent">${attacker.name}</span> attacks
          <span class="logs__accent">${defender.name}</span>, dealing
-         <span class="logs__accent">${damage}</span> damage by hitting ${zone}`,
+         <span class="logs__accent">${damage}${critText}</span> damage by hitting ${zone}`,
         );
       });
     };
 
-    createAttackLogs(
-      player,
-      enemy,
-      [character.attackChoice],
-      damagePlayer,
-      critPlayer,
-    );
-    createAttackLogs(enemy, player, enemyAttackZone, damageEnemy, critEnemy);
+    createAttackLogs(player, enemy, [character.attackChoice], damagePlayer);
+    createAttackLogs(enemy, player, enemyAttackZone, damageEnemy);
 
     if (player.health <= 0 && enemy.health <= 0) {
       log.unshift(`<span class="logs__accent">Draw!</span>`);
