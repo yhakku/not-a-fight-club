@@ -192,7 +192,9 @@ const initFight = () => {
       renderEnemy(state.battle.enemy);
       renderPlayer(state.battle.player);
       saveState(state);
-    } else {
+    }
+
+    if (state.battle !== null) {
       reloadFight();
     }
   };
@@ -406,8 +408,10 @@ const initFight = () => {
     });
   };
 
-  if (data.battle.player.health <= 0 || data.battle.enemy.health <= 0) {
-    endGame();
+  if (state.battle !== null) {
+    if (data.battle.player.health <= 0 || data.battle.enemy.health <= 0) {
+      endGame();
+    }
   }
 
   charactersLink.classList.add('disabled');
