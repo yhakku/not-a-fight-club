@@ -3,7 +3,6 @@ import initOverlayClose from './modal-overlay';
 
 const initChars = () => {
   const body = document.querySelector('body');
-  const overlay = document.querySelector('.overlay');
   const logo = document.querySelector('.logo');
   const buttonClose = document.querySelector('.characters__button-close');
   const nicknames = document.querySelectorAll('.characters__nickname');
@@ -78,6 +77,7 @@ const initChars = () => {
   }
 
   initOverlayClose(closeModal);
+  loadState();
 };
 
 export default initChars;

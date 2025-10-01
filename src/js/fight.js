@@ -1,6 +1,6 @@
 import { state } from './storage.js';
 import { saveState, loadState } from './state.js';
-import initChar from './characters.js';
+import initChars from './characters.js';
 import KenImg from '/src/assets/images/fight/Ken.webp';
 import SukunaImg from '/src/assets/images/fight/Sukuna.webp';
 import TojiImg from '/src/assets/images/fight/Todzi.webp';
@@ -68,15 +68,22 @@ const initFight = () => {
   let enemy = getRandomEnemy();
   let character = getCharacters();
 
-  const renderEnemy = () => {
+  const renderEnemy = (data) => {
+    let enemyData = null;
+    if (state.battle === null) {
+      enemyData = enemy;
+    } else {
+      enemyData = data;
+    }
+
     const cardEnemy = document.querySelector('.fight__card--antagonist');
 
     cardEnemy.innerHTML = `
       <div class="fight__image-container">
         <img
           class="fight__image"
-          src=${enemy.img}
-          alt=${enemy.name}
+          src=${enemyData.img}
+          alt=${enemyData.name}
           width="260"
           height="320"
           loading="lazy"
@@ -87,13 +94,13 @@ const initFight = () => {
           <span class="hp-control__hp-enemy"></span>
         </div>
           <span class="hp-control__amount">
-            <span class="hp-control__count-enemy">${enemy.health}</span>
-              /${enemy.maxHealth}
+            <span class="hp-control__count-enemy">${enemyData.health}</span>
+              /${enemyData.maxHealth}
           </span>
         </div>`;
 
     const hpEnemy = document.querySelector('.hp-control__hp-enemy');
-    hpEnemy.style.width = `${enemy.health}%`;
+    hpEnemy.style.width = `${enemyData.health}%`;
   };
 
   const selectedZone = () => {
@@ -139,15 +146,22 @@ const initFight = () => {
   selectedZone();
   validateChoices();
 
-  const renderPlayer = () => {
+  const renderPlayer = (data) => {
+    let playerData = null;
+    if (state.battle === null) {
+      playerData = character;
+    } else {
+      playerData = data;
+    }
+
     const cardPlayer = document.querySelector('.fight__card--protagonist');
 
     cardPlayer.innerHTML = `
       <div class="fight__image-container">
         <img
           class="fight__image"
-          src=${character.img}
-          alt=${character.name}
+          src=${playerData.img}
+          alt=${playerData.name}
           width="260"
           height="320"
           loading="lazy"
@@ -158,24 +172,50 @@ const initFight = () => {
           <span class="hp-control__hp-player"></span>
         </div>
           <span class="hp-control__amount">
-            <span class="hp-control__count-player">${character.health}</span>
-              /${character.maxHealth}
+            <span class="hp-control__count-player">${playerData.health}</span>
+              /${playerData.maxHealth}
           </span>
         </div>`;
 
     const hpPlayer = document.querySelector('.hp-control__hp-player');
-    hpPlayer.style.width = `${character.health}%`;
+    hpPlayer.style.width = `${playerData.health}%`;
   };
 
   const startFight = () => {
+    if (state.battle === null) {
+      state.battle = {
+        player: { ...character },
+        enemy: { ...enemy },
+        log: [],
+      };
+
+      renderEnemy(state.battle.enemy);
+      renderPlayer(state.battle.player);
+      saveState(state);
+    } else {
+      reloadFight();
+    }
+  };
+
+  const reloadFight = () => {
+    const data = loadState();
     state.battle = {
-      player: { ...character },
-      enemy: { ...enemy },
-      log: [],
+      player: { ...data.battle.player },
+      enemy: { ...data.battle.enemy },
+      log: [...data.battle.log],
     };
 
-    renderEnemy();
-    renderPlayer();
+    renderEnemy(state.battle.enemy);
+    renderPlayer(state.battle.player);
+
+    const logContainer = document.querySelector('.logs__list');
+    logContainer.innerHTML = '';
+    state.battle.log.forEach((entry) => {
+      const li = document.createElement('li');
+      li.classList.add('logs__item');
+      li.innerHTML = entry;
+      logContainer.appendChild(li);
+    });
   };
 
   const getCriticalHitChance = () => {
@@ -345,23 +385,38 @@ const initFight = () => {
         log: [],
       };
 
-      renderEnemy();
-      renderPlayer();
+      renderEnemy(state.battle.enemy);
+      renderPlayer(state.battle.player);
 
       resetButton.style.display = 'none';
       attackButton.style.display = 'flex';
       attackButtons.forEach((btn) => btn.classList.remove('selected'));
       defenceButtons.forEach((btn) => btn.classList.remove('selected'));
       validateChoices();
+
+      const logContainer = document.querySelector('.logs__list');
+      logContainer.innerHTML = '';
+      state.battle.log.forEach((entry) => {
+        const li = document.createElement('li');
+        li.classList.add('logs__item');
+        li.innerHTML = entry;
+        logContainer.appendChild(li);
+      });
+      saveState(state);
     });
   };
+
+  if (data.battle.player.health <= 0 || data.battle.enemy.health <= 0) {
+    endGame();
+  }
 
   charactersLink.classList.add('disabled');
   settingsLink.classList.add('disabled');
 
   attackButton.addEventListener('click', startAttack);
   startFightButton.addEventListener('click', startFight);
-  window.addEventListener('load', startFight);
+  window.addEventListener('load', reloadFight);
+  charactersLink.addEventListener('click', initChars);
 };
 
 export default initFight;
