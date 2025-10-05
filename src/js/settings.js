@@ -1,5 +1,4 @@
-import { loadState, saveState } from './state';
-import { state } from './storage.js';
+import { state } from './state';
 import initChars from './characters.js';
 import { changeGreeting, toggleSectionVisible } from './ui.js';
 
@@ -12,12 +11,10 @@ const initSettings = () => {
   const input = document.querySelector('.change-name__input');
   const title = document.querySelector('.login__title');
 
-  const data = loadState();
-  let nickname = data.user.nickname;
+  let nickname = state.nickname;
 
-  if (data.user.nickname) {
+  if (state.nickname) {
     input.placeholder = nickname;
-    console.log(input.placeholder);
   } else {
     location.hash = '#login';
   }
@@ -26,8 +23,7 @@ const initSettings = () => {
     event.preventDefault();
     nickname = input.value.trim();
 
-    state.user.nickname = nickname;
-    saveState(state);
+    state.nickname = nickname;
     initChars();
     changeGreeting(nickname);
     toggleSectionVisible(body, logo, false);

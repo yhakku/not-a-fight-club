@@ -1,4 +1,4 @@
-import { loadState, saveState } from './state';
+import { state } from './state';
 import initOverlayClose from './modal-overlay';
 
 const initChars = () => {
@@ -11,15 +11,12 @@ const initChars = () => {
   const selectedChars = document.querySelectorAll('.characters__selected');
   const settingsLink = document.querySelector('a[href="#settings"]');
 
-  let data = loadState();
-
-  if (data.user.nickname) {
+  if (state.nickname) {
     nicknames.forEach((nickname) => {
-      nickname.innerHTML = data.user.nickname;
+      nickname.innerHTML = state.nickname;
     });
 
-    data = loadState();
-    data.user.characters.forEach((char, index) => {
+    state.characters.forEach((char, index) => {
       if (wins[index]) {
         wins[index].innerHTML = char.stats.win;
       }
@@ -29,7 +26,7 @@ const initChars = () => {
       }
     });
 
-    const defaultChar = data.user.avatarId ?? 0;
+    const defaultChar = state.avatarId ?? 0;
     selectedChars[defaultChar].checked = true;
 
     selectedChars.forEach((selectedChar, index) => {
@@ -41,8 +38,7 @@ const initChars = () => {
             }
           });
         }
-        data.user.avatarId = index;
-        saveState(data);
+        state.avatarId = index;
       });
     });
   }
@@ -77,7 +73,6 @@ const initChars = () => {
   }
 
   initOverlayClose(closeModal);
-  loadState();
 };
 
 export default initChars;

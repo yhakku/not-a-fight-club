@@ -1,5 +1,4 @@
-import { saveState, loadState } from './state.js';
-import { state } from './storage.js';
+import { state, saveState, loadState } from './state.js';
 import {
   showGreeting,
   toggleFormVisible,
@@ -19,8 +18,7 @@ const initLogin = () => {
   const buttonChars = document.querySelector('.login__button-chars');
   const buttonSettings = document.querySelector('.login__button-settings');
 
-  const data = loadState();
-  let nickname = data.user.nickname;
+  let nickname = state.nickname;
 
   if (nickname === null) {
     formContainer.style.paddingBottom = '10px';
@@ -43,7 +41,6 @@ const initLogin = () => {
     }
 
     state.user.nickname = nickname;
-    saveState(state);
     initChars();
     initSettings();
   });
