@@ -20,13 +20,13 @@ const initLogin = () => {
 
   let nickname = state.nickname;
 
-  if (nickname === null) {
+  if (nickname) {
+    toggleFormVisible(form, true);
+    showGreeting(title, nickname);
+  } else {
     formContainer.style.paddingBottom = '10px';
     input.focus();
     toggleButtons([buttonFight, buttonChars, buttonSettings], false);
-  } else {
-    toggleFormVisible(form, true);
-    showGreeting(title, nickname);
   }
 
   form.addEventListener('submit', (event) => {
@@ -40,7 +40,7 @@ const initLogin = () => {
       toggleButtons([buttonFight, buttonChars, buttonSettings], true);
     }
 
-    state.user.nickname = nickname;
+    state.nickname = nickname;
     initChars();
     initSettings();
   });

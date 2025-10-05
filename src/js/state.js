@@ -3,54 +3,52 @@ import ItadoriImg from '/src/assets/images/fight/Itadori.webp';
 import NanamiImg from '/src/assets/images/fight/Nanami.webp';
 
 const defaultState = {
-  user: {
-    nickname: null,
-    avatarId: 0,
-    characters: [
-      {
-        name: 'Gojo Satoru',
-        id: 0,
-        maxHealth: 110,
-        health: 110,
-        damage: 25,
-        img: GojoImg,
-        attackChoice: null,
-        defenceChoice: [],
-        stats: {
-          win: 0,
-          lose: 0,
-        },
+  nickname: null,
+  avatarId: 0,
+  characters: [
+    {
+      name: 'Gojo Satoru',
+      id: 0,
+      maxHealth: 110,
+      health: 110,
+      damage: 25,
+      img: GojoImg,
+      attackChoice: null,
+      defenceChoice: [],
+      stats: {
+        win: 0,
+        lose: 0,
       },
-      {
-        name: 'Yuji Itadori',
-        id: 1,
-        maxHealth: 100,
-        health: 100,
-        damage: 20,
-        img: ItadoriImg,
-        attackChoice: null,
-        defenceChoice: [],
-        stats: {
-          win: 0,
-          lose: 0,
-        },
+    },
+    {
+      name: 'Yuji Itadori',
+      id: 1,
+      maxHealth: 100,
+      health: 100,
+      damage: 20,
+      img: ItadoriImg,
+      attackChoice: null,
+      defenceChoice: [],
+      stats: {
+        win: 0,
+        lose: 0,
       },
-      {
-        name: 'Kento Nanami',
-        id: 2,
-        maxHealth: 100,
-        health: 100,
-        damage: 20,
-        img: NanamiImg,
-        attackChoice: null,
-        defenceChoice: [],
-        stats: {
-          win: 0,
-          lose: 0,
-        },
+    },
+    {
+      name: 'Kento Nanami',
+      id: 2,
+      maxHealth: 100,
+      health: 100,
+      damage: 20,
+      img: NanamiImg,
+      attackChoice: null,
+      defenceChoice: [],
+      stats: {
+        win: 0,
+        lose: 0,
       },
-    ],
-  },
+    },
+  ],
   battle: null,
 };
 

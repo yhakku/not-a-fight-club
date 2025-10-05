@@ -1,4 +1,4 @@
-import { state } from './state.js';
+import { loadState, state } from './state.js';
 import initChars from './characters.js';
 import KenImg from '/src/assets/images/fight/Ken.webp';
 import SukunaImg from '/src/assets/images/fight/Sukuna.webp';
@@ -41,7 +41,7 @@ const initFight = () => {
   };
 
   const getCharacter = () => {
-    const charsId = state.characters.map((character) => character.id); // [0, 1, 2]
+    let charsId = state.characters.map((character) => character.id); // [0, 1, 2]
 
     for (let charId of charsId) {
       if (charId === state.avatarId) {
