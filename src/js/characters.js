@@ -69,7 +69,8 @@ const initChars = () => {
     }
 
     if (state.battle.player.id !== state.avatarId) {
-      initFight();
+      const { startFight } = initFight();
+      startFight();
     }
   };
 
