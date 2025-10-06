@@ -1,10 +1,12 @@
-import { loadState, state } from './state.js';
+import { state } from './state.js';
 import initChars from './characters.js';
 import KenImg from '/src/assets/images/fight/Ken.webp';
 import SukunaImg from '/src/assets/images/fight/Sukuna.webp';
 import TojiImg from '/src/assets/images/fight/Todzi.webp';
 
-const initFight = () => {
+export const initFight = () => {
+  const startFightButton = document.querySelector('.login__button-fight');
+
   const enemies = [
     {
       name: 'Kenjaku',
@@ -53,26 +55,20 @@ const initFight = () => {
   let enemy = getRandomEnemy();
   let character = getCharacter();
 
-  state.battle = {
-    player: character,
-    enemy: enemy,
-    log: [],
-  };
-
-  const renderEnemy = () => {
-    // let enemyData = null;
-    // if (state.battle === null) {
-    //   enemyData = enemy;
-    // } else {
-    //   enemyData = data;
-    // }
+  const renderEnemy = (data) => {
+    let enemyData = null;
+    if (state.battle === null) {
+      enemyData = enemy;
+    } else {
+      enemyData = data;
+    }
     const cardEnemy = document.querySelector('.fight__card--antagonist');
     cardEnemy.innerHTML = `
       <div class="fight__image-container">
         <img
           class="fight__image"
-          src=${enemy.img}
-          alt=${enemy.name}
+          src=${enemyData.img}
+          alt=${enemyData.name}
           width="260"
           height="320"
           loading="lazy"
@@ -83,28 +79,28 @@ const initFight = () => {
           <span class="hp-control__hp-enemy"></span>
         </div>
           <span class="hp-control__amount">
-            <span class="hp-control__count-enemy">${enemy.health}</span>
-              /${enemy.maxHealth}
+            <span class="hp-control__count-enemy">${enemyData.health}</span>
+              /${enemyData.maxHealth}
           </span>
         </div>`;
     const hpEnemy = document.querySelector('.hp-control__hp-enemy');
-    hpEnemy.style.width = `${enemy.health}%`;
+    hpEnemy.style.width = `${enemyData.health}%`;
   };
 
-  const renderPlayer = () => {
-    // let playerData = null;
-    // if (state.battle === null) {
-    //   playerData = character;
-    // } else {
-    //   playerData = data;
-    // }
+  const renderPlayer = (data) => {
+    let playerData = null;
+    if (state.battle === null) {
+      playerData = character;
+    } else {
+      playerData = data;
+    }
     const cardPlayer = document.querySelector('.fight__card--protagonist');
     cardPlayer.innerHTML = `
       <div class="fight__image-container">
         <img
           class="fight__image"
-          src=${character.img}
-          alt=${character.name}
+          src=${playerData.img}
+          alt=${playerData.name}
           width="260"
           height="320"
           loading="lazy"
@@ -115,17 +111,43 @@ const initFight = () => {
           <span class="hp-control__hp-player"></span>
         </div>
           <span class="hp-control__amount">
-            <span class="hp-control__count-player">${character.health}</span>
-              /${character.maxHealth}
+            <span class="hp-control__count-player">${playerData.health}</span>
+              /${playerData.maxHealth}
           </span>
         </div>`;
     const hpPlayer = document.querySelector('.hp-control__hp-player');
-    hpPlayer.style.width = `${character.health}%`;
+    hpPlayer.style.width = `${playerData.health}%`;
   };
 
-  renderEnemy();
-  renderPlayer();
-  // const startFightButton = document.querySelector('.login__button-fight');
+  const startFight = () => {
+    state.battle = {
+      player: character,
+      enemy: enemy,
+      log: [],
+    };
+
+    renderEnemy(state.battle.enemy);
+    renderPlayer(state.battle.player);
+  };
+
+  const reloadFight = () => {
+    state.battle = {
+      player: { ...state.battle.player },
+      enemy: { ...state.battle.enemy },
+      log: [...state.battle.log],
+    };
+
+    renderEnemy(state.battle.enemy);
+    renderPlayer(state.battle.player);
+  };
+
+  startFightButton.addEventListener('click', startFight);
+  window.addEventListener('load', reloadFight);
+
+  return { startFight };
+
+  // TODO: Сделать два коммита для двух файлов. Тут я реализовал обновление страницы без потери данных боя, а в characters пофиксил вызов функции после смены персонажа
+
   // const attackButton = document.querySelector('.fight__fight-button');
   // const attackButtons = document.querySelectorAll(
   //   '.attack-panel .fight__button',
