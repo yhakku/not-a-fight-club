@@ -6,6 +6,9 @@ import TojiImg from '/src/assets/images/fight/Todzi.webp';
 
 export const initFight = () => {
   const startFightButton = document.querySelector('.login__button-fight');
+  const attackButtons = document.querySelectorAll(
+    '.attack-panel .fight__button',
+  );
 
   const enemies = [
     {
@@ -131,22 +134,35 @@ export const initFight = () => {
   };
 
   const reloadFight = () => {
-    state.battle = {
-      player: { ...state.battle.player },
-      enemy: { ...state.battle.enemy },
-      log: [...state.battle.log],
-    };
+    attackButtons.forEach((attackButton) => {
+      if (attackButton.textContent === state.battle.player.attackChoice) {
+        attackButton.classList.add('selected');
+      }
+    });
 
     renderEnemy(state.battle.enemy);
     renderPlayer(state.battle.player);
   };
 
+  const selectZone = () => {
+    attackButtons.forEach((attackButton) => {
+      attackButton.addEventListener('click', () => {
+        attackButtons.forEach((selectedButton) => {
+          selectedButton.classList.remove('selected');
+        });
+        attackButton.classList.add('selected');
+        state.battle.player.attackChoice = attackButton.textContent;
+      });
+    });
+  };
+
+  selectZone();
+  // TODO: При смене персонажа остаётся выбранная зона, но при обновлении -- пропадает
+
   startFightButton.addEventListener('click', startFight);
   window.addEventListener('load', reloadFight);
 
   return { startFight };
-
-  // TODO: Сделать два коммита для двух файлов. Тут я реализовал обновление страницы без потери данных боя, а в characters пофиксил вызов функции после смены персонажа
 
   // const attackButton = document.querySelector('.fight__fight-button');
   // const attackButtons = document.querySelectorAll(

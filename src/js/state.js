@@ -63,17 +63,19 @@ export const loadState = () => {
   return loadData ? JSON.parse(loadData) : defaultState;
 };
 
-const createCurrentState = (initialState) => {
+const createCurrentState = (initialState, rootState = null) => {
+  const root = rootState || initialState;
+
   return new Proxy(initialState, {
     set(target, prop, value) {
       target[prop] = value;
-      saveState(initialState);
+      saveState(root);
       return true;
     },
     get(target, prop) {
       const value = target[prop];
       if (typeof value === 'object' && value !== null) {
-        return createCurrentState(value);
+        return createCurrentState(value, root);
       }
 
       return value;

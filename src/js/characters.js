@@ -11,6 +11,9 @@ const initChars = () => {
   const loses = document.querySelectorAll('.characters__result-l');
   const selectedChars = document.querySelectorAll('.characters__selected');
   const settingsLink = document.querySelector('a[href="#settings"]');
+  const attackButtons = document.querySelectorAll(
+    '.attack-panel .fight__button',
+  );
 
   if (state.nickname) {
     nicknames.forEach((nickname) => {
@@ -71,6 +74,10 @@ const initChars = () => {
     if (state.battle.player.id !== state.avatarId) {
       const { startFight } = initFight();
       startFight();
+
+      attackButtons.forEach((attackButton) => {
+        attackButton.classList.remove('selected');
+      });
     }
   };
 
