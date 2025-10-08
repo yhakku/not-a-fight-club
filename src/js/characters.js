@@ -14,6 +14,9 @@ const initChars = () => {
   const attackButtons = document.querySelectorAll(
     '.attack-panel .fight__button',
   );
+  const defenceButtons = document.querySelectorAll(
+    '.defence-panel .fight__button',
+  );
 
   if (state.nickname) {
     nicknames.forEach((nickname) => {
@@ -77,6 +80,10 @@ const initChars = () => {
 
       attackButtons.forEach((attackButton) => {
         attackButton.classList.remove('selected');
+      });
+
+      defenceButtons.forEach((defenceButton) => {
+        defenceButton.classList.remove('selected');
       });
     }
   };

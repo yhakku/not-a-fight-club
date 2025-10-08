@@ -9,6 +9,9 @@ export const initFight = () => {
   const attackButtons = document.querySelectorAll(
     '.attack-panel .fight__button',
   );
+  const defenceButtons = document.querySelectorAll(
+    '.defence-panel .fight__button',
+  );
 
   const enemies = [
     {
@@ -140,6 +143,14 @@ export const initFight = () => {
       }
     });
 
+    defenceButtons.forEach((defenceButton) => {
+      state.battle.player.defenceChoice.forEach((choice) => {
+        if (defenceButton.textContent === choice) {
+          defenceButton.classList.add('selected');
+        }
+      });
+    });
+
     renderEnemy(state.battle.enemy);
     renderPlayer(state.battle.player);
   };
@@ -150,14 +161,40 @@ export const initFight = () => {
         attackButtons.forEach((selectedButton) => {
           selectedButton.classList.remove('selected');
         });
-        attackButton.classList.add('selected');
-        state.battle.player.attackChoice = attackButton.textContent;
+
+        if (state.battle.player.attackChoice === null) {
+          attackButton.classList.add('selected');
+          state.battle.player.attackChoice = attackButton.textContent;
+        }
+
+        if (state.battle.player.attackChoice !== attackButton.textContent) {
+          attackButton.classList.add('selected');
+          state.battle.player.attackChoice = attackButton.textContent;
+        }
+
+        if (!attackButton.getAttribute('class').includes('selected')) {
+          state.battle.player.attackChoice = null;
+        }
+      });
+    });
+    defenceButtons.forEach((defenceButton) => {
+      defenceButton.addEventListener('click', () => {
+        const zone = defenceButton.textContent;
+        if (state.battle.player.defenceChoice.includes(zone)) {
+          state.battle.player.defenceChoice =
+            state.battle.player.defenceChoice.filter((z) => z !== zone);
+          defenceButton.classList.remove('selected');
+        } else {
+          if (state.battle.player.defenceChoice.length < 2) {
+            state.battle.player.defenceChoice.push(zone);
+            defenceButton.classList.add('selected');
+          }
+        }
       });
     });
   };
 
   selectZone();
-  // TODO: При смене персонажа остаётся выбранная зона, но при обновлении -- пропадает
 
   startFightButton.addEventListener('click', startFight);
   window.addEventListener('load', reloadFight);
