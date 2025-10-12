@@ -12,6 +12,7 @@ export const initFight = () => {
   const defenceButtons = document.querySelectorAll(
     '.defence-panel .fight__button',
   );
+  const attackButton = document.querySelector('.fight__fight-button');
 
   const enemies = [
     {
@@ -19,8 +20,10 @@ export const initFight = () => {
       maxHealth: 100,
       health: 100,
       damage: 20,
-      attackZone: 1,
-      defenceZone: 2,
+      countAttackZone: 1,
+      attackZone: null,
+      countDefenceZone: 2,
+      defenceZones: [],
       img: KenImg,
     },
     {
@@ -28,8 +31,10 @@ export const initFight = () => {
       maxHealth: 110,
       health: 110,
       damage: 25,
-      attackZone: 2,
-      defenceZone: 2,
+      countAttackZone: 2,
+      attackZone: null,
+      countDefenceZone: 2,
+      defenceZones: [],
       img: SukunaImg,
     },
     {
@@ -37,11 +42,15 @@ export const initFight = () => {
       maxHealth: 100,
       health: 100,
       damage: 20,
-      attackZone: 1,
-      defenceZone: 3,
+      countAttackZone: 1,
+      attackZone: null,
+      countDefenceZone: 3,
+      defenceZones: [],
       img: TojiImg,
     },
   ];
+
+  const zones = ['Head', 'Neck', 'Body', 'Belly', 'Legs'];
 
   const getRandomEnemy = () => {
     const index = Math.floor(Math.random() * enemies.length);
@@ -91,6 +100,11 @@ export const initFight = () => {
         </div>`;
     const hpEnemy = document.querySelector('.hp-control__hp-enemy');
     hpEnemy.style.width = `${enemyData.health}%`;
+
+    if (state.battle) {
+      determineDefenceZonesEnemy();
+      determineAttackZoneEnemy();
+    }
   };
 
   const renderPlayer = (data) => {
@@ -126,11 +140,13 @@ export const initFight = () => {
   };
 
   const startFight = () => {
-    state.battle = {
-      player: character,
-      enemy: enemy,
-      log: [],
-    };
+    if (!state.battle) {
+      state.battle = {
+        player: character,
+        enemy: enemy,
+        log: [],
+      };
+    }
 
     renderEnemy(state.battle.enemy);
     renderPlayer(state.battle.player);
@@ -138,21 +154,21 @@ export const initFight = () => {
 
   const reloadFight = () => {
     attackButtons.forEach((attackButton) => {
-      if (attackButton.textContent === state.battle.player.attackChoice) {
+      if (attackButton.textContent === state.battle?.player.attackChoice) {
         attackButton.classList.add('selected');
       }
     });
 
     defenceButtons.forEach((defenceButton) => {
-      state.battle.player.defenceChoice.forEach((choice) => {
+      state.battle?.player.defenceChoice.forEach((choice) => {
         if (defenceButton.textContent === choice) {
           defenceButton.classList.add('selected');
         }
       });
     });
 
-    renderEnemy(state.battle.enemy);
-    renderPlayer(state.battle.player);
+    renderEnemy(state.battle?.enemy);
+    renderPlayer(state.battle?.player);
   };
 
   const selectZone = () => {
@@ -167,7 +183,7 @@ export const initFight = () => {
           state.battle.player.attackChoice = attackButton.textContent;
         }
 
-        if (state.battle.player.attackChoice !== attackButton.textContent) {
+        if (state.battle?.player.attackChoice !== attackButton.textContent) {
           attackButton.classList.add('selected');
           state.battle.player.attackChoice = attackButton.textContent;
         }
@@ -175,8 +191,11 @@ export const initFight = () => {
         if (!attackButton.getAttribute('class').includes('selected')) {
           state.battle.player.attackChoice = null;
         }
+
+        validateChoices();
       });
     });
+
     defenceButtons.forEach((defenceButton) => {
       defenceButton.addEventListener('click', () => {
         const zone = defenceButton.textContent;
@@ -190,14 +209,100 @@ export const initFight = () => {
             defenceButton.classList.add('selected');
           }
         }
+
+        validateChoices();
       });
     });
   };
 
+  const validateChoices = () => {
+    if (
+      state.battle?.player.attackChoice &&
+      state.battle?.player.defenceChoice.length === 2
+    ) {
+      console.log('Валидный выбор!');
+      attackButton.disabled = false;
+    } else {
+      console.log('Невалидный выбор!');
+      attackButton.disabled = true;
+    }
+  };
+
+  function determineDefenceZonesEnemy() {
+    const uniqueZoneIndex = new Set();
+
+    while (
+      state.battle.enemy.defenceZones.length <
+      state.battle.enemy.countDefenceZone
+    ) {
+      // TODO2: Всё равно получаю иногда 1 элемент, вместо 2(перепроверить)
+      const randomZoneIndex = Math.floor(Math.random() * zones.length);
+      if (!uniqueZoneIndex.has(randomZoneIndex)) {
+        uniqueZoneIndex.add(randomZoneIndex);
+        state.battle.enemy.defenceZones.push(zones[randomZoneIndex]);
+      }
+    }
+
+    return state.battle.enemy.defenceZones;
+  }
+
+  function determineAttackZoneEnemy() {
+    // TODO: Нужно понять как получать количество зон атаки динамически(и нужно ли -- у Сукуны 2 атаки)
+    const randomZoneIndex = Math.floor(Math.random() * zones.length);
+    if (!state.battle.enemy.attackZone) {
+      return (state.battle.enemy.attackZone = zones[randomZoneIndex]);
+    }
+  }
+
+  const startAttack = () => {
+    const hpPanelEnemy = document.querySelector('.hp-control__hp-enemy');
+    const hpPanelPlayer = document.querySelector('.hp-control__hp-player');
+    const countHpPanelEnemy = document.querySelector(
+      '.hp-control__count-enemy',
+    );
+    const countHpPanelPlayer = document.querySelector(
+      '.hp-control__count-player',
+    );
+
+    if (
+      state.battle.enemy.defenceZones.includes(state.battle.player.attackChoice)
+    ) {
+      state.battle.player.damage * 0;
+    } else {
+      state.battle.enemy.health -= state.battle.player.damage;
+      console.log(state.battle.player.damage);
+
+      if (state.battle.enemy.health <= 0) {
+        state.battle.enemy.health = 0;
+      }
+
+      hpPanelEnemy.style.width = `${state.battle.enemy.health}%`;
+      countHpPanelEnemy.innerHTML = `${state.battle.enemy.health}`;
+    }
+
+    if (
+      state.battle.player.defenceChoice.includes(state.battle.enemy.attackZone)
+    ) {
+      state.battle.enemy.damage * 0;
+    } else {
+      state.battle.player.health -= state.battle.enemy.damage;
+      console.log(state.battle.enemy.damage);
+
+      if (state.battle.player.health <= 0) {
+        state.battle.player.health = 0;
+      }
+
+      hpPanelPlayer.style.width = `${state.battle.player.health}%`;
+      countHpPanelPlayer.innerHTML = `${state.battle.player.health}`;
+    }
+  };
+
   selectZone();
+  validateChoices();
 
   startFightButton.addEventListener('click', startFight);
   window.addEventListener('load', reloadFight);
+  attackButton.addEventListener('click', startAttack);
 
   return { startFight };
 
