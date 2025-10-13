@@ -178,21 +178,23 @@ export const initFight = () => {
           selectedButton.classList.remove('selected');
         });
 
-        if (state.battle.player.attackChoice === null) {
-          attackButton.classList.add('selected');
-          state.battle.player.attackChoice = attackButton.textContent;
-        }
+        if (state.battle) {
+          if (state.battle.player.attackChoice === null) {
+            attackButton.classList.add('selected');
+            state.battle.player.attackChoice = attackButton.textContent;
+          }
 
-        if (state.battle?.player.attackChoice !== attackButton.textContent) {
-          attackButton.classList.add('selected');
-          state.battle.player.attackChoice = attackButton.textContent;
-        }
+          if (state.battle?.player.attackChoice !== attackButton.textContent) {
+            attackButton.classList.add('selected');
+            state.battle.player.attackChoice = attackButton.textContent;
+          }
 
-        if (!attackButton.getAttribute('class').includes('selected')) {
-          state.battle.player.attackChoice = null;
-        }
+          if (!attackButton.getAttribute('class').includes('selected')) {
+            state.battle.player.attackChoice = null;
+          }
 
-        validateChoices();
+          validateChoices();
+        }
       });
     });
 
@@ -220,10 +222,8 @@ export const initFight = () => {
       state.battle?.player.attackChoice &&
       state.battle?.player.defenceChoice.length === 2
     ) {
-      console.log('Валидный выбор!');
       attackButton.disabled = false;
     } else {
-      console.log('Невалидный выбор!');
       attackButton.disabled = true;
     }
   };
@@ -270,7 +270,6 @@ export const initFight = () => {
       state.battle.player.damage * 0;
     } else {
       state.battle.enemy.health -= state.battle.player.damage;
-      console.log(state.battle.player.damage);
 
       if (state.battle.enemy.health <= 0) {
         state.battle.enemy.health = 0;
@@ -286,7 +285,6 @@ export const initFight = () => {
       state.battle.enemy.damage * 0;
     } else {
       state.battle.player.health -= state.battle.enemy.damage;
-      console.log(state.battle.enemy.damage);
 
       if (state.battle.player.health <= 0) {
         state.battle.player.health = 0;
@@ -295,10 +293,58 @@ export const initFight = () => {
       hpPanelPlayer.style.width = `${state.battle.player.health}%`;
       countHpPanelPlayer.innerHTML = `${state.battle.player.health}`;
     }
+
+    resetFight();
   };
+
+  function resetFight() {
+    if (state.battle?.enemy.health <= 0 || state.battle?.player.health <= 0) {
+      attackButton.style.display = 'none';
+      const attackPanel = document.querySelector('.attack-panel');
+      const resetButton = document.createElement('button');
+      resetButton.classList.add('fight__reset-button');
+      attackPanel.insertAdjacentElement('afterend', resetButton); // TODO: Изучить подробнее
+
+      resetButton.addEventListener('click', () => {
+        endGame();
+        resetButton.style.display = 'none';
+        attackButton.style.display = 'flex';
+
+        attackButtons.forEach((attackButton) => {
+          attackButton.classList.remove('selected');
+        });
+        defenceButtons.forEach((defenceButton) => {
+          defenceButton.classList.remove('selected');
+        });
+
+        validateChoices();
+      });
+    }
+  }
+
+  function endGame() {
+    character = {
+      ...character,
+      attackChoice: null,
+      defenceChoice: [],
+      health: character.maxHealth,
+    };
+
+    enemy = getRandomEnemy();
+
+    state.battle = {
+      player: { ...character },
+      enemy: { ...enemy },
+      log: [],
+    };
+
+    renderEnemy(state.battle.enemy);
+    renderPlayer(state.battle.player);
+  }
 
   selectZone();
   validateChoices();
+  resetFight();
 
   startFightButton.addEventListener('click', startFight);
   window.addEventListener('load', reloadFight);
