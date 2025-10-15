@@ -1,6 +1,6 @@
 import { state } from './state';
 import initOverlayClose from './modal-overlay';
-import initFight from './fight';
+import { resetFightByCharacterChange } from './fight';
 
 const initChars = () => {
   const body = document.querySelector('body');
@@ -74,9 +74,8 @@ const initChars = () => {
       location.hash = '#login';
     }
 
-    if (state.battle.player.id !== state.avatarId) {
-      const { startFight } = initFight();
-      startFight();
+    if (state.battle?.player.id !== state.avatarId) {
+      resetFightByCharacterChange();
 
       attackButtons.forEach((attackButton) => {
         attackButton.classList.remove('selected');

@@ -1,84 +1,77 @@
 import { state } from './state.js';
-import initChars from './characters.js';
 import KenImg from '/src/assets/images/fight/Ken.webp';
 import SukunaImg from '/src/assets/images/fight/Sukuna.webp';
 import TojiImg from '/src/assets/images/fight/Todzi.webp';
 
-export const initFight = () => {
-  const startFightButton = document.querySelector('.login__button-fight');
-  const attackButtons = document.querySelectorAll(
-    '.attack-panel .fight__button',
-  );
-  const defenceButtons = document.querySelectorAll(
-    '.defence-panel .fight__button',
-  );
-  const attackButton = document.querySelector('.fight__fight-button');
+const startFightButton = document.querySelector('.login__button-fight');
+const attackButtons = document.querySelectorAll('.attack-panel .fight__button');
+const defenceButtons = document.querySelectorAll(
+  '.defence-panel .fight__button',
+);
+const attackButton = document.querySelector('.fight__fight-button');
 
-  const enemies = [
-    {
-      name: 'Kenjaku',
-      maxHealth: 100,
-      health: 100,
-      damage: 20,
-      countAttackZone: 1,
-      attackZone: null,
-      countDefenceZone: 2,
-      defenceZones: [],
-      img: KenImg,
-    },
-    {
-      name: 'Sukuna',
-      maxHealth: 110,
-      health: 110,
-      damage: 25,
-      countAttackZone: 2,
-      attackZone: null,
-      countDefenceZone: 2,
-      defenceZones: [],
-      img: SukunaImg,
-    },
-    {
-      name: 'Fushiguro Toji',
-      maxHealth: 100,
-      health: 100,
-      damage: 20,
-      countAttackZone: 1,
-      attackZone: null,
-      countDefenceZone: 3,
-      defenceZones: [],
-      img: TojiImg,
-    },
-  ];
+const enemies = [
+  {
+    name: 'Kenjaku',
+    maxHealth: 100,
+    health: 100,
+    damage: 20,
+    countAttackZone: 1,
+    attackZone: null,
+    countDefenceZone: 2,
+    defenceZones: [],
+    img: KenImg,
+  },
+  {
+    name: 'Sukuna',
+    maxHealth: 110,
+    health: 110,
+    damage: 25,
+    countAttackZone: 2,
+    attackZone: null,
+    countDefenceZone: 2,
+    defenceZones: [],
+    img: SukunaImg,
+  },
+  {
+    name: 'Fushiguro Toji',
+    maxHealth: 100,
+    health: 100,
+    damage: 20,
+    countAttackZone: 1,
+    attackZone: null,
+    countDefenceZone: 3,
+    defenceZones: [],
+    img: TojiImg,
+  },
+];
 
-  const zones = ['Head', 'Neck', 'Body', 'Belly', 'Legs'];
+const zones = ['Head', 'Neck', 'Body', 'Belly', 'Legs'];
 
-  const getRandomEnemy = () => {
-    const index = Math.floor(Math.random() * enemies.length);
-    return enemies[index];
-  };
+const getRandomEnemy = () => {
+  const index = Math.floor(Math.random() * enemies.length);
+  return enemies[index];
+};
 
-  const getCharacter = () => {
-    let charsId = state.characters.map((character) => character.id); // [0, 1, 2]
+const getCharacter = () => {
+  let charsId = state.characters.map((character) => character.id); // [0, 1, 2]
 
-    for (let charId of charsId) {
-      if (charId === state.avatarId) {
-        return state.characters[charId];
-      }
+  for (let charId of charsId) {
+    if (charId === state.avatarId) {
+      return state.characters[charId];
     }
-  };
+  }
+};
 
-  let enemy = getRandomEnemy();
-  let character = getCharacter();
-
-  const renderEnemy = (data) => {
-    let enemyData = null;
-    if (state.battle === null) {
-      enemyData = enemy;
-    } else {
-      enemyData = data;
-    }
-    const cardEnemy = document.querySelector('.fight__card--antagonist');
-    cardEnemy.innerHTML = `
+const renderEnemy = (data) => {
+  let enemyData = null;
+  if (state.battle === null) {
+    enemyData = enemy;
+  } else {
+    enemyData = data;
+  }
+  const cardEnemy = document.querySelector('.fight__card--antagonist');
+  cardEnemy.innerHTML = `
       <div class="fight__image-container">
         <img
           class="fight__image"
@@ -98,24 +91,24 @@ export const initFight = () => {
               /${enemyData.maxHealth}
           </span>
         </div>`;
-    const hpEnemy = document.querySelector('.hp-control__hp-enemy');
-    hpEnemy.style.width = `${enemyData.health}%`;
+  const hpEnemy = document.querySelector('.hp-control__hp-enemy');
+  hpEnemy.style.width = `${enemyData.health}%`;
 
-    if (state.battle) {
-      determineDefenceZonesEnemy();
-      determineAttackZoneEnemy();
-    }
-  };
+  if (state.battle) {
+    determineDefenceZonesEnemy();
+    determineAttackZoneEnemy();
+  }
+};
 
-  const renderPlayer = (data) => {
-    let playerData = null;
-    if (state.battle === null) {
-      playerData = character;
-    } else {
-      playerData = data;
-    }
-    const cardPlayer = document.querySelector('.fight__card--protagonist');
-    cardPlayer.innerHTML = `
+const renderPlayer = (data) => {
+  let playerData = null;
+  if (state.battle === null) {
+    playerData = character;
+  } else {
+    playerData = data;
+  }
+  const cardPlayer = document.querySelector('.fight__card--protagonist');
+  cardPlayer.innerHTML = `
       <div class="fight__image-container">
         <img
           class="fight__image"
@@ -135,9 +128,52 @@ export const initFight = () => {
               /${playerData.maxHealth}
           </span>
         </div>`;
-    const hpPlayer = document.querySelector('.hp-control__hp-player');
-    hpPlayer.style.width = `${playerData.health}%`;
-  };
+  const hpPlayer = document.querySelector('.hp-control__hp-player');
+  hpPlayer.style.width = `${playerData.health}%`;
+};
+
+let enemy;
+let character;
+
+function determineDefenceZonesEnemy() {
+  const uniqueZoneIndex = new Set();
+
+  while (
+    state.battle.enemy.defenceZones.length < state.battle.enemy.countDefenceZone
+  ) {
+    // TODO2: Всё равно получаю иногда 1 элемент, вместо 2(перепроверить)
+    const randomZoneIndex = Math.floor(Math.random() * zones.length);
+    if (!uniqueZoneIndex.has(randomZoneIndex)) {
+      uniqueZoneIndex.add(randomZoneIndex);
+      state.battle.enemy.defenceZones.push(zones[randomZoneIndex]);
+    }
+  }
+
+  return state.battle.enemy.defenceZones;
+}
+
+function determineAttackZoneEnemy() {
+  // TODO: Нужно понять как получать количество зон атаки динамически(и нужно ли -- у Сукуны 2 атаки)
+  const randomZoneIndex = Math.floor(Math.random() * zones.length);
+  if (!state.battle.enemy.attackZone) {
+    return (state.battle.enemy.attackZone = zones[randomZoneIndex]);
+  }
+}
+
+const validateChoices = () => {
+  if (
+    state.battle?.player.attackChoice &&
+    state.battle?.player.defenceChoice.length === 2
+  ) {
+    attackButton.disabled = false;
+  } else {
+    attackButton.disabled = true;
+  }
+};
+
+export const initFight = () => {
+  enemy = getRandomEnemy();
+  character = getCharacter();
 
   const startFight = () => {
     if (!state.battle) {
@@ -217,43 +253,6 @@ export const initFight = () => {
     });
   };
 
-  const validateChoices = () => {
-    if (
-      state.battle?.player.attackChoice &&
-      state.battle?.player.defenceChoice.length === 2
-    ) {
-      attackButton.disabled = false;
-    } else {
-      attackButton.disabled = true;
-    }
-  };
-
-  function determineDefenceZonesEnemy() {
-    const uniqueZoneIndex = new Set();
-
-    while (
-      state.battle.enemy.defenceZones.length <
-      state.battle.enemy.countDefenceZone
-    ) {
-      // TODO2: Всё равно получаю иногда 1 элемент, вместо 2(перепроверить)
-      const randomZoneIndex = Math.floor(Math.random() * zones.length);
-      if (!uniqueZoneIndex.has(randomZoneIndex)) {
-        uniqueZoneIndex.add(randomZoneIndex);
-        state.battle.enemy.defenceZones.push(zones[randomZoneIndex]);
-      }
-    }
-
-    return state.battle.enemy.defenceZones;
-  }
-
-  function determineAttackZoneEnemy() {
-    // TODO: Нужно понять как получать количество зон атаки динамически(и нужно ли -- у Сукуны 2 атаки)
-    const randomZoneIndex = Math.floor(Math.random() * zones.length);
-    if (!state.battle.enemy.attackZone) {
-      return (state.battle.enemy.attackZone = zones[randomZoneIndex]);
-    }
-  }
-
   const startAttack = () => {
     const hpPanelEnemy = document.querySelector('.hp-control__hp-enemy');
     const hpPanelPlayer = document.querySelector('.hp-control__hp-player');
@@ -324,7 +323,7 @@ export const initFight = () => {
 
   function endGame() {
     character = {
-      ...character,
+      ...getCharacter(),
       attackChoice: null,
       defenceChoice: [],
       health: character.maxHealth,
@@ -349,8 +348,6 @@ export const initFight = () => {
   startFightButton.addEventListener('click', startFight);
   window.addEventListener('load', reloadFight);
   attackButton.addEventListener('click', startAttack);
-
-  return { startFight };
 
   // const attackButton = document.querySelector('.fight__fight-button');
   // const attackButtons = document.querySelectorAll(
@@ -626,5 +623,39 @@ export const initFight = () => {
   //   selectedChar.addEventListener('click', updateFight);
   // });
 };
+
+export function resetFightByCharacterChange() {
+  if (state.battle?.enemy.health > 0 || state.battle?.player.health > 0) {
+    const resetButton = document.querySelector('.fight__reset-button');
+    resetButton.style.display = 'none';
+    attackButton.style.display = 'flex';
+  }
+
+  const newCharacter = getCharacter();
+  enemy = getRandomEnemy();
+
+  state.battle = {
+    player: {
+      ...newCharacter,
+      attackChoice: null,
+      defenceChoice: [],
+      health: newCharacter.maxHealth,
+    },
+    enemy: { ...enemy },
+    log: [],
+  };
+
+  renderEnemy(state.battle.enemy);
+  renderPlayer(state.battle.player);
+
+  attackButtons.forEach((attackButton) =>
+    attackButton.classList.remove('selected'),
+  );
+  defenceButtons.forEach((defenceButton) =>
+    defenceButton.classList.remove('selected'),
+  );
+
+  validateChoices();
+}
 
 export default initFight;
