@@ -54,9 +54,12 @@ const initChars = () => {
 
     if (currentHash === '#characters') {
       settingsLink.classList.add('disabled');
+      updateStatsOnModalOpen();
     } else {
       settingsLink.classList.remove('disabled');
     }
+
+    updateStatsOnModalOpen();
   });
 
   const closeModal = () => {
@@ -87,8 +90,6 @@ const initChars = () => {
   }
 
   initOverlayClose(closeModal);
-  updateStatsOnModalOpen();
-  window.addEventListener('hashchange', updateStatsOnModalOpen);
 };
 
 export default initChars;
