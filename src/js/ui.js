@@ -1,3 +1,5 @@
+import { state } from './state';
+
 export const showGreeting = (title, nickname) => {
   const greeting = document.createElement('p');
   greeting.className = 'login__greeting h2';
@@ -30,3 +32,18 @@ export const toggleSectionVisible = (body, logo, isVisible) => {
   body.classList.toggle('overlay', isVisible);
   logo.classList.toggle('hidden', isVisible);
 };
+
+export function updateStatsUI() {
+  const wins = document.querySelectorAll('.characters__result-w');
+  const loses = document.querySelectorAll('.characters__result-l');
+
+  state.characters.forEach((char, index) => {
+    if (wins[index]) {
+      wins[index].innerHTML = char.stats.win;
+    }
+
+    if (loses[index]) {
+      loses[index].innerHTML = char.stats.lose;
+    }
+  });
+}

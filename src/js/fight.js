@@ -171,7 +171,19 @@ const validateChoices = () => {
   }
 };
 
+function determineStatFight() {
+  if (state.battle.player.health <= 0 && state.battle.enemy.health <= 0) {
+    state.battle.player.stats.lose += 1;
+    state.battle.player.stats.win += 1;
+  } else if (state.battle.enemy.health <= 0) {
+    state.battle.player.stats.win += 1;
+  } else if (state.battle.player.health <= 0) {
+    state.battle.player.stats.lose += 1;
+  }
+}
+
 export const initFight = () => {
+  // TODO: Поймал баг, при смене персонажа энеми появляется с 0 хп, хотя до этого бой был обновлён
   enemy = getRandomEnemy();
   character = getCharacter();
 
@@ -294,6 +306,7 @@ export const initFight = () => {
     }
 
     resetFight();
+    determineStatFight();
   };
 
   function resetFight() {
@@ -627,8 +640,10 @@ export const initFight = () => {
 export function resetFightByCharacterChange() {
   if (state.battle?.enemy.health > 0 || state.battle?.player.health > 0) {
     const resetButton = document.querySelector('.fight__reset-button');
-    resetButton.style.display = 'none';
-    attackButton.style.display = 'flex';
+    if (resetButton) {
+      resetButton.style.display = 'none';
+      attackButton.style.display = 'flex';
+    }
   }
 
   const newCharacter = getCharacter();
