@@ -9,6 +9,7 @@ const defenceButtons = document.querySelectorAll(
   '.defence-panel .fight__button',
 );
 const attackButton = document.querySelector('.fight__fight-button');
+const logContainer = document.querySelector('.logs__list');
 
 const enemies = [
   {
@@ -175,10 +176,17 @@ function determineStatFight() {
   if (state.battle.player.health <= 0 && state.battle.enemy.health <= 0) {
     state.battle.player.stats.lose += 1;
     state.battle.player.stats.win += 1;
+    state.battle.log.unshift(`<span class="logs__accent">Draw!</span>`);
   } else if (state.battle.enemy.health <= 0) {
     state.battle.player.stats.win += 1;
+    state.battle.log.unshift(
+      `<span class="logs__accent">${state.battle.player.name}</span> wins!`,
+    );
   } else if (state.battle.player.health <= 0) {
     state.battle.player.stats.lose += 1;
+    state.battle.log.unshift(
+      `<span class="logs__accent">${state.battle.enemy.name}</span> wins!`,
+    );
   }
 }
 
@@ -217,6 +225,14 @@ export const initFight = () => {
 
     renderEnemy(state.battle?.enemy);
     renderPlayer(state.battle?.player);
+
+    logContainer.innerHTML = '';
+    state.battle?.log.forEach((entry) => {
+      const li = document.createElement('li');
+      li.classList.add('logs__item');
+      li.innerHTML = entry;
+      logContainer.appendChild(li);
+    });
   };
 
   const selectZone = () => {
@@ -275,38 +291,104 @@ export const initFight = () => {
       '.hp-control__count-player',
     );
 
+    const playerDamage = state.battle.player.damage;
+    let actualPlayerDamage = playerDamage;
+    const enemyDamage = state.battle.enemy.damage;
+    let actualEnemyDamage = enemyDamage;
+
+    const critChance = 20;
+    const critMultiplier = 1.5;
+
+    const isCrit = () => {
+      let actualCritChance = Math.floor(Math.random() * 100);
+      if (actualCritChance <= critChance) {
+        return true;
+      } else {
+        return false;
+      }
+    };
+
+    const isPlayerCrit = isCrit();
+    const isEnemyCrit = isCrit();
+
     if (
       state.battle.enemy.defenceZones.includes(state.battle.player.attackChoice)
     ) {
-      state.battle.player.damage * 0;
-    } else {
-      state.battle.enemy.health -= state.battle.player.damage;
-
-      if (state.battle.enemy.health <= 0) {
-        state.battle.enemy.health = 0;
-      }
-
-      hpPanelEnemy.style.width = `${state.battle.enemy.health}%`;
-      countHpPanelEnemy.innerHTML = `${state.battle.enemy.health}`;
+      actualPlayerDamage = 0;
     }
+
+    if (
+      (state.battle.enemy.defenceZones.includes(
+        state.battle.player.attackChoice,
+      ) &&
+        isPlayerCrit) ||
+      isPlayerCrit
+    ) {
+      actualPlayerDamage = playerDamage * critMultiplier;
+    }
+
+    state.battle.enemy.health -= actualPlayerDamage;
+
+    if (state.battle.enemy.health <= 0) {
+      state.battle.enemy.health = 0;
+    }
+
+    hpPanelEnemy.style.width = `${state.battle.enemy.health}%`;
+    countHpPanelEnemy.innerHTML = `${state.battle.enemy.health}`;
 
     if (
       state.battle.player.defenceChoice.includes(state.battle.enemy.attackZone)
     ) {
-      state.battle.enemy.damage * 0;
-    } else {
-      state.battle.player.health -= state.battle.enemy.damage;
-
-      if (state.battle.player.health <= 0) {
-        state.battle.player.health = 0;
-      }
-
-      hpPanelPlayer.style.width = `${state.battle.player.health}%`;
-      countHpPanelPlayer.innerHTML = `${state.battle.player.health}`;
+      actualEnemyDamage = 0;
     }
 
+    if (
+      (state.battle.enemy.defenceZones.includes(
+        state.battle.player.attackChoice,
+      ) &&
+        isEnemyCrit) ||
+      isEnemyCrit
+    ) {
+      actualEnemyDamage = enemyDamage * critMultiplier;
+    }
+
+    state.battle.player.health -= actualEnemyDamage;
+
+    if (state.battle.player.health <= 0) {
+      state.battle.player.health = 0;
+    }
+
+    console.log(isPlayerCrit, isEnemyCrit);
+
+    hpPanelPlayer.style.width = `${state.battle.player.health}%`;
+    countHpPanelPlayer.innerHTML = `${state.battle.player.health}`;
+
     resetFight();
+
+    createAttackLogs(
+      state.battle.player,
+      state.battle.enemy,
+      state.battle.player.attackChoice,
+      actualPlayerDamage,
+      isPlayerCrit,
+    );
+    createAttackLogs(
+      state.battle.enemy,
+      state.battle.player,
+      state.battle.enemy.attackZone,
+      actualEnemyDamage,
+      isEnemyCrit,
+    );
+
     determineStatFight();
+
+    logContainer.innerHTML = '';
+    state.battle.log.forEach((entry) => {
+      const li = document.createElement('li');
+      li.classList.add('logs__item');
+      li.innerHTML = entry;
+      logContainer.appendChild(li);
+    });
   };
 
   function resetFight() {
@@ -335,6 +417,7 @@ export const initFight = () => {
   }
 
   function endGame() {
+    // TODO: После ресета боя хп плеера некорректное, либо 110 из 100, либо 100 из 110
     character = {
       ...getCharacter(),
       attackChoice: null,
@@ -352,6 +435,18 @@ export const initFight = () => {
 
     renderEnemy(state.battle.enemy);
     renderPlayer(state.battle.player);
+
+    logContainer.innerHTML = '';
+  }
+
+  function createAttackLogs(attacker, defender, attackZones, damage, isCrit) {
+    let crit = isCrit ? '(Crit!)' : '';
+    state.battle.log.unshift(
+      `<span class="logs__accent">${attacker.name}</span> attacks
+        <span class="logs__accent">${defender.name}</span>, dealing
+        <span class="logs__accent">${damage}${crit}</span> damage by hitting
+        <span class="logs__accent">${attackZones}</span>`,
+    );
   }
 
   selectZone();
@@ -671,6 +766,7 @@ export function resetFightByCharacterChange() {
   );
 
   validateChoices();
+  logContainer.innerHTML = '';
 }
 
 export default initFight;
