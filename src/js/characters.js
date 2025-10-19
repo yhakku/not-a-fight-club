@@ -17,6 +17,10 @@ const initChars = () => {
     '.defence-panel .fight__button',
   );
 
+  if (location.hash === '#characters') {
+    settingsLink.classList.add('disabled');
+  }
+
   const updateStatsOnModalOpen = () => {
     if (location.hash === '#characters') {
       updateStatsUI();
@@ -90,6 +94,7 @@ const initChars = () => {
   }
 
   initOverlayClose(closeModal);
+  updateStatsUI();
 };
 
 export default initChars;
