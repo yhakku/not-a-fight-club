@@ -25,6 +25,7 @@ const router = () => {
     case 'fight':
       hiddenUi('fight');
       menu.classList.remove('hidden');
+      body.classList.remove('overlay');
       body.classList.add('fight-background');
       break;
     case 'characters':
