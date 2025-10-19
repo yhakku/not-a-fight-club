@@ -6,7 +6,7 @@ const initSettings = () => {
   const body = document.querySelector('body');
   const logo = document.querySelector('.logo');
   const buttonClose = document.querySelector('.settings__button-close');
-  const settingsLink = document.querySelector('a[href="#characters"]');
+  const characterLink = document.querySelector('a[href="#characters"]');
   const form = document.querySelector('.change-name__form');
   const input = document.querySelector('.change-name__input');
   const title = document.querySelector('.login__title');
@@ -17,6 +17,10 @@ const initSettings = () => {
     input.placeholder = nickname;
   } else {
     location.hash = '#login';
+  }
+
+  if (location.hash === '#settings') {
+    characterLink.classList.add('disabled');
   }
 
   form.addEventListener('submit', (event) => {
@@ -38,9 +42,9 @@ const initSettings = () => {
     currentHash = location.hash;
 
     if (currentHash === '#settings') {
-      settingsLink.classList.add('disabled');
+      characterLink.classList.add('disabled');
     } else {
-      settingsLink.classList.remove('disabled');
+      characterLink.classList.remove('disabled');
     }
   });
 
