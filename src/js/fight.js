@@ -415,11 +415,13 @@ export const initFight = () => {
 
   function endGame() {
     // TODO: После ресета боя хп плеера некорректное, либо 110 из 100, либо 100 из 110
+    const actualChar = getCharacter();
+
     character = {
-      ...getCharacter(),
+      ...actualChar,
       attackChoice: null,
       defenceChoice: [],
-      health: character.maxHealth,
+      health: actualChar.maxHealth,
     };
 
     enemy = getRandomEnemy();
