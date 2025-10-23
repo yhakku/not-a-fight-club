@@ -10,6 +10,7 @@ const defenceButtons = document.querySelectorAll(
 );
 const attackButton = document.querySelector('.fight__fight-button');
 const logContainer = document.querySelector('.logs__list');
+const reloadButton = document.querySelector('.fight__reload-button');
 
 const enemies = [
   {
@@ -391,11 +392,13 @@ export const initFight = () => {
   function resetFight() {
     if (state.battle?.enemy.health <= 0 || state.battle?.player.health <= 0) {
       attackButton.style.display = 'none';
-      const managementPanel = document.querySelector('.management-panel');
+      const managementPanel = document.querySelector(
+        '.fight__buttons-container',
+      );
       const resetButton = document.createElement('button');
       resetButton.classList.add('fight__reset-button');
       resetButton.textContent = 'Next!';
-      managementPanel.appendChild(resetButton);
+      managementPanel.insertAdjacentElement('afterBegin', resetButton); // TODO: Спамятся кнопки
 
       resetButton.addEventListener('click', () => {
         endGame();
@@ -456,6 +459,7 @@ export const initFight = () => {
   startFightButton.addEventListener('click', startFight);
   window.addEventListener('load', reloadFight);
   attackButton.addEventListener('click', startAttack);
+  reloadButton.addEventListener('click', resetFightByCharacterChange);
 };
 
 export function resetFightByCharacterChange() {

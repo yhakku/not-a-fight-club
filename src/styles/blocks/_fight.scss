@@ -57,11 +57,16 @@
     padding: rem(12) rem(24) rem(11) rem(24);
   }
 
+  &__buttons-container {
+    display: flex;
+  }
+
   &__fight-button {
     display: flex;
     align-self: flex-start;
     background-color: root.$color-dark;
     padding: rem(16) rem(24) rem(15) rem(24);
+    margin-right: rem(10);
     border: none;
     border-radius: rem(50);
     color: root.$color-ligth;
@@ -72,11 +77,22 @@
     }
   }
 
+  &__reload-button {
+    display: flex;
+    align-self: flex-start;
+    background-color: root.$color-dark;
+    padding: rem(16) rem(24) rem(15) rem(24);
+    border: none;
+    border-radius: rem(50);
+    color: root.$color-ligth;
+  }
+
   &__reset-button {
     display: flex;
     align-self: flex-start;
     background-color: root.$color-dark;
     padding: rem(16) rem(24) rem(15) rem(24);
+    margin-right: rem(29);
     border: none;
     border-radius: rem(50);
     color: root.$color-ligth;
