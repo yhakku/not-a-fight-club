@@ -190,7 +190,7 @@ function determineStatFight() {
 }
 
 export const initFight = () => {
-  // TODO: Поймал баг, при смене персонажа энеми появляется с 0 хп, хотя до этого бой был обновлён
+  // TODO: Поймал баг, при смене персонажа энеми появляется с 0 хп, хотя до этого бой был обновлён | Не заметил пока
   enemy = getRandomEnemy();
   character = getCharacter();
 
@@ -391,10 +391,11 @@ export const initFight = () => {
   function resetFight() {
     if (state.battle?.enemy.health <= 0 || state.battle?.player.health <= 0) {
       attackButton.style.display = 'none';
-      const attackPanel = document.querySelector('.attack-panel');
+      const managementPanel = document.querySelector('.management-panel');
       const resetButton = document.createElement('button');
       resetButton.classList.add('fight__reset-button');
-      attackPanel.insertAdjacentElement('afterend', resetButton);
+      resetButton.textContent = 'Next!';
+      managementPanel.appendChild(resetButton);
 
       resetButton.addEventListener('click', () => {
         endGame();
@@ -414,7 +415,7 @@ export const initFight = () => {
   }
 
   function endGame() {
-    // TODO: После ресета боя хп плеера некорректное, либо 110 из 100, либо 100 из 110
+    // TODO: После ресета боя хп плеера некорректное, либо 110 из 100, либо 100 из 110 | Решён
     const actualChar = getCharacter();
 
     character = {

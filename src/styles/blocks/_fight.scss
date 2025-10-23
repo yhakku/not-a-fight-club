@@ -33,8 +33,14 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
-    row-gap: rem(20);
+    align-items: flex-start;
+    row-gap: rem(15);
+  }
+
+  &__panel-container {
+    display: flex;
+    flex-direction: column;
+    row-gap: rem(25);
     padding-inline: rem(40);
   }
 
@@ -44,35 +50,35 @@
 
   &__buttons {
     display: flex;
-    flex-direction: column;
-    row-gap: rem(16);
+    column-gap: rem(10);
   }
 
   &__button {
-    width: rem(120);
-    height: rem(42);
+    padding: rem(12) rem(24) rem(11) rem(24);
   }
 
   &__fight-button {
     display: flex;
-    align-self: center;
+    align-self: flex-start;
     background-color: root.$color-dark;
-    padding: rem(20) rem(26) rem(21) rem(25);
+    padding: rem(16) rem(24) rem(15) rem(24);
     border: none;
     border-radius: rem(50);
+    color: root.$color-ligth;
+
+    &:disabled {
+      background-color: #555555;
+      cursor: not-allowed;
+    }
   }
 
   &__reset-button {
     display: flex;
-    align-self: center;
+    align-self: flex-start;
     background-color: root.$color-dark;
-    padding: rem(20) rem(26) rem(21) rem(25);
-    background-image: url(/spiral.svg);
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    padding: rem(51);
+    padding: rem(16) rem(24) rem(15) rem(24);
     border: none;
     border-radius: rem(50);
+    color: root.$color-ligth;
   }
 }
