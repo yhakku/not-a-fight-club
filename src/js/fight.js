@@ -398,11 +398,11 @@ export const initFight = () => {
       const resetButton = document.createElement('button');
       resetButton.classList.add('fight__reset-button');
       resetButton.textContent = 'Next!';
-      managementPanel.insertAdjacentElement('afterBegin', resetButton); // TODO: Спамятся кнопки
+      managementPanel.insertAdjacentElement('afterBegin', resetButton);
 
       resetButton.addEventListener('click', () => {
         endGame();
-        resetButton.style.display = 'none';
+        resetButton.remove(); // TODO: Спамятся кнопки | Решён
         attackButton.style.display = 'flex';
 
         attackButtons.forEach((attackButton) => {
