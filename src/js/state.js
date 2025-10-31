@@ -5,6 +5,7 @@ import NanamiImg from '/src/assets/images/fight/Nanami.webp';
 const defaultState = {
   nickname: null,
   avatarId: 0,
+  isShowDescriptionFight: false,
   characters: [
     {
       name: 'Gojo Satoru',

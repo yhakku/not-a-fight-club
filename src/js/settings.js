@@ -10,6 +10,16 @@ const initSettings = () => {
   const form = document.querySelector('.change-name__form');
   const input = document.querySelector('.change-name__input');
   const title = document.querySelector('.login__title');
+  const checkbox = document.querySelector(
+    '.show-description__form-checkbox-input',
+  );
+  const checkboxFight = document.querySelector('.fight__panel-checkbox-input');
+  const fightPanelContainer = document.querySelector(
+    '.fight__panel-container--fight',
+  );
+  const descriptionPanelContainer = document.querySelector(
+    '.fight__panel-container--description',
+  );
 
   let nickname = state.nickname;
 
@@ -34,6 +44,20 @@ const initSettings = () => {
     history.back();
   });
 
+  function toggleDescriptionFight() {
+    if (checkbox.checked) {
+      state.isShowDescriptionFight = false;
+      checkboxFight.checked = false;
+      descriptionPanelContainer.style.display = 'flex';
+      fightPanelContainer.style.display = 'none';
+    } else {
+      state.isShowDescriptionFight = true;
+      checkboxFight.checked = true;
+      descriptionPanelContainer.style.display = 'none';
+      fightPanelContainer.style.display = 'flex';
+    }
+  }
+
   let prevHash = null;
   let currentHash = location.hash;
 
@@ -56,6 +80,8 @@ const initSettings = () => {
   if (buttonClose) {
     buttonClose.addEventListener('click', closeModal);
   }
+
+  checkbox.addEventListener('change', toggleDescriptionFight);
 };
 
 export default initSettings;

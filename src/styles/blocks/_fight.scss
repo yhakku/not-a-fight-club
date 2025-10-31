@@ -76,13 +76,112 @@
     &-tooltip-container:hover svg {
       opacity: 1;
     }
+
+    &-versus {
+      font-size: rem(44);
+      padding-bottom: rem(10);
+
+      &--player {
+        position: absolute;
+        top: rem(9);
+        right: 60%;
+        transform: translateX(10%);
+        font-size: rem(28);
+      }
+
+      &--enemy {
+        position: absolute;
+        top: rem(9);
+        left: 57%;
+        font-size: rem(28);
+      }
+    }
+
+    &-description {
+      display: flex;
+      justify-content: center;
+      max-width: rem(539.08);
+      font-family: root.$font-family-accent;
+      font-size: rem(18);
+      line-height: 0.9;
+      text-align: center;
+      padding-bottom: rem(15);
+    }
+
+    &-button {
+      display: flex;
+      background-color: root.$color-dark;
+      padding: rem(16) rem(24) rem(15) rem(24);
+      border: none;
+      border-radius: rem(50);
+      color: root.$color-ligth;
+    }
+
+    &-checkbox {
+      position: absolute;
+      right: 2%;
+      bottom: 5%;
+
+      &-input {
+        @include visually-hidden;
+      }
+
+      &-text {
+        position: relative;
+        display: flex;
+        align-items: center;
+        font-family: root.$font-family-accent;
+      }
+
+      &-text::before {
+        content: '';
+        display: inline-block;
+        width: rem(12);
+        height: rem(12);
+        background-color: transparent;
+        border: rem(1) solid root.$color-dark;
+        border-radius: rem(3);
+        margin-right: rem(5);
+      }
+
+      &-text::after {
+        content: '';
+        position: absolute;
+        left: rem(1);
+        top: 35%;
+        transform: translateY(-40%);
+        width: rem(10);
+        height: rem(11);
+        background-image: url(../../assets/images/fight/check.svg);
+        opacity: 0;
+        transition: opacity 0.2s ease;
+      }
+
+      &-input:checked + &-text::after {
+        opacity: 1;
+      }
+    }
   }
 
   &__panel-container {
     display: flex;
+    align-items: center;
     flex-direction: column;
-    row-gap: rem(25);
     padding-inline: rem(40);
+
+    &--description {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    &--fight {
+      display: none;
+      flex-direction: column;
+      align-items: flex-start;
+      row-gap: rem(25);
+    }
   }
 
   &__panel-title {

@@ -11,6 +11,15 @@ const defenceButtons = document.querySelectorAll(
 const attackButton = document.querySelector('.fight__fight-button');
 const logContainer = document.querySelector('.logs__list');
 const reloadButton = document.querySelector('.fight__reload-button');
+const fightPanelContainer = document.querySelector(
+  '.fight__panel-container--fight',
+);
+const descriptionPanelContainer = document.querySelector(
+  '.fight__panel-container--description',
+);
+const startFightBeforeDescription = document.querySelector(
+  '.fight__panel-button',
+);
 
 const enemies = [
   {
@@ -190,8 +199,40 @@ function determineStatFight() {
   }
 }
 
+function createDescriptionGame() {
+  const checkbox = document.querySelector('.fight__panel-checkbox-input');
+  const checkboxSettings = document.querySelector(
+    '.show-description__form-checkbox-input',
+  );
+  if (checkbox.checked) {
+    state.isShowDescriptionFight = true;
+  }
+
+  if (state.isShowDescriptionFight) {
+    descriptionPanelContainer.style.display = 'none';
+    fightPanelContainer.style.display = 'flex';
+    checkboxSettings.checked = false;
+  } else {
+    descriptionPanelContainer.style.display = 'flex';
+    fightPanelContainer.style.display = 'none';
+    checkboxSettings.checked = true;
+  }
+
+  const titlePlayer = document.querySelector('.fight__panel-versus--player');
+  const titleEnemy = document.querySelector('.fight__panel-versus--enemy');
+  titlePlayer.innerHTML = `${state.battle?.player.name}`;
+  titleEnemy.innerHTML = `${state.battle?.enemy.name}`;
+}
+
+function createFightGame() {
+  createDescriptionGame();
+  fightPanelContainer.style.display = 'flex';
+
+  descriptionPanelContainer.style.display = 'none';
+}
+
 export const initFight = () => {
-  // TODO: Поймал баг, при смене персонажа энеми появляется с 0 хп, хотя до этого бой был обновлён | Не заметил пока
+  // TODO: Поймал баг, при смене персонажа энеми появляется с 0 хп, хотя до этого бой был обновлён | Подтверждён
   enemy = getRandomEnemy();
   character = getCharacter();
 
@@ -204,11 +245,15 @@ export const initFight = () => {
       };
     }
 
+    createDescriptionGame();
+
     renderEnemy(state.battle.enemy);
     renderPlayer(state.battle.player);
   };
 
   const reloadFight = () => {
+    createDescriptionGame();
+
     attackButtons.forEach((attackButton) => {
       if (attackButton.textContent === state.battle?.player.attackChoice) {
         attackButton.classList.add('selected');
@@ -460,6 +505,7 @@ export const initFight = () => {
   window.addEventListener('load', reloadFight);
   attackButton.addEventListener('click', startAttack);
   reloadButton.addEventListener('click', resetFightByCharacterChange);
+  startFightBeforeDescription.addEventListener('click', createFightGame);
 };
 
 export function resetFightByCharacterChange() {
@@ -495,6 +541,7 @@ export function resetFightByCharacterChange() {
     defenceButton.classList.remove('selected'),
   );
 
+  createDescriptionGame();
   validateChoices();
   logContainer.innerHTML = '';
 }
