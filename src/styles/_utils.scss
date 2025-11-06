@@ -36,3 +36,8 @@
   background-color: root.$color-dark;
   color: root.$color-ligth;
 }
+
+.waiting-attack + .fight__tooltip {
+  opacity: 0 !important;
+  visibility: hidden !important;
+}

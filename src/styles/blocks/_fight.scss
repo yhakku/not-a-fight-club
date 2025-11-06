@@ -4,7 +4,7 @@
 .fight {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: end;
   align-items: center;
   height: 100%;
 
@@ -12,7 +12,7 @@
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    padding-bottom: rem(80);
+    padding-bottom: rem(40);
   }
 
   &__card {
@@ -22,6 +22,7 @@
   }
 
   &__image-container {
+    position: relative;
     max-width: rem(260);
   }
 
@@ -60,6 +61,7 @@
     }
 
     &-tooltip {
+      // TODO: подвинуть ниже
       position: absolute;
       bottom: rem(8);
       left: 97%;
@@ -220,13 +222,25 @@
     background-color: root.$color-dark;
     padding: rem(16) rem(24) rem(15) rem(24);
     margin-right: rem(10);
-    border: none;
+    border: root.$border-default;
     border-radius: rem(50);
     color: root.$color-ligth;
+    transition: all 0.3s ease;
 
     &:disabled {
       background-color: #555555;
+      border: rem(2) solid #555555;
       cursor: not-allowed;
+    }
+
+    &:not(:disabled):hover {
+      color: root.$color-dark;
+      background-color: root.$color-ligth;
+      border: root.$border-default;
+    }
+
+    &:not(:disabled):active {
+      scale: 0.95;
     }
   }
 
@@ -240,9 +254,20 @@
     align-self: flex-start;
     background-color: root.$color-dark;
     padding: rem(16) rem(24) rem(15) rem(24);
-    border: none;
+    border: root.$border-default;
     border-radius: rem(50);
     color: root.$color-ligth;
+    transition: all 0.3s ease;
+
+    &:hover {
+      color: root.$color-dark;
+      background-color: root.$color-ligth;
+      border: root.$border-default;
+    }
+
+    &:active {
+      scale: 0.95;
+    }
   }
 
   &__reset-button {
@@ -251,8 +276,55 @@
     background-color: root.$color-dark;
     padding: rem(16) rem(24) rem(15) rem(24);
     margin-right: rem(29);
-    border: none;
+    border: root.$border-default;
     border-radius: rem(50);
     color: root.$color-ligth;
+
+    @include hover(false) {
+      color: root.$color-dark;
+      background-color: root.$color-ligth;
+      border: root.$border-default;
+    }
   }
+
+  &__hint-container {
+    position: absolute;
+    left: 40%;
+    bottom: 70%;
+    transform: translate(12%, 3%);
+
+    &--enemy {
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.2s ease;
+    }
+
+    &--player {
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.2s ease;
+    }
+  }
+}
+
+@keyframes hint-movement {
+  from {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(0, 0);
+  }
+
+  to {
+    transform: translate(20%, -20%);
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+.fight__hint-container--enemy:has(> .fight__hint-enemy[src]) {
+  animation: hint-movement 1.2s ease-in-out;
+}
+
+.fight__hint-container--player:has(> .fight__hint-player[src]) {
+  animation: hint-movement 1.2s ease-in-out;
 }

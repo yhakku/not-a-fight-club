@@ -59,6 +59,10 @@ const enemies = [
 
 const zones = ['Head', 'Neck', 'Body', 'Belly', 'Legs'];
 
+const attack = 'src/assets/images/fight/attack.svg';
+const block = 'src/assets/images/fight/block.svg';
+const crit = 'src/assets/images/fight/crit.svg';
+
 const getRandomEnemy = () => {
   const index = Math.floor(Math.random() * enemies.length);
   return enemies[index];
@@ -92,6 +96,15 @@ const renderEnemy = (data) => {
           height="320"
           loading="lazy"
         >
+        <div class="fight__hint-container fight__hint-container--enemy">
+          <img
+            class="fight__hint-enemy"
+            alt="hint-attack"
+            width="200"
+            height="150"
+            loading="lazy"
+          >
+        </div>
       </div>
       <div class="fight__hp-control hp-control">
         <div class="hp-control__full">
@@ -102,6 +115,7 @@ const renderEnemy = (data) => {
               /${enemyData.maxHealth}
           </span>
         </div>`;
+
   const hpEnemy = document.querySelector('.hp-control__hp-enemy');
   hpEnemy.style.width = `${enemyData.health}%`;
 
@@ -129,6 +143,15 @@ const renderPlayer = (data) => {
           height="320"
           loading="lazy"
         >
+        <div class="fight__hint-container fight__hint-container--player">
+          <img
+            class="fight__hint-player"
+            alt="hint-attack"
+            width="200"
+            height="150"
+            loading="lazy"
+          >
+        </div>
       </div>
       <div class="fight__hp-control hp-control">
         <div class="hp-control__full">
@@ -176,8 +199,10 @@ const validateChoices = () => {
     state.battle?.player.defenceChoice.length === 2
   ) {
     attackButton.disabled = false;
+    attackButton.style.cursor = 'pointer';
   } else {
     attackButton.disabled = true;
+    attackButton.style.cursor = 'not-allowed';
   }
 };
 
@@ -290,12 +315,16 @@ export const initFight = () => {
         if (state.battle) {
           if (state.battle.player.attackChoice === null) {
             attackButton.classList.add('selected');
-            state.battle.player.attackChoice = attackButton.textContent;
+            state.battle.player.attackChoice = attackButton.textContent
+              .replace(/(\r\n|\n|\r)/gm, '')
+              .trim();
           }
 
           if (state.battle?.player.attackChoice !== attackButton.textContent) {
             attackButton.classList.add('selected');
-            state.battle.player.attackChoice = attackButton.textContent;
+            state.battle.player.attackChoice = attackButton.textContent
+              .replace(/(\r\n|\n|\r)/gm, '')
+              .trim();
           }
 
           if (!attackButton.getAttribute('class').includes('selected')) {
@@ -309,7 +338,9 @@ export const initFight = () => {
 
     defenceButtons.forEach((defenceButton) => {
       defenceButton.addEventListener('click', () => {
-        const zone = defenceButton.textContent;
+        const zone = defenceButton.textContent
+          .replace(/(\r\n|\n|\r)/gm, '')
+          .trim();
         if (state.battle.player.defenceChoice.includes(zone)) {
           state.battle.player.defenceChoice =
             state.battle.player.defenceChoice.filter((z) => z !== zone);
@@ -335,6 +366,14 @@ export const initFight = () => {
     const countHpPanelPlayer = document.querySelector(
       '.hp-control__count-player',
     );
+    const hintContainerEnemy = document.querySelector(
+      '.fight__hint-container--enemy',
+    );
+    const hintContainerPlayer = document.querySelector(
+      '.fight__hint-container--player',
+    );
+    const hintPlayer = document.querySelector('.fight__hint-player');
+    const hintEnemy = document.querySelector('.fight__hint-enemy');
 
     const playerDamage = state.battle.player.damage;
     let actualPlayerDamage = playerDamage;
@@ -372,6 +411,28 @@ export const initFight = () => {
       actualPlayerDamage = playerDamage * critMultiplier;
     }
 
+    if (
+      !state.battle.enemy.defenceZones.includes(
+        state.battle.player.attackChoice,
+      ) &&
+      !isPlayerCrit
+    ) {
+      hintEnemy.src = attack;
+    }
+
+    if (
+      state.battle.enemy.defenceZones.includes(
+        state.battle.player.attackChoice,
+      ) &&
+      !isPlayerCrit
+    ) {
+      hintEnemy.src = block;
+    }
+
+    if (isEnemyCrit) {
+      hintPlayer.src = crit;
+    }
+
     state.battle.enemy.health -= actualPlayerDamage;
 
     if (state.battle.enemy.health <= 0) {
@@ -380,6 +441,17 @@ export const initFight = () => {
 
     hpPanelEnemy.style.width = `${state.battle.enemy.health}%`;
     countHpPanelEnemy.innerHTML = `${state.battle.enemy.health}`;
+
+    hintContainerEnemy.addEventListener('animationend', () => {
+      const hintImg = document.querySelector('.fight__hint-player[src]');
+
+      if (hintImg) {
+        hintImg.removeAttribute('src');
+      }
+
+      hintContainerEnemy.style.opacity = '0';
+      hintContainerEnemy.style.visibility = 'hidden';
+    });
 
     if (
       state.battle.player.defenceChoice.includes(state.battle.enemy.attackZone)
@@ -397,6 +469,28 @@ export const initFight = () => {
       actualEnemyDamage = enemyDamage * critMultiplier;
     }
 
+    if (
+      !state.battle.player.defenceChoice.includes(
+        state.battle.enemy.attackZone,
+      ) &&
+      !isEnemyCrit
+    ) {
+      hintPlayer.src = attack;
+    }
+
+    if (
+      state.battle.player.defenceChoice.includes(
+        state.battle.enemy.attackZone,
+      ) &&
+      !isEnemyCrit
+    ) {
+      hintPlayer.src = block;
+    }
+
+    if (isPlayerCrit) {
+      hintEnemy.src = crit;
+    }
+
     state.battle.player.health -= actualEnemyDamage;
 
     if (state.battle.player.health <= 0) {
@@ -405,6 +499,20 @@ export const initFight = () => {
 
     hpPanelPlayer.style.width = `${state.battle.player.health}%`;
     countHpPanelPlayer.innerHTML = `${state.battle.player.health}`;
+
+    hintContainerPlayer.addEventListener('animationend', () => {
+      const hintImg = document.querySelector('.fight__hint-enemy[src]');
+
+      if (hintImg) {
+        hintImg.removeAttribute('src');
+      }
+
+      hintContainerPlayer.style.opacity = '0';
+      hintContainerPlayer.style.visibility = 'hidden';
+      attackButton.classList.remove('waiting-attack');
+      attackButton.style.cursor = 'pointer';
+      attackButton.disabled = false;
+    });
 
     resetFight();
 
@@ -432,6 +540,10 @@ export const initFight = () => {
       li.innerHTML = entry;
       logContainer.appendChild(li);
     });
+
+    attackButton.classList.add('waiting-attack');
+    attackButton.style.cursor = 'progress';
+    attackButton.disabled = true;
   };
 
   function resetFight() {
