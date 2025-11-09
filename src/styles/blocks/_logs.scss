@@ -4,13 +4,13 @@
 .logs {
   max-width: rem(1120);
   width: 100%;
-  height: auto;
+  height: 300px;
   padding: rem(20) rem(30);
   border: root.$border-default;
   background-color: root.$color-ligth;
 
   &__list {
-    height: rem(190);
+    height: 100%;
     overflow-y: auto;
   }
 

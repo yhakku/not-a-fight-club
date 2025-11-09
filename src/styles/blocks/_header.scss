@@ -4,8 +4,8 @@
 .header {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  padding-top: rem(70);
+  align-items: flex-start;
+  padding-top: rem(50);
 
   &__logo {
     max-width: rem(126);
@@ -14,11 +14,10 @@
   }
 
   &__nav {
-    max-width: rem(252);
-    width: 100%;
+    display: flex;
     background-color: root.$color-dark;
     border-radius: rem(50);
-    padding-block: rem(30);
+    padding: rem(20) rem(25);
     z-index: 2;
   }
 
@@ -26,16 +25,23 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    column-gap: rem(30);
+    column-gap: rem(20);
   }
 
   &__item {
     display: flex;
+    transition: scale 0.2s ease;
 
-    @include square(34);
+    @include square(26px);
   }
 
   &__link {
     width: 100%;
+
+    @include hover() {
+      &:not(.disabled) {
+        scale: 1.2;
+      }
+    }
   }
 }

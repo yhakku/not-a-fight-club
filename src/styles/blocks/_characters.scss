@@ -31,12 +31,11 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    cursor: pointer;
 
     &:has(.characters__selected:checked) .characters__label {
-      position: relative;
+      position: absolute;
       opacity: 1;
-      transform: translateY(-90px);
+      transform: translateY(-20px);
       background-color: root.$color-dark;
       color: root.$color-ligth;
     }
@@ -56,7 +55,7 @@
     @include hover(false) {
       .characters__image + .characters__label {
         opacity: 1;
-        transform: translateY(-90px);
+        transform: translateY(-20px);
       }
 
       .characters__image {
@@ -76,13 +75,14 @@
   }
 
   &__label {
+    position: absolute;
+    bottom: 5%;
     opacity: 0;
     max-width: rem(180);
     width: 100%;
     height: rem(66);
     background-color: root.$color-ligth;
     color: root.$color-dark;
-    transform: translateY(-40px);
 
     @include hover(false) {
       background-color: root.$color-dark;
@@ -108,7 +108,8 @@
 
   &__statistics {
     position: absolute;
-    bottom: 40px;
+    top: 100%;
+    transform: translateY(40%);
     left: 0;
     display: flex;
     justify-content: space-between;

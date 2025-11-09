@@ -1,6 +1,6 @@
 import { state } from './state';
 import initChars from './characters.js';
-import { changeGreeting, toggleSectionVisible } from './ui.js';
+import { changeGreeting, setInvalidState, toggleSectionVisible } from './ui.js';
 
 const initSettings = () => {
   const body = document.querySelector('body');
@@ -9,7 +9,7 @@ const initSettings = () => {
   const characterLink = document.querySelector('a[href="#characters"]');
   const form = document.querySelector('.change-name__form');
   const input = document.querySelector('.change-name__input');
-  const title = document.querySelector('.login__title');
+  const messageError = document.querySelector('.change-name__error');
   const checkbox = document.querySelector(
     '.show-description__form-checkbox-input',
   );
@@ -38,10 +38,25 @@ const initSettings = () => {
     nickname = input.value.trim();
 
     state.nickname = nickname;
+    input.value = '';
+    input.placeholder = nickname;
     initChars();
     changeGreeting(nickname);
     toggleSectionVisible(body, logo, false);
     history.back();
+  });
+
+  input.addEventListener('input', () => {
+    const validityStateSettings = input.validity;
+
+    input.setCustomValidity(' ');
+
+    if (validityStateSettings.patternMismatch) {
+      setInvalidState(input, messageError, true);
+    } else {
+      setInvalidState(input, messageError, false);
+      input.setCustomValidity('');
+    }
   });
 
   function toggleDescriptionFight() {

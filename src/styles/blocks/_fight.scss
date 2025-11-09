@@ -61,7 +61,6 @@
     }
 
     &-tooltip {
-      // TODO: подвинуть ниже
       position: absolute;
       bottom: rem(8);
       left: 97%;
@@ -97,6 +96,13 @@
         left: 57%;
         font-size: rem(28);
       }
+
+      &-button {
+        position: absolute;
+        top: rem(9);
+        left: 50%;
+        transform: translateX(-50%);
+      }
     }
 
     &-description {
@@ -114,9 +120,17 @@
       display: flex;
       background-color: root.$color-dark;
       padding: rem(16) rem(24) rem(15) rem(24);
-      border: none;
+      border: root.$border-default;
       border-radius: rem(50);
       color: root.$color-ligth;
+
+      @include hover(false) {
+        & {
+          background-color: root.$color-ligth;
+          border: root.$border-default;
+          color: root.$color-dark;
+        }
+      }
     }
 
     &-checkbox {
@@ -161,6 +175,10 @@
 
       &-input:checked + &-text::after {
         opacity: 1;
+      }
+
+      &-input:checked + &-text::before {
+        scale: 1.05;
       }
     }
   }
@@ -209,7 +227,7 @@
 
   &__tooltip {
     position: absolute;
-    top: rem(45);
+    top: 90%;
     left: 80%;
     opacity: 0;
     visibility: hidden;
