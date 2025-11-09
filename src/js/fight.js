@@ -207,20 +207,24 @@ const validateChoices = () => {
 };
 
 function determineStatFight() {
-  if (state.battle.player.health <= 0 && state.battle.enemy.health <= 0) {
-    state.battle.player.stats.lose += 1;
-    state.battle.player.stats.win += 1;
-    state.battle.log.unshift(`<span class="logs__accent">Draw!</span>`);
-  } else if (state.battle.enemy.health <= 0) {
-    state.battle.player.stats.win += 1;
-    state.battle.log.unshift(
-      `<span class="logs__accent">${state.battle.player.name}</span> wins!`,
-    );
-  } else if (state.battle.player.health <= 0) {
-    state.battle.player.stats.lose += 1;
-    state.battle.log.unshift(
-      `<span class="logs__accent">${state.battle.enemy.name}</span> wins!`,
-    );
+  character = getCharacter();
+
+  if (state.battle) {
+    if (state.battle.player.health <= 0 && state.battle.enemy.health <= 0) {
+      character.stats.win += 1;
+      character.stats.lose += 1;
+      state.battle.log.unshift(`<span class="logs__accent">Draw!</span>`);
+    } else if (state.battle.enemy.health <= 0) {
+      character.stats.win += 1;
+      state.battle.log.unshift(
+        `<span class="logs__accent">${state.battle.player.name}</span> wins!`,
+      );
+    } else if (state.battle.player.health <= 0) {
+      character.stats.lose += 1;
+      state.battle.log.unshift(
+        `<span class="logs__accent">${state.battle.enemy.name}</span> wins!`,
+      );
+    }
   }
 }
 
@@ -279,19 +283,25 @@ export const initFight = () => {
   const reloadFight = () => {
     createDescriptionGame();
 
-    attackButtons.forEach((attackButton) => {
-      if (attackButton.textContent === state.battle?.player.attackChoice) {
+    for (let attackButton of attackButtons) {
+      if (
+        attackButton.textContent.replace(/(\r\n|\n|\r)/gm, '').trim() ===
+        state.battle?.player.attackChoice
+      ) {
         attackButton.classList.add('selected');
       }
-    });
+    }
 
-    defenceButtons.forEach((defenceButton) => {
+    for (let defenceButton of defenceButtons) {
       state.battle?.player.defenceChoice.forEach((choice) => {
-        if (defenceButton.textContent === choice) {
+        if (
+          defenceButton.textContent.replace(/(\r\n|\n|\r)/gm, '').trim() ===
+          choice
+        ) {
           defenceButton.classList.add('selected');
         }
       });
-    });
+    }
 
     renderEnemy(state.battle?.enemy);
     renderPlayer(state.battle?.player);
@@ -559,7 +569,7 @@ export const initFight = () => {
 
       resetButton.addEventListener('click', () => {
         endGame();
-        resetButton.remove(); // TODO: Спамятся кнопки | Решён
+        resetButton.remove();
         attackButton.style.display = 'flex';
 
         attackButtons.forEach((attackButton) => {
@@ -575,7 +585,6 @@ export const initFight = () => {
   }
 
   function endGame() {
-    // TODO: После ресета боя хп плеера некорректное, либо 110 из 100, либо 100 из 110 | Решён
     const actualChar = getCharacter();
 
     character = {
