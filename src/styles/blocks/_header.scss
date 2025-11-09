@@ -2,7 +2,6 @@
 @use '../variables/' as root;
 
 .header {
-  display: flex;
   justify-content: space-between;
   align-items: flex-start;
   padding-top: rem(50);
