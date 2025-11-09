@@ -2,10 +2,12 @@ import { state } from './state';
 import initOverlayClose from './modal-overlay';
 import { resetFightByCharacterChange } from './fight';
 import { updateStatsUI } from './ui';
+import initEscapeModal from './modal-escape';
 
 const initChars = () => {
   const body = document.querySelector('body');
   const logo = document.querySelector('.logo');
+  const modal = document.querySelector('.characters');
   const buttonClose = document.querySelector('.characters__button-close');
   const nicknames = document.querySelectorAll('.characters__nickname');
   const selectedChars = document.querySelectorAll('.characters__selected');
@@ -94,6 +96,7 @@ const initChars = () => {
   }
 
   initOverlayClose(closeModal);
+  initEscapeModal(closeModal);
   updateStatsUI();
 };
 
