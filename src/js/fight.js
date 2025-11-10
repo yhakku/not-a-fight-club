@@ -512,10 +512,12 @@ export const initFight = () => {
 
     attackButtons.forEach((attackButton) => {
       attackButton.style.pointerEvents = 'none';
+      reloadButton.style.pointerEvents = 'none';
     });
 
     defenceButtons.forEach((defenceButton) => {
       defenceButton.style.pointerEvents = 'none';
+      reloadButton.style.pointerEvents = 'none';
     });
 
     hintContainerPlayer.addEventListener('animationend', () => {
@@ -533,10 +535,12 @@ export const initFight = () => {
 
       attackButtons.forEach((attackButton) => {
         attackButton.style.pointerEvents = 'unset';
+        reloadButton.style.pointerEvents = 'unset';
       });
 
       defenceButtons.forEach((defenceButton) => {
         defenceButton.style.pointerEvents = 'unset';
+        reloadButton.style.pointerEvents = 'unset';
       });
     });
 
