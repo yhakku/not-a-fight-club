@@ -510,6 +510,14 @@ export const initFight = () => {
     hpPanelPlayer.style.width = `${state.battle.player.health}%`;
     countHpPanelPlayer.innerHTML = `${state.battle.player.health}`;
 
+    attackButtons.forEach((attackButton) => {
+      attackButton.style.pointerEvents = 'none';
+    });
+
+    defenceButtons.forEach((defenceButton) => {
+      defenceButton.style.pointerEvents = 'none';
+    });
+
     hintContainerPlayer.addEventListener('animationend', () => {
       const hintImg = document.querySelector('.fight__hint-enemy[src]');
 
@@ -522,6 +530,14 @@ export const initFight = () => {
       attackButton.classList.remove('waiting-attack');
       attackButton.style.cursor = 'pointer';
       attackButton.disabled = false;
+
+      attackButtons.forEach((attackButton) => {
+        attackButton.style.pointerEvents = 'unset';
+      });
+
+      defenceButtons.forEach((defenceButton) => {
+        defenceButton.style.pointerEvents = 'unset';
+      });
     });
 
     resetFight();
@@ -661,6 +677,8 @@ export function resetFightByCharacterChange() {
   defenceButtons.forEach((defenceButton) =>
     defenceButton.classList.remove('selected'),
   );
+
+  attackButton.classList.remove('waiting-attack');
 
   createDescriptionGame();
   validateChoices();
