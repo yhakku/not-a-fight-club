@@ -16,6 +16,7 @@ const defaultState = {
       img: GojoImg,
       attackChoice: null,
       defenceChoice: [],
+      countDefenceZone: 3,
       stats: {
         win: 0,
         lose: 0,
@@ -30,6 +31,7 @@ const defaultState = {
       img: ItadoriImg,
       attackChoice: null,
       defenceChoice: [],
+      countDefenceZone: 2,
       stats: {
         win: 0,
         lose: 0,
@@ -44,6 +46,7 @@ const defaultState = {
       img: NanamiImg,
       attackChoice: null,
       defenceChoice: [],
+      countDefenceZone: 2,
       stats: {
         win: 0,
         lose: 0,
