@@ -19,6 +19,7 @@
     display: flex;
     flex-direction: column;
     row-gap: rem(10);
+    transition: all 0.2s ease;
   }
 
   &__image-container {

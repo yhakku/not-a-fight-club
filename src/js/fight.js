@@ -17,6 +17,8 @@ const reloadButton = document.querySelector('.fight__reload-button');
 const fightPanelContainer = document.querySelector(
   '.fight__panel-container--fight',
 );
+const cardEnemy = document.querySelector('.fight__card--antagonist');
+const cardPlayer = document.querySelector('.fight__card--protagonist');
 const descriptionPanelContainer = document.querySelector(
   '.fight__panel-container--description',
 );
@@ -465,7 +467,7 @@ const renderEnemy = (data) => {
   } else {
     enemyData = data;
   }
-  const cardEnemy = document.querySelector('.fight__card--antagonist');
+
   cardEnemy.innerHTML = `
       <div class="fight__image-container">
         <img
@@ -688,6 +690,19 @@ export const initFight = () => {
       });
     }
 
+    if (state.battle?.player.health <= 0 && state.battle?.enemy.health <= 0) {
+      cardPlayer.style.filter = 'contrast(0.5)';
+      cardEnemy.style.filter = 'contrast(0.5)';
+    }
+
+    if (state.battle?.enemy.health <= 0) {
+      cardEnemy.style.filter = 'contrast(0.5)';
+    }
+
+    if (state.battle?.player.health <= 0) {
+      cardPlayer.style.filter = 'contrast(0.5)';
+    }
+
     renderEnemy(state.battle?.enemy);
     renderPlayer(state.battle?.player);
 
@@ -835,6 +850,8 @@ export const initFight = () => {
 
     if (state.battle.enemy.health <= 0) {
       state.battle.enemy.health = 0;
+
+      cardEnemy.style.filter = 'contrast(0.5)';
     }
 
     hpPanelEnemy.style.width = `${state.battle.enemy.health}%`;
@@ -893,6 +910,8 @@ export const initFight = () => {
 
     if (state.battle.player.health <= 0) {
       state.battle.player.health = 0;
+
+      cardPlayer.style.filter = 'contrast(0.5)';
     }
 
     hpPanelPlayer.style.width = `${state.battle.player.health}%`;
@@ -1013,6 +1032,8 @@ export const initFight = () => {
     };
 
     determineNumberDefenceZones();
+    cardEnemy.style.filter = 'none';
+    cardPlayer.style.filter = 'none';
 
     renderEnemy(state.battle.enemy);
     renderPlayer(state.battle.player);
@@ -1065,6 +1086,8 @@ export function resetFightByCharacterChange() {
   };
 
   determineNumberDefenceZones();
+  cardEnemy.style.filter = 'none';
+  cardPlayer.style.filter = 'none';
 
   renderEnemy(state.battle.enemy);
   renderPlayer(state.battle.player);
