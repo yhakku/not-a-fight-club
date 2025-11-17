@@ -690,17 +690,14 @@ export const initFight = () => {
       });
     }
 
-    if (state.battle?.player.health <= 0 && state.battle?.enemy.health <= 0) {
-      cardPlayer.style.filter = 'contrast(0.5)';
-      cardEnemy.style.filter = 'contrast(0.5)';
-    }
-
     if (state.battle?.enemy.health <= 0) {
       cardEnemy.style.filter = 'contrast(0.5)';
+      cardPlayer.style.filter = 'drop-shadow(2px 2px 5px #272727)';
     }
 
     if (state.battle?.player.health <= 0) {
       cardPlayer.style.filter = 'contrast(0.5)';
+      cardEnemy.style.filter = 'drop-shadow(2px 2px 5px #272727)';
     }
 
     renderEnemy(state.battle?.enemy);
@@ -852,6 +849,11 @@ export const initFight = () => {
       state.battle.enemy.health = 0;
 
       cardEnemy.style.filter = 'contrast(0.5)';
+      cardPlayer.style.filter = 'drop-shadow(2px 2px 5px #272727)';
+
+      if (state.battle.player.health <= 0) {
+        cardPlayer.style.filter = 'contrast(0.5)';
+      }
     }
 
     hpPanelEnemy.style.width = `${state.battle.enemy.health}%`;
@@ -912,6 +914,11 @@ export const initFight = () => {
       state.battle.player.health = 0;
 
       cardPlayer.style.filter = 'contrast(0.5)';
+      cardEnemy.style.filter = 'drop-shadow(2px 2px 5px #272727)';
+
+      if (state.battle.enemy.health <= 0) {
+        cardEnemy.style.filter = 'contrast(0.5)';
+      }
     }
 
     hpPanelPlayer.style.width = `${state.battle.player.health}%`;
