@@ -41,3 +41,9 @@
   opacity: 0 !important;
   visibility: hidden !important;
 }
+
+.active {
+  svg {
+    fill: #000;
+  }
+}

@@ -2,6 +2,9 @@ import { state } from './state.js';
 import KenImg from '/src/assets/images/fight/Ken.webp';
 import SukunaImg from '/src/assets/images/fight/Sukuna.webp';
 import TojiImg from '/src/assets/images/fight/Todzi.webp';
+import JogoImg from '/src/assets/images/fight/Jogo.webp';
+import HanamiImg from '/src/assets/images/fight/Hanami.webp';
+import MahitoImg from '/src/assets/images/fight/Mahito.webp';
 
 const startFightButton = document.querySelector('.login__button-fight');
 const attackButtons = document.querySelectorAll('.attack-panel .fight__button');
@@ -31,34 +34,67 @@ const enemies = [
     name: 'Kenjaku',
     maxHealth: 100,
     health: 100,
-    damage: 20,
+    damage: 19,
     countAttackZone: 1,
     attackZone: null,
-    countDefenceZone: 2,
+    countDefenceZone: 3,
     defenceZones: [],
     img: KenImg,
   },
   {
-    name: 'Sukuna',
+    name: 'Ryomen Sukuna',
     maxHealth: 110,
     health: 110,
-    damage: 25,
+    damage: 23,
     countAttackZone: 2,
     attackZone: null,
-    countDefenceZone: 2,
+    countDefenceZone: 3,
     defenceZones: [],
     img: SukunaImg,
   },
   {
-    name: 'Fushiguro Toji',
+    name: 'Toji Fushiguro',
+    maxHealth: 110,
+    health: 110,
+    damage: 22,
+    countAttackZone: 1,
+    attackZone: null,
+    countDefenceZone: 2,
+    defenceZones: [],
+    img: TojiImg,
+  },
+  {
+    name: 'Jogo',
+    maxHealth: 100,
+    health: 100,
+    damage: 21,
+    countAttackZone: 1,
+    attackZone: null,
+    countDefenceZone: 2,
+    defenceZones: [],
+    img: JogoImg,
+  },
+  {
+    name: 'Hanami',
     maxHealth: 100,
     health: 100,
     damage: 20,
     countAttackZone: 1,
     attackZone: null,
-    countDefenceZone: 3,
+    countDefenceZone: 2,
     defenceZones: [],
-    img: TojiImg,
+    img: HanamiImg,
+  },
+  {
+    name: 'Mahito',
+    maxHealth: 100,
+    health: 100,
+    damage: 21,
+    countAttackZone: 1,
+    attackZone: null,
+    countDefenceZone: 2,
+    defenceZones: [],
+    img: MahitoImg,
   },
 ];
 
@@ -476,6 +512,7 @@ const renderPlayer = (data) => {
   } else {
     playerData = data;
   }
+
   const cardPlayer = document.querySelector('.fight__card--protagonist');
   cardPlayer.innerHTML = `
       <div class="fight__image-container">
@@ -506,6 +543,7 @@ const renderPlayer = (data) => {
               /${playerData.maxHealth}
           </span>
         </div>`;
+
   const hpPlayer = document.querySelector('.hp-control__hp-player');
   hpPlayer.style.width = `${playerData.health}%`;
 };

@@ -1,6 +1,9 @@
 import GojoImg from '/src/assets/images/fight/Gojo.webp';
 import ItadoriImg from '/src/assets/images/fight/Itadori.webp';
 import NanamiImg from '/src/assets/images/fight/Nanami.webp';
+import MakiImg from '/src/assets/images/fight/Maki.webp';
+import MegumiImg from '/src/assets/images/fight/Megumi.webp';
+import YtaImg from '/src/assets/images/fight/Yta.webp';
 
 const defaultState = {
   nickname: null,
@@ -12,7 +15,7 @@ const defaultState = {
       id: 0,
       maxHealth: 110,
       health: 110,
-      damage: 25,
+      damage: 22,
       img: GojoImg,
       attackChoice: null,
       defenceChoice: [],
@@ -27,7 +30,7 @@ const defaultState = {
       id: 1,
       maxHealth: 100,
       health: 100,
-      damage: 20,
+      damage: 19,
       img: ItadoriImg,
       attackChoice: null,
       defenceChoice: [],
@@ -44,6 +47,51 @@ const defaultState = {
       health: 100,
       damage: 20,
       img: NanamiImg,
+      attackChoice: null,
+      defenceChoice: [],
+      countDefenceZone: 2,
+      stats: {
+        win: 0,
+        lose: 0,
+      },
+    },
+    {
+      name: 'Maki Zenin',
+      id: 3,
+      maxHealth: 110,
+      health: 110,
+      damage: 21,
+      img: MakiImg,
+      attackChoice: null,
+      defenceChoice: [],
+      countDefenceZone: 2,
+      stats: {
+        win: 0,
+        lose: 0,
+      },
+    },
+    {
+      name: 'Megumi Fushiguro',
+      id: 4,
+      maxHealth: 100,
+      health: 100,
+      damage: 18,
+      img: MegumiImg,
+      attackChoice: null,
+      defenceChoice: [],
+      countDefenceZone: 3,
+      stats: {
+        win: 0,
+        lose: 0,
+      },
+    },
+    {
+      name: 'Yuta Okkotsu',
+      id: 5,
+      maxHealth: 100,
+      health: 100,
+      damage: 20,
+      img: YtaImg,
       attackChoice: null,
       defenceChoice: [],
       countDefenceZone: 2,

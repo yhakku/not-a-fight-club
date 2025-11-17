@@ -13,17 +13,56 @@
   height: 100%;
   margin: 0 auto;
   padding-top: rem(60);
-  padding-inline: rem(60);
+  padding-inline: rem(25);
   background-color: root.$color-ligth;
   border: root.$border-default;
 
   &__title {
-    padding-bottom: rem(30);
+    padding-left: rem(47);
+    padding-bottom: rem(25);
+  }
+
+  &__slider {
+    display: flex;
+    align-items: center;
+    column-gap: rem(20);
+
+    &-wrapper {
+      display: flex;
+      align-self: center;
+      max-width: rem(810);
+      overflow-x: clip;
+    }
+
+    &-button {
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+      transition: opacity 0.3s ease;
+
+      @include hover(false) {
+        & {
+          scale: 1.1;
+          transition: scale 0.3s ease;
+        }
+
+        &:active {
+          scale: 0.9;
+        }
+      }
+
+      &--prev {
+        opacity: 0;
+        visibility: hidden;
+      }
+    }
   }
 
   &__list {
     display: flex;
-    column-gap: rem(30);
+    width: 100%;
+    column-gap: rem(15);
+    transition: all 0.3s ease;
   }
 
   &__item {
@@ -31,6 +70,11 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    flex-shrink: 0;
+
+    &:nth-child(4) {
+      margin-left: rem(-15);
+    }
 
     &:has(.characters__selected:checked) .characters__label {
       position: absolute;
@@ -78,10 +122,9 @@
     position: absolute;
     bottom: 5%;
     opacity: 0;
-    max-width: rem(180);
-    width: 100%;
-    height: rem(66);
+    padding: rem(15) rem(20);
     background-color: root.$color-ligth;
+    font-size: rem(18);
     color: root.$color-dark;
 
     @include hover(false) {
@@ -95,8 +138,8 @@
 
     @include square(rem(44));
 
-    right: -2.5%;
-    top: -4.5%;
+    right: -2.4%;
+    top: -4.6%;
   }
 
   &__line {
@@ -126,5 +169,20 @@
   &__result-container {
     display: flex;
     column-gap: rem(10);
+  }
+
+  &__pagination {
+    position: absolute;
+    top: 13%;
+    right: 8%;
+    display: flex;
+    column-gap: rem(5);
+
+    &-button {
+      position: relative;
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+    }
   }
 }

@@ -437,104 +437,272 @@
       >
         <h2 class="characters__title hidden">Character title</h2>
         <h3 class="characters__title">Change a characters</h3>
-        <ul class="characters__list">
-          <li class="characters__item">
-            <img
-              class="characters__image"
-              src="src/assets/images/fight/Gojo.webp"
-              alt="Gojo"
-              width="260"
-              height="320"
-              loading="lazy"
+        <div class="characters__slider">
+          <button
+            class="characters__slider-button characters__slider-button--prev"
+            type="button"
+          >
+            <svg
+              width="23"
+              height="45"
+              viewBox="0 0 23 45"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
             >
-            <label class="characters__label button" for="gojo-char">
-              Gojo Satoru
-            </label>
-            <input
-              class="characters__selected hidden"
-              type="radio"
-              name="gojo-char"
-              id="gojo-char"
+              <path
+                d="M16.8278 1.37298C16.8278 1.37298 16.4411 1.9474 15.6678 3.09625C14.8946 4.23602 14.0115 5.48704 13.0185 6.84931C12.0256 8.20704 11.0396 9.58975 10.0604 10.9974C9.0812 12.4051 8.086 13.8605 7.07478 15.3635C6.05899 16.8711 5.12327 18.1789 4.26762 19.2869C3.4074 20.3948 2.64098 21.3689 1.96836 22.2089C1.29574 23.049 0.728356 24.3977 0.266215 26.2549C-0.195926 28.1121 -0.0563679 29.513 0.684887 30.4575C1.43072 31.3975 2.2978 32.2285 3.28614 32.9505C4.27906 33.6725 5.44814 34.4149 6.79338 35.1778C8.13862 35.9452 9.28024 36.699 10.2183 37.4391C11.1563 38.1839 12.0508 38.8854 12.9019 39.5439C13.7529 40.2023 14.4484 40.8426 14.9884 41.4647C15.5329 42.0868 15.8898 42.5749 16.0591 42.9291C16.2329 43.2878 16.4571 43.6102 16.7317 43.8963C17.0108 44.1779 17.3265 44.4094 17.6788 44.5911C18.0357 44.7727 18.411 44.8953 18.8045 44.9589C19.198 45.0179 19.5892 45.0134 19.9781 44.9453C20.3716 44.8771 20.7422 44.7477 21.09 44.557C21.4423 44.3708 21.7535 44.1324 22.0234 43.8418C22.2934 43.5512 22.5107 43.2243 22.6755 42.861C22.8402 42.5023 22.9431 42.1254 22.9843 41.7303C23.0209 41.3352 22.9935 40.9447 22.902 40.5587C22.815 40.1728 22.6663 39.8118 22.4558 39.4757C22.2453 39.1397 21.9868 38.8446 21.6803 38.5903C21.3737 38.336 21.0351 38.1384 20.6645 37.9977C20.2938 37.8569 19.9095 37.7774 19.5114 37.7593C19.1133 37.7411 18.7244 37.7865 18.3446 37.8955C17.9602 38.0045 17.6033 38.1725 17.2739 38.3995C16.949 38.6266 16.6676 38.899 16.4297 39.2169C16.1918 39.5348 16.011 39.8822 15.8875 40.259C15.7639 40.6359 15.7045 41.0219 15.709 41.417C15.7136 41.812 15.78 42.1957 15.9081 42.5681C16.0408 42.9405 16.2284 43.2833 16.4709 43.5966C16.718 43.9099 17.0085 44.1756 17.3425 44.3935C17.672 44.6115 18.0312 44.7727 18.4201 44.8772C18.8045 44.9771 19.1934 45.0157 19.5869 44.9929C19.985 44.9657 20.367 44.8771 20.7331 44.7273C21.1037 44.5774 21.44 44.3731 21.742 44.1143C22.044 43.8509 22.2957 43.5489 22.497 43.2084C22.6983 42.8678 22.8402 42.5045 22.9225 42.1186C23.0049 41.728 23.0209 41.3375 22.9706 40.947C22.9248 40.5519 22.902 40.3544 22.902 40.3544C22.902 40.3589 22.1447 39.4508 20.6301 37.6299C19.1156 35.8135 17.9511 34.6238 17.1366 34.0607C16.3222 33.5022 15.3293 32.7597 14.1579 31.8334C12.9911 30.907 11.8129 30.0647 10.6232 29.3064C9.43353 28.548 8.32851 27.9509 7.30814 27.515C6.28777 27.0745 6.05441 26.4093 6.60806 25.5193C7.16172 24.6292 7.84578 23.6053 8.66024 22.4473C9.47471 21.2849 10.4356 19.9884 11.5429 18.558C12.6502 17.1231 13.698 15.7563 14.6864 14.4576C15.6701 13.1589 16.7637 11.808 17.9671 10.4048C19.1705 9.0017 20.1588 7.72344 20.9321 6.57005C21.7008 5.4212 22.1424 4.73325 22.2568 4.5062C22.3712 4.2837 22.4558 4.04984 22.5107 3.80463C22.5656 3.55942 22.5931 3.31194 22.5931 3.06219C22.5885 2.81244 22.5519 2.56496 22.4833 2.31976C22.4192 2.07455 22.3277 1.84296 22.2087 1.625C22.0852 1.40249 21.9388 1.19815 21.7695 1.01197C21.5956 0.825797 21.4034 0.662324 21.1929 0.521556C20.9825 0.380788 20.7583 0.269535 20.5203 0.187799C20.2778 0.101522 20.0307 0.0447604 19.7791 0.0175149C19.532 -0.00973051 19.2826 -0.00518962 19.031 0.0311377C18.7793 0.062924 18.5345 0.126497 18.2966 0.221856C18.0632 0.312674 17.8436 0.433008 17.6377 0.582858C17.4318 0.728167 17.2442 0.896181 17.0749 1.0869C16.9101 1.27762 16.8278 1.37298 16.8278 1.37298Z"
+                fill="#272727"
+              />
+            </svg>
+          </button>
+          <div class="characters__slider-wrapper">
+            <ul class="characters__list">
+              <li class="characters__item">
+                <img
+                  class="characters__image"
+                  src="src/assets/images/fight/Gojo.webp"
+                  alt="Gojo"
+                  width="260"
+                  height="320"
+                  loading="lazy"
+                >
+                <label class="characters__label button" for="gojo-char">
+                  Gojo Satoru
+                </label>
+                <input
+                  class="characters__selected hidden"
+                  type="radio"
+                  name="gojo-char"
+                  id="gojo-char"
+                >
+                <div class="characters__statistics">
+                  <span class="characters__nickname h3"></span>
+                  <div class="characters__result-container">
+                    <span class="characters__result">
+                      W:
+                      <span class="characters__result-w"></span>
+                    </span>
+                    <span class="characters__result">
+                      L:
+                      <span class="characters__result-l"></span>
+                    </span>
+                  </div>
+                </div>
+              </li>
+              <li class="characters__item">
+                <img
+                  class="characters__image"
+                  src="src/assets/images/fight/Itadori.webp"
+                  alt="Itadori"
+                  width="260"
+                  height="320"
+                  loading="lazy"
+                >
+                <label class="characters__label button" for="itadori-char">
+                  Yuji Itadori
+                </label>
+                <input
+                  class="characters__selected hidden"
+                  type="radio"
+                  name="itadori-char"
+                  id="itadori-char"
+                >
+                <div class="characters__statistics">
+                  <span class="characters__nickname h3"></span>
+                  <div class="characters__result-container">
+                    <span class="characters__result">
+                      W:
+                      <span class="characters__result-w"></span>
+                    </span>
+                    <span class="characters__result">
+                      L:
+                      <span class="characters__result-l"></span>
+                    </span>
+                  </div>
+                </div>
+              </li>
+              <li class="characters__item">
+                <img
+                  class="characters__image"
+                  src="src/assets/images/fight/Nanami.webp"
+                  alt="Nanami"
+                  width="260"
+                  height="320"
+                  loading="lazy"
+                >
+                <label class="characters__label button" for="nanami-char">
+                  Kento Nanami
+                </label>
+                <input
+                  class="characters__selected hidden"
+                  type="radio"
+                  name="nanami-char"
+                  id="nanami-char"
+                >
+                <div class="characters__statistics">
+                  <span class="characters__nickname h3"></span>
+                  <div class="characters__result-container">
+                    <span class="characters__result">
+                      W:
+                      <span class="characters__result-w"></span>
+                    </span>
+                    <span class="characters__result">
+                      L:
+                      <span class="characters__result-l"></span>
+                    </span>
+                  </div>
+                </div>
+              </li>
+              <li class="characters__item">
+                <img
+                  class="characters__image"
+                  src="src/assets/images/fight/Maki.webp"
+                  alt="Maki"
+                  width="260"
+                  height="320"
+                  loading="lazy"
+                >
+                <label class="characters__label button" for="maki-char">
+                  Maki Zenin
+                </label>
+                <input
+                  class="characters__selected hidden"
+                  type="radio"
+                  name="maki-char"
+                  id="maki-char"
+                >
+                <div class="characters__statistics">
+                  <span class="characters__nickname h3"></span>
+                  <div class="characters__result-container">
+                    <span class="characters__result">
+                      W:
+                      <span class="characters__result-w"></span>
+                    </span>
+                    <span class="characters__result">
+                      L:
+                      <span class="characters__result-l"></span>
+                    </span>
+                  </div>
+                </div>
+              </li>
+              <li class="characters__item">
+                <img
+                  class="characters__image"
+                  src="src/assets/images/fight/Megumi.webp"
+                  alt="Megumi"
+                  width="260"
+                  height="320"
+                  loading="lazy"
+                >
+                <label class="characters__label button" for="megumi-char">
+                  Megumi Fushiguro
+                </label>
+                <input
+                  class="characters__selected hidden"
+                  type="radio"
+                  name="megumi-char"
+                  id="megumi-char"
+                >
+                <div class="characters__statistics">
+                  <span class="characters__nickname h3"></span>
+                  <div class="characters__result-container">
+                    <span class="characters__result">
+                      W:
+                      <span class="characters__result-w"></span>
+                    </span>
+                    <span class="characters__result">
+                      L:
+                      <span class="characters__result-l"></span>
+                    </span>
+                  </div>
+                </div>
+              </li>
+              <li class="characters__item">
+                <img
+                  class="characters__image"
+                  src="src/assets/images/fight/Yta.webp"
+                  alt="Yta"
+                  width="260"
+                  height="320"
+                  loading="lazy"
+                >
+                <label class="characters__label button" for="yta-char">
+                  Yuta Okkotsu
+                </label>
+                <input
+                  class="characters__selected hidden"
+                  type="radio"
+                  name="yta-char"
+                  id="yta-char"
+                >
+                <div class="characters__statistics">
+                  <span class="characters__nickname h3"></span>
+                  <div class="characters__result-container">
+                    <span class="characters__result">
+                      W:
+                      <span class="characters__result-w"></span>
+                    </span>
+                    <span class="characters__result">
+                      L:
+                      <span class="characters__result-l"></span>
+                    </span>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <button
+            class="characters__slider-button characters__slider-button--next"
+            type="button"
+          >
+            <svg
+              width="23"
+              height="45"
+              viewBox="0 0 23 45"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
             >
-            <div class="characters__statistics">
-              <span class="characters__nickname h3"></span>
-              <div class="characters__result-container">
-                <span class="characters__result">
-                  W:
-                  <span class="characters__result-w"></span>
-                </span>
-                <span class="characters__result">
-                  L:
-                  <span class="characters__result-l"></span>
-                </span>
-              </div>
-            </div>
-          </li>
-          <li class="characters__item">
-            <img
-              class="characters__image"
-              src="src/assets/images/fight/Itadori.webp"
-              alt="Itadori"
-              width="260"
-              height="320"
-              loading="lazy"
-            >
-            <label class="characters__label button" for="itadori-char">
-              Yuji Itadori
-            </label>
-            <input
-              class="characters__selected hidden"
-              type="radio"
-              name="itadori-char"
-              id="itadori-char"
-            >
-            <div class="characters__statistics">
-              <span class="characters__nickname h3"></span>
-              <div class="characters__result-container">
-                <span class="characters__result">
-                  W:
-                  <span class="characters__result-w"></span>
-                </span>
-                <span class="characters__result">
-                  L:
-                  <span class="characters__result-l"></span>
-                </span>
-              </div>
-            </div>
-          </li>
-          <li class="characters__item">
-            <img
-              class="characters__image"
-              src="src/assets/images/fight/Nanami.webp"
-              alt="Nanami"
-              width="260"
-              height="320"
-              loading="lazy"
-            >
-            <label class="characters__label button" for="nanami-char">
-              Kento Nanami
-            </label>
-            <input
-              class="characters__selected hidden"
-              type="radio"
-              name="nanami-char"
-              id="nanami-char"
-            >
-            <div class="characters__statistics">
-              <span class="characters__nickname h3"></span>
-              <div class="characters__result-container">
-                <span class="characters__result">
-                  W:
-                  <span class="characters__result-w"></span>
-                </span>
-                <span class="characters__result">
-                  L:
-                  <span class="characters__result-l"></span>
-                </span>
-              </div>
-            </div>
-          </li>
-        </ul>
+              <path
+                d="M6.17222 1.37298C6.17222 1.37298 6.55887 1.9474 7.33215 3.09625C8.10544 4.23602 8.98854 5.48704 9.98145 6.84931C10.9744 8.20704 11.9604 9.58975 12.9396 10.9974C13.9188 12.4051 14.914 13.8605 15.9252 15.3635C16.941 16.8711 17.8767 18.1789 18.7324 19.2869C19.5926 20.3948 20.359 21.3689 21.0316 22.2089C21.7043 23.049 22.2716 24.3977 22.7338 26.2549C23.1959 28.1121 23.0564 29.513 22.3151 30.4575C21.5693 31.3975 20.7022 32.2285 19.7139 32.9505C18.7209 33.6725 17.5519 34.4149 16.2066 35.1778C14.8614 35.9452 13.7198 36.699 12.7817 37.4391C11.8437 38.1839 10.9492 38.8854 10.0981 39.5439C9.24706 40.2023 8.55156 40.8426 8.01163 41.4647C7.46713 42.0868 7.11023 42.5749 6.94093 42.9291C6.76706 43.2878 6.54285 43.6102 6.26831 43.8963C5.9892 44.1779 5.67348 44.4094 5.32115 44.5911C4.96425 44.7727 4.58905 44.8953 4.19554 44.9589C3.80204 45.0179 3.41082 45.0134 3.02189 44.9453C2.62838 44.8771 2.25776 44.7477 1.91001 44.557C1.55768 44.3708 1.24654 44.1324 0.976574 43.8418C0.706611 43.5512 0.489267 43.2243 0.324544 42.861C0.159821 42.5023 0.0568688 42.1254 0.015688 41.7303C-0.0209172 41.3352 0.00653658 40.9447 0.0980496 40.5587C0.184987 40.1728 0.333696 39.8118 0.544175 39.4757C0.754655 39.1397 1.01318 38.8446 1.31975 38.5903C1.62632 38.336 1.96491 38.1384 2.33554 37.9977C2.70617 37.8569 3.09052 37.7774 3.48861 37.7593C3.88669 37.7411 4.27562 37.7865 4.6554 37.8955C5.03975 38.0045 5.39665 38.1725 5.7261 38.3995C6.05097 38.6266 6.33237 38.899 6.57031 39.2169C6.80824 39.5348 6.98898 39.8822 7.11252 40.259C7.23606 40.6359 7.29555 41.0219 7.29097 41.417C7.28639 41.812 7.22005 42.1957 7.09193 42.5681C6.95924 42.9405 6.77163 43.2833 6.52912 43.5966C6.28204 43.9099 5.99149 44.1756 5.65746 44.3935C5.32802 44.6115 4.96883 44.7727 4.5799 44.8772C4.19554 44.9771 3.80661 45.0157 3.41311 44.9929C3.01503 44.9657 2.63296 44.8771 2.26691 44.7273C1.89628 44.5774 1.55997 44.3731 1.25798 44.1143C0.955984 43.8509 0.704323 43.5489 0.502995 43.2084C0.301666 42.8678 0.159821 42.5045 0.077459 42.1186C-0.00490269 41.728 -0.0209172 41.3375 0.0294149 40.947C0.0751714 40.5519 0.0980496 40.3544 0.0980496 40.3544C0.0980496 40.3589 0.855319 39.4508 2.36986 37.6299C3.8844 35.8135 5.0489 34.6238 5.86337 34.0607C6.67783 33.5022 7.67075 32.7597 8.84211 31.8334C10.0089 30.907 11.1871 30.0647 12.3768 29.3064C13.5665 28.548 14.6715 27.9509 15.6919 27.515C16.7122 27.0745 16.9456 26.4093 16.3919 25.5193C15.8383 24.6292 15.1542 23.6053 14.3398 22.4473C13.5253 21.2849 12.5644 19.9884 11.4571 18.558C10.3498 17.1231 9.30197 15.7563 8.31363 14.4576C7.32986 13.1589 6.23628 11.808 5.03289 10.4048C3.82949 9.0017 2.84115 7.72344 2.06787 6.57005C1.29916 5.4212 0.857607 4.73325 0.743216 4.5062C0.628825 4.2837 0.544175 4.04984 0.489268 3.80463C0.43436 3.55942 0.406906 3.31194 0.406906 3.06219C0.411481 2.81244 0.448087 2.56496 0.516722 2.31976C0.580781 2.07455 0.672293 1.84296 0.79126 1.625C0.914803 1.40249 1.06122 1.19815 1.23052 1.01197C1.4044 0.825797 1.59657 0.662324 1.80705 0.521556C2.01753 0.380788 2.24174 0.269535 2.47967 0.187799C2.72218 0.101522 2.96927 0.0447604 3.22093 0.0175149C3.46802 -0.00973051 3.71739 -0.00518962 3.96905 0.0311377C4.22071 0.062924 4.46551 0.126497 4.70344 0.221856C4.9368 0.312674 5.15643 0.433008 5.36233 0.582858C5.56824 0.728167 5.75584 0.896181 5.92514 1.0869C6.08986 1.27762 6.17222 1.37298 6.17222 1.37298Z"
+                fill="#272727"
+              />
+            </svg>
+          </button>
+          <div class="characters__pagination">
+            <button class="characters__pagination-button active">
+              <svg
+                width="15"
+                height="14"
+                viewBox="0 0 15 14"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M8.18051 12.1549C7.02051 12.3049 5.10051 11.3349 4.07051 10.6749C3.05051 10.0249 2.43051 9.34488 2.03051 8.23488C1.63051 7.13488 1.28051 5.20488 1.67051 4.06488C2.06051 2.93488 3.34051 1.80488 4.36051 1.42488C5.38051 1.04488 6.67051 1.49488 7.78051 1.79488C8.90051 2.10488 10.1805 2.49488 11.0605 3.25488C11.9405 4.02488 13.1305 5.32488 13.0805 6.37488C13.0205 7.42488 11.6605 8.65488 10.7305 9.56488C9.80051 10.4849 8.10051 11.5949 7.48051 11.8649C6.86051 12.1349 7.06051 11.2549 7.01051 11.1849M6.30051 11.5549C5.11051 11.4849 3.94051 10.0649 3.06051 9.34488C2.18051 8.62488 1.02051 8.22488 1.00051 7.24488C0.970506 6.26488 2.03051 4.44488 2.91051 3.44488C3.80051 2.43488 5.19051 1.54488 6.30051 1.21488C7.42051 0.884884 8.51051 0.904883 9.58051 1.48488C10.6505 2.06488 12.3105 3.48488 12.7205 4.67488C13.1205 5.87488 12.5305 7.50488 12.0205 8.63488C11.5105 9.76488 10.6405 10.9649 9.66051 11.4749C8.69051 11.9849 6.74051 11.7449 6.19051 11.6849C5.63051 11.6149 6.34051 11.1849 6.32051 11.0649"
+                  stroke="#272727"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                />
+              </svg>
+            </button>
+            <button class="characters__pagination-button">
+              <svg
+                width="15"
+                height="14"
+                viewBox="0 0 15 14"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M5.90153 1.01528C7.06152 0.865282 8.98153 1.83528 10.0115 2.49528C11.0315 3.14528 11.6515 3.82528 12.0515 4.93528C12.4515 6.03528 12.8015 7.96528 12.4115 9.10528C12.0215 10.2353 10.7415 11.3653 9.72152 11.7453C8.70152 12.1253 7.41153 11.6753 6.30153 11.3753C5.18153 11.0653 3.90153 10.6753 3.02153 9.91528C2.14153 9.14528 0.951525 7.84528 1.00153 6.79528C1.06153 5.74528 2.42153 4.51528 3.35153 3.60528C4.28153 2.68528 5.98153 1.57528 6.60153 1.30528C7.22153 1.03528 7.02153 1.91528 7.07153 1.98528M7.78153 1.61528C8.97153 1.68528 10.1415 3.10528 11.0215 3.82528C11.9015 4.54528 13.0615 4.94528 13.0815 5.92528C13.1115 6.90528 12.0515 8.72528 11.1715 9.72528C10.2815 10.7353 8.89153 11.6253 7.78153 11.9553C6.66153 12.2853 5.57153 12.2653 4.50153 11.6853C3.43153 11.1053 1.77153 9.68528 1.36153 8.49528C0.961525 7.29528 1.55153 5.66528 2.06153 4.53528C2.57153 3.40528 3.44153 2.20528 4.42153 1.69528C5.39153 1.18528 7.34153 1.42528 7.89153 1.48528C8.45153 1.55528 7.74153 1.98528 7.76153 2.10528"
+                  stroke="#272727"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
         <button class="characters__button-close button" type="button">
           <svg
             width="20"

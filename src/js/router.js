@@ -1,3 +1,5 @@
+import { toggleSlideToOpenModal } from './characters';
+
 const router = () => {
   const body = document.querySelector('body');
   const menu = document.querySelector('.header__nav');
@@ -34,6 +36,7 @@ const router = () => {
       menu.classList.remove('hidden');
       menu.style.marginLeft = 'auto';
       body.classList.add('overlay');
+      toggleSlideToOpenModal();
       break;
     case 'settings':
       hiddenUi('settings');
