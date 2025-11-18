@@ -60,11 +60,38 @@ const initSettings = () => {
   });
 
   function toggleDescriptionFight() {
+    const descriptionText = document.querySelector('.fight__panel-description');
+
     if (checkbox.checked) {
       state.isShowDescriptionFight = false;
       checkboxFight.checked = false;
       descriptionPanelContainer.style.display = 'flex';
       fightPanelContainer.style.display = 'none';
+      descriptionText.innerHTML = `
+      The fight has begun!
+      <br>
+      <br>
+      Your task now is to select one zone to attack and ${state.battle?.player.countDefenceZone} zones to
+      defend. Click on the parts of your opponent’s body that you want
+      to strike — this is your attack. Then choose ${state.battle?.player.countDefenceZone} zones you want
+      to defend — you’ll try to block your enemy’s hits.
+      <br>
+      <br>
+      After choosing, press "Attack!" to exchange blows. Protected
+      zones block damage; if unprotected, your health drops. Critical
+      hits can deal extra damage and break defenses. A detailed battle
+      log will appear below for each turn.
+      <br>
+      <br>
+      Good luck in your fight!
+      `;
+
+      const titlePlayer = document.querySelector(
+        '.fight__panel-versus--player',
+      );
+      const titleEnemy = document.querySelector('.fight__panel-versus--enemy');
+      titlePlayer.innerHTML = `${state.battle?.player.name}`;
+      titleEnemy.innerHTML = `${state.battle?.enemy.name}`;
     } else {
       state.isShowDescriptionFight = true;
       checkboxFight.checked = true;

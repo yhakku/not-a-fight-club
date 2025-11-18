@@ -80,22 +80,24 @@
     }
 
     &-versus {
-      font-size: rem(44);
       padding-bottom: rem(10);
+      font-size: rem(40);
 
       &--player {
         position: absolute;
         top: rem(9);
         right: 60%;
         transform: translateX(10%);
-        font-size: rem(28);
+        font-size: rem(26);
+        text-wrap: nowrap;
       }
 
       &--enemy {
         position: absolute;
         top: rem(9);
         left: 57%;
-        font-size: rem(28);
+        font-size: rem(26);
+        text-wrap: nowrap;
       }
 
       &-button {
