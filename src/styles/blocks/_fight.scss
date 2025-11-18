@@ -70,12 +70,14 @@
       transition: opacity 0.2s ease;
     }
 
-    &-tooltip-container:hover .fight__panel-tooltip {
+    &-tooltip-container:hover .fight__panel-tooltip,
+    &-tooltip-container button:focus + .fight__panel-tooltip {
       opacity: 1;
       visibility: visible;
     }
 
-    &-tooltip-container:hover svg {
+    &-tooltip-container:hover svg,
+    &-tooltip-container button:focus svg {
       opacity: 1;
     }
 
