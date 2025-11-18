@@ -299,10 +299,20 @@
     border-radius: rem(50);
     color: root.$color-ligth;
 
-    @include hover(false) {
+    &:disabled {
+      background-color: #555555;
+      border: rem(2) solid #555555;
+      cursor: not-allowed;
+    }
+
+    &:not(:disabled):hover {
       color: root.$color-dark;
       background-color: root.$color-ligth;
       border: root.$border-default;
+    }
+
+    &:not(:disabled):active {
+      scale: 0.95;
     }
   }
 

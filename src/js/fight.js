@@ -693,11 +693,19 @@ export const initFight = () => {
     if (state.battle?.enemy.health <= 0) {
       cardEnemy.style.filter = 'contrast(0.5)';
       cardPlayer.style.filter = 'drop-shadow(2px 2px 5px #272727)';
+
+      if (state.battle?.player.health <= 0) {
+        cardPlayer.style.filter = 'contrast(0.5)';
+      }
     }
 
     if (state.battle?.player.health <= 0) {
       cardPlayer.style.filter = 'contrast(0.5)';
       cardEnemy.style.filter = 'drop-shadow(2px 2px 5px #272727)';
+
+      if (state.battle?.enemy.health <= 0) {
+        cardEnemy.style.filter = 'contrast(0.5)';
+      }
     }
 
     renderEnemy(state.battle?.enemy);
@@ -956,6 +964,12 @@ export const initFight = () => {
         defenceButton.style.pointerEvents = 'unset';
         reloadButton.style.pointerEvents = 'unset';
       });
+
+      if (resetButton) {
+        resetButton.classList.remove('waiting-attack');
+        resetButton.style.cursor = 'pointer';
+        resetButton.disabled = false;
+      }
     });
 
     resetFight();
@@ -988,6 +1002,13 @@ export const initFight = () => {
     attackButton.classList.add('waiting-attack');
     attackButton.style.cursor = 'progress';
     attackButton.disabled = true;
+
+    const resetButton = document.querySelector('.fight__reset-button');
+    if (resetButton) {
+      resetButton.classList.add('waiting-attack');
+      resetButton.style.cursor = 'progress';
+      resetButton.disabled = true;
+    }
   };
 
   function resetFight() {
@@ -1070,12 +1091,17 @@ export const initFight = () => {
 };
 
 export function resetFightByCharacterChange() {
-  if (state.battle?.enemy.health > 0 || state.battle?.player.health > 0) {
-    const resetButton = document.querySelector('.fight__reset-button');
-    if (resetButton) {
-      resetButton.style.display = 'none';
-      attackButton.style.display = 'flex';
-    }
+  const resetButton = document.querySelector('.fight__reset-button');
+  // if (state.battle?.enemy.health > 0 || state.battle?.player.health > 0) {
+  //   if (resetButton) {
+  //     resetButton.style.display = 'none';
+  //     attackButton.style.display = 'flex';
+  //   }
+  // }
+
+  if (resetButton) {
+    resetButton.style.display = 'none';
+    attackButton.style.display = 'flex';
   }
 
   const newCharacter = getCharacter();
