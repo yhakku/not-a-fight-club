@@ -25,36 +25,58 @@ const initLogin = () => {
     showGreeting(title, nickname);
   } else {
     formContainer.style.paddingBottom = '10px';
-    input.focus();
     toggleButtons([buttonFight, buttonChars, buttonSettings], false);
   }
 
   form.addEventListener('submit', (event) => {
     event.preventDefault();
     nickname = input.value.trim();
-    if (!nickname) {
-      return;
-    } else {
-      toggleFormVisible(form, true);
-      showGreeting(title, nickname);
-      toggleButtons([buttonFight, buttonChars, buttonSettings], true);
-    }
 
-    state.nickname = nickname;
-    initChars();
-    initSettings();
+    const validityState = input.validity;
+    if (validityState.patternMismatch || validityState.valueMissing) {
+      setInvalidState(input, messageError, true);
+    } else {
+      if (!nickname) {
+        return;
+      } else {
+        toggleFormVisible(form, true);
+        showGreeting(title, nickname);
+        toggleButtons([buttonFight, buttonChars, buttonSettings], true);
+      }
+
+      state.nickname = nickname;
+      initChars();
+      initSettings();
+    }
   });
 
   input.addEventListener('input', () => {
     const validityState = input.validity;
 
-    input.setCustomValidity(' ');
-
     if (validityState.patternMismatch) {
       setInvalidState(input, messageError, true);
     } else {
       setInvalidState(input, messageError, false);
-      input.setCustomValidity('');
+    }
+
+    if (validityState.valueMissing) {
+      setInvalidState(input, messageError, true);
+    }
+  });
+
+  input.addEventListener('blur', () => {
+    const validityState = input.validity;
+
+    if (validityState.valueMissing) {
+      setInvalidState(input, messageError, false);
+    }
+  });
+
+  document.addEventListener('click', (event) => {
+    const validityState = input.validity;
+
+    if (validityState.valueMissing && event.target !== input) {
+      setInvalidState(input, messageError, false);
     }
   });
 };

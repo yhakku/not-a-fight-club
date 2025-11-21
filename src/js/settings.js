@@ -35,27 +35,51 @@ const initSettings = () => {
 
   form.addEventListener('submit', (event) => {
     event.preventDefault();
-    nickname = input.value.trim();
+    const validityStateSettings = input.validity;
 
-    state.nickname = nickname;
-    input.value = '';
-    input.placeholder = nickname;
-    initChars();
-    changeGreeting(nickname);
-    toggleSectionVisible(body, logo, false);
-    history.back();
+    if (
+      validityStateSettings.patternMismatch ||
+      validityStateSettings.valueMissing
+    ) {
+      setInvalidState(input, messageError, true);
+    } else {
+      nickname = input.value.trim();
+
+      state.nickname = nickname;
+      input.value = '';
+      input.placeholder = nickname;
+      initChars();
+      changeGreeting(nickname);
+    }
   });
 
   input.addEventListener('input', () => {
     const validityStateSettings = input.validity;
 
-    input.setCustomValidity(' ');
-
     if (validityStateSettings.patternMismatch) {
       setInvalidState(input, messageError, true);
     } else {
       setInvalidState(input, messageError, false);
-      input.setCustomValidity('');
+    }
+
+    if (validityStateSettings.valueMissing) {
+      setInvalidState(input, messageError, true);
+    }
+  });
+
+  input.addEventListener('blur', () => {
+    const validityStateSettings = input.validity;
+
+    if (validityStateSettings.valueMissing) {
+      setInvalidState(input, messageError, false);
+    }
+  });
+
+  document.addEventListener('click', (event) => {
+    const validityStateSettings = input.validity;
+
+    if (validityStateSettings.valueMissing && event.target !== input) {
+      setInvalidState(input, messageError, false);
     }
   });
 
@@ -114,10 +138,17 @@ const initSettings = () => {
     }
   });
 
-  const closeModal = () => {
-    toggleSectionVisible(body, logo, false);
-    history.back();
-  };
+  function closeModal() {
+    toggleSectionVisible(body, logo, true);
+    body.classList.remove('overlay');
+    logo.classList.remove('hidden');
+
+    if (prevHash && prevHash !== currentHash) {
+      location.hash = prevHash;
+    } else {
+      location.hash = '#login';
+    }
+  }
 
   if (buttonClose) {
     buttonClose.addEventListener('click', closeModal);

@@ -75,7 +75,7 @@
       >
         <div class="login__body">
           <h1 class="login__title" id="login-title">Not a Fight Club</h1>
-          <form class="login__form form">
+          <form class="login__form form" novalidate>
             <label class="form__label h2" for="username">
               What's your name?
             </label>
@@ -85,7 +85,7 @@
                 type="text"
                 id="username"
                 placeholder="Name"
-                autofocus
+                autocomplete="on"
                 required
                 minlength="2"
                 maxlength="11"
@@ -732,7 +732,7 @@
         <h2 class="settings__title hidden">Settings title</h2>
         <div class="settings__change-name change-name">
           <h3 class="change-name__title">Change name</h3>
-          <form class="change-name__form">
+          <form class="change-name__form" novalidate>
             <label class="change-name__label h2" for="nickname-change"></label>
             <div class="change-name__form-container">
               <input
@@ -740,6 +740,7 @@
                 type="text"
                 id="nickname-change"
                 placeholder="Change name"
+                autocomplete="on"
                 required
                 minlength="2"
                 maxlength="11"
