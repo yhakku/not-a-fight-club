@@ -8,10 +8,13 @@
   height: 100%;
 
   &__title {
+    font-family: 'JujutsuKaisenTitles', sans-serif;
+    font-size: rem(84);
     max-width: rem(332);
+    line-height: 0.8;
     width: 100%;
     text-align: center;
-    padding-bottom: rem(35);
+    padding-bottom: rem(45);
   }
 
   &__body {
@@ -39,6 +42,8 @@
   }
 
   &__greeting {
+    font-family: 'JujutsuKaisen', sans-serif;
+    font-size: rem(24);
     padding-bottom: rem(20);
   }
 }
