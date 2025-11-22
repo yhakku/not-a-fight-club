@@ -124,6 +124,14 @@ const initSettings = () => {
     }
   }
 
+  checkbox.addEventListener('keydown', (event) => {
+    if (event.code === 'Enter') {
+      event.preventDefault();
+      checkbox.checked = !checkbox.checked;
+      checkbox.dispatchEvent(new Event('change'));
+    }
+  });
+
   let prevHash = null;
   let currentHash = location.hash;
 

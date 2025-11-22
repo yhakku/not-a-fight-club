@@ -30,6 +30,11 @@ const tooltipDefenceContainer = document.querySelector(
 );
 const tooltipCommonlyDefenceContainer =
   document.querySelector('.fight__tooltip');
+const checkbox = document.querySelector('.fight__panel-checkbox-input');
+const checkboxSettings = document.querySelector(
+  '.show-description__form-checkbox-input',
+);
+const descriptionText = document.querySelector('.fight__panel-description');
 
 const enemies = [
   {
@@ -614,11 +619,6 @@ function determineStatFight() {
 }
 
 function createDescriptionGame() {
-  const checkbox = document.querySelector('.fight__panel-checkbox-input');
-  const checkboxSettings = document.querySelector(
-    '.show-description__form-checkbox-input',
-  );
-  const descriptionText = document.querySelector('.fight__panel-description');
   if (checkbox.checked) {
     state.isShowDescriptionFight = true;
   }
@@ -1098,6 +1098,14 @@ export const initFight = () => {
         <span class="logs__accent">${attackZones}</span>`,
     );
   }
+
+  checkbox.addEventListener('keydown', (event) => {
+    if (event.code === 'Enter') {
+      event.preventDefault();
+      checkbox.checked = !checkbox.checked;
+      checkbox.dispatchEvent(new Event('change'));
+    }
+  });
 
   selectZone();
   validateChoices();
