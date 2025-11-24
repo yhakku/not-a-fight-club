@@ -7,6 +7,10 @@ const initSettings = () => {
   const logo = document.querySelector('.logo');
   const buttonClose = document.querySelector('.settings__button-close');
   const characterLink = document.querySelector('a[href="#characters"]');
+  const settingsLink = document.querySelector('a[href="#settings"]');
+  const settingLinkContainer = document.querySelector(
+    '.header__item--settings',
+  );
   const form = document.querySelector('.change-name__form');
   const input = document.querySelector('.change-name__input');
   const messageError = document.querySelector('.change-name__error');
@@ -132,6 +136,25 @@ const initSettings = () => {
     }
   });
 
+  const createButtonClose = () => {
+    settingsLink.style.display = 'none';
+    const settingButtonClose = document.createElement('button');
+    settingButtonClose.classList.add('header__close-button--settings');
+    settingButtonClose.innerHTML = `<img src="/not-a-fight-club/src/assets/images/header/close.svg" alt="close"/>`;
+    settingLinkContainer.appendChild(settingButtonClose);
+    settingButtonClose.addEventListener('click', () => {
+      settingButtonClose.style.display = 'none';
+      closeModal();
+    });
+  };
+
+  const deleteButtonClose = () => {
+    const settingButtonClose = document.querySelector(
+      '.header__close-button--settings',
+    );
+    settingButtonClose?.remove();
+  };
+
   let prevHash = null;
   let currentHash = location.hash;
 
@@ -141,8 +164,11 @@ const initSettings = () => {
 
     if (currentHash === '#settings') {
       characterLink.classList.add('disabled');
+      createButtonClose();
     } else {
       characterLink.classList.remove('disabled');
+      settingsLink.style.display = 'flex';
+      deleteButtonClose();
     }
   });
 
@@ -163,6 +189,10 @@ const initSettings = () => {
   }
 
   checkbox.addEventListener('change', toggleDescriptionFight);
+
+  if (location.hash === '#settings') {
+    createButtonClose();
+  }
 };
 
 export default initSettings;

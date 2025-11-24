@@ -14,8 +14,25 @@ const trackButtonPrev = document.querySelector(
 const buttonsPagination = document.querySelectorAll(
   '.characters__pagination-button',
 );
+const characterLink = document.querySelector('a[href="#characters"]');
+const characterLinkContainer = document.querySelector(
+  '.header__item--characters',
+);
+const body = document.querySelector('body');
+const logo = document.querySelector('.logo');
+const buttonClose = document.querySelector('.characters__button-close');
+const nicknames = document.querySelectorAll('.characters__nickname');
+const selectedChars = document.querySelectorAll('.characters__selected');
+const settingsLink = document.querySelector('a[href="#settings"]');
+const attackButtons = document.querySelectorAll('.attack-panel .fight__button');
+const defenceButtons = document.querySelectorAll(
+  '.defence-panel .fight__button',
+);
 
 let countSlide = 0;
+
+let prevHash = null;
+let currentHash = location.hash;
 
 export const toggleSlideToOpenModal = () => {
   countSlide <= 0 ? (countSlide = 0) : (countSlide -= 1);
@@ -40,21 +57,49 @@ export const toggleSlideToOpenModal = () => {
   }
 };
 
-const initChars = () => {
-  const body = document.querySelector('body');
-  const logo = document.querySelector('.logo');
-  const modal = document.querySelector('.characters');
-  const buttonClose = document.querySelector('.characters__button-close');
-  const nicknames = document.querySelectorAll('.characters__nickname');
-  const selectedChars = document.querySelectorAll('.characters__selected');
-  const settingsLink = document.querySelector('a[href="#settings"]');
-  const attackButtons = document.querySelectorAll(
-    '.attack-panel .fight__button',
-  );
-  const defenceButtons = document.querySelectorAll(
-    '.defence-panel .fight__button',
-  );
+export const closeModal = () => {
+  body.classList.remove('overlay');
+  logo.classList.remove('hidden');
 
+  if (prevHash && prevHash !== currentHash) {
+    location.hash = prevHash;
+  } else {
+    location.hash = '#login';
+  }
+
+  if (state.battle?.player.id !== state.avatarId) {
+    resetFightByCharacterChange();
+
+    attackButtons.forEach((attackButton) => {
+      attackButton.classList.remove('selected');
+    });
+
+    defenceButtons.forEach((defenceButton) => {
+      defenceButton.classList.remove('selected');
+    });
+  }
+};
+
+export const createButtonClose = () => {
+  characterLink.style.display = 'none';
+  const characterButtonClose = document.createElement('button');
+  characterButtonClose.classList.add('header__close-button--characters');
+  characterButtonClose.innerHTML = `<img src="/not-a-fight-club/src/assets/images/header/close.svg" alt="close"/>`;
+  characterLinkContainer.appendChild(characterButtonClose);
+  characterButtonClose.addEventListener('click', () => {
+    characterButtonClose.style.display = 'none';
+    closeModal();
+  });
+};
+
+export const deleteButtonClose = () => {
+  const characterButtonClose = document.querySelector(
+    '.header__close-button--characters',
+  );
+  characterButtonClose?.remove();
+};
+
+const initChars = () => {
   if (location.hash === '#characters') {
     settingsLink.classList.add('disabled');
   }
@@ -87,45 +132,22 @@ const initChars = () => {
     });
   }
 
-  let prevHash = null;
-  let currentHash = location.hash;
-
   window.addEventListener('hashchange', () => {
     prevHash = currentHash;
     currentHash = location.hash;
 
     if (currentHash === '#characters') {
       settingsLink.classList.add('disabled');
+      createButtonClose();
       updateStatsOnModalOpen();
     } else {
       settingsLink.classList.remove('disabled');
+      characterLink.style.display = 'flex';
+      deleteButtonClose();
     }
 
     updateStatsOnModalOpen();
   });
-
-  const closeModal = () => {
-    body.classList.remove('overlay');
-    logo.classList.remove('hidden');
-
-    if (prevHash && prevHash !== currentHash) {
-      location.hash = prevHash;
-    } else {
-      location.hash = '#login';
-    }
-
-    if (state.battle?.player.id !== state.avatarId) {
-      resetFightByCharacterChange();
-
-      attackButtons.forEach((attackButton) => {
-        attackButton.classList.remove('selected');
-      });
-
-      defenceButtons.forEach((defenceButton) => {
-        defenceButton.classList.remove('selected');
-      });
-    }
-  };
 
   if (buttonClose) {
     buttonClose.addEventListener('click', closeModal);
@@ -197,7 +219,9 @@ const initChars = () => {
     });
   });
 
-  // toggleSlidetoOpenModal();
+  if (location.hash === '#characters') {
+    createButtonClose();
+  }
 };
 
 export default initChars;
