@@ -31,9 +31,6 @@ const defenceButtons = document.querySelectorAll(
 
 let countSlide = 0;
 
-let prevHash = null;
-let currentHash = location.hash;
-
 export const toggleSlideToOpenModal = () => {
   countSlide <= 0 ? (countSlide = 0) : (countSlide -= 1);
   if (state.avatarId < 3) {
@@ -61,11 +58,12 @@ export const closeModal = () => {
   body.classList.remove('overlay');
   logo.classList.remove('hidden');
 
-  if (prevHash && prevHash !== currentHash) {
-    location.hash = prevHash;
+  if (state.prevHash === '#fight') {
+    location.hash = state.prevHash;
   } else {
     location.hash = '#login';
   }
+  state.prevHash = null;
 
   if (state.battle?.player.id !== state.avatarId) {
     resetFightByCharacterChange();
@@ -79,6 +77,12 @@ export const closeModal = () => {
     });
   }
 };
+
+window.addEventListener('load', () => {
+  if (state.prevHash === '#fight') {
+    body.classList.add('fight-background');
+  }
+});
 
 export const createButtonClose = () => {
   characterLink.style.display = 'none';
@@ -132,14 +136,20 @@ const initChars = () => {
     });
   }
 
+  let currentHash = location.hash;
+
   window.addEventListener('hashchange', () => {
-    prevHash = currentHash;
+    const prevHash = currentHash;
     currentHash = location.hash;
 
     if (currentHash === '#characters') {
       settingsLink.classList.add('disabled');
       createButtonClose();
       updateStatsOnModalOpen();
+
+      if (state.prevHash === null) {
+        state.prevHash = prevHash;
+      }
     } else {
       settingsLink.classList.remove('disabled');
       characterLink.style.display = 'flex';

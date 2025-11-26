@@ -102,6 +102,7 @@ const defaultState = {
     },
   ],
   battle: null,
+  prevHash: null,
 };
 
 const STORAGE_KEY = 'data';

@@ -155,16 +155,19 @@ const initSettings = () => {
     settingButtonClose?.remove();
   };
 
-  let prevHash = null;
   let currentHash = location.hash;
 
   window.addEventListener('hashchange', () => {
-    prevHash = currentHash;
+    const prevHash = currentHash;
     currentHash = location.hash;
 
     if (currentHash === '#settings') {
       characterLink.classList.add('disabled');
       createButtonClose();
+
+      if (state.prevHash === null) {
+        state.prevHash = prevHash;
+      }
     } else {
       characterLink.classList.remove('disabled');
       settingsLink.style.display = 'flex';
@@ -177,11 +180,12 @@ const initSettings = () => {
     body.classList.remove('overlay');
     logo.classList.remove('hidden');
 
-    if (prevHash && prevHash !== currentHash) {
-      location.hash = prevHash;
+    if (currentHash === '#settings') {
+      location.hash = state.prevHash;
     } else {
       location.hash = '#login';
     }
+    state.prevHash = null;
   }
 
   if (buttonClose) {
