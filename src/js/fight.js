@@ -575,7 +575,6 @@ function determineDefenceZonesEnemy() {
 }
 
 function determineAttackZoneEnemy() {
-  // TODO: Нужно понять как получать количество зон атаки динамически(и нужно ли -- у Сукуны 2 атаки)
   const randomZoneIndex = Math.floor(Math.random() * zones.length);
   if (!state.battle.enemy.attackZone) {
     return (state.battle.enemy.attackZone = zones[randomZoneIndex]);
@@ -666,7 +665,6 @@ function createFightGame() {
 }
 
 export const initFight = () => {
-  // TODO: Поймал баг, при смене персонажа энеми появляется с 0 хп, хотя до этого бой был обновлён | Подтверждён
   enemy = getRandomEnemy();
   character = getCharacter();
 
@@ -1120,12 +1118,6 @@ export const initFight = () => {
 
 export function resetFightByCharacterChange() {
   const resetButton = document.querySelector('.fight__reset-button');
-  // if (state.battle?.enemy.health > 0 || state.battle?.player.health > 0) {
-  //   if (resetButton) {
-  //     resetButton.style.display = 'none';
-  //     attackButton.style.display = 'flex';
-  //   }
-  // }
 
   if (resetButton) {
     resetButton.style.display = 'none';
