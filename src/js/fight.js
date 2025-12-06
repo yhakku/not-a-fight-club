@@ -107,7 +107,7 @@ const enemies = [
 
 const zones = ['Head', 'Neck', 'Body', 'Belly', 'Legs'];
 
-const attack = 'src/assets/images/fight/attack.svg';
+const attack = 'src/assets/images/fight/Hit.svg';
 const block = 'src/assets/images/fight/block.svg';
 const crit = 'src/assets/images/fight/crit.svg';
 
