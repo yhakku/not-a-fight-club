@@ -24,7 +24,7 @@ const initLogin = () => {
     toggleFormVisible(form, true);
     showGreeting(title, nickname);
   } else {
-    formContainer.style.paddingBottom = '10px';
+    formContainer.style.paddingBottom = '0.325rem';
     toggleButtons([buttonFight, buttonChars, buttonSettings], false);
   }
 
