@@ -45,8 +45,6 @@ const initLogin = () => {
       }
 
       state.nickname = nickname;
-      initChars();
-      initSettings();
     }
   });
 

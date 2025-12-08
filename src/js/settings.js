@@ -52,7 +52,6 @@ const initSettings = () => {
       state.nickname = nickname;
       input.value = '';
       input.placeholder = nickname;
-      initChars();
       changeGreeting(nickname);
     }
   });
