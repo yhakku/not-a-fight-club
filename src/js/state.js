@@ -108,16 +108,24 @@ const defaultState = {
 const STORAGE_KEY = 'data';
 
 export const saveState = (state) => {
-  console.log('[STATE]', state);
   localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
 };
 
 export const loadState = () => {
   const loadData = localStorage.getItem(STORAGE_KEY);
+  const parsed = loadData ? JSON.parse(loadData) : defaultState;
 
-  console.log('[LOAD FROM LS]', loadData);
+  if (parsed.user) {
+    return {
+      ...parsed.user,
+      battle: parsed.battle ?? null,
+      prevHash: null,
+    };
+  }
 
-  return loadData ? JSON.parse(loadData) : defaultState;
+  return parsed;
+
+  // return loadData ? JSON.parse(loadData) : defaultState;
 };
 
 const createCurrentState = (initialState, rootState = null) => {
@@ -125,7 +133,6 @@ const createCurrentState = (initialState, rootState = null) => {
 
   return new Proxy(initialState, {
     set(target, prop, value) {
-      console.log('[STATE UPDATED]', prop, '=>', value);
       target[prop] = value;
       saveState(root);
       return true;

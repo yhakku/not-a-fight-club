@@ -37,10 +37,6 @@ export function updateStatsUI() {
   const wins = document.querySelectorAll('.characters__result-w');
   const loses = document.querySelectorAll('.characters__result-l');
 
-  console.log('characters:', state.characters);
-  console.log('win elements:', wins);
-  console.log('lose elements:', loses);
-
   if (!state.characters || !Array.isArray(state.characters)) return;
 
   state.characters.forEach((char, index) => {
