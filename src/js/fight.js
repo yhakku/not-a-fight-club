@@ -5,6 +5,9 @@ import TojiImg from '/src/assets/images/fight/Todzi.webp';
 import JogoImg from '/src/assets/images/fight/Jogo.webp';
 import HanamiImg from '/src/assets/images/fight/Hanami.webp';
 import MahitoImg from '/src/assets/images/fight/Mahito.webp';
+import Hit from '/src/assets/images/fight/Hit.svg';
+import Block from '/src/assets/images/fight/block.svg';
+import Crit from '/src/assets/images/fight/crit.svg';
 
 const startFightButton = document.querySelector('.login__button-fight');
 const attackButtons = document.querySelectorAll('.attack-panel .fight__button');
@@ -107,9 +110,9 @@ const enemies = [
 
 const zones = ['Head', 'Neck', 'Body', 'Belly', 'Legs'];
 
-const attack = 'src/assets/images/fight/Hit.svg';
-const block = 'src/assets/images/fight/block.svg';
-const crit = 'src/assets/images/fight/crit.svg';
+const hit = Hit;
+const block = Block;
+const crit = Crit;
 
 const tooltipForTwoDefenceZone = `
   <svg
@@ -853,7 +856,7 @@ export const initFight = () => {
       ) &&
       !isPlayerCrit
     ) {
-      hintEnemy.src = attack;
+      hintEnemy.src = hit;
     }
 
     if (
@@ -918,7 +921,7 @@ export const initFight = () => {
       ) &&
       !isEnemyCrit
     ) {
-      hintPlayer.src = attack;
+      hintPlayer.src = hit;
     }
 
     if (

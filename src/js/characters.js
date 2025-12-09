@@ -3,6 +3,7 @@ import initOverlayClose from './modal-overlay';
 import { resetFightByCharacterChange } from './fight';
 import { updateStatsUI } from './ui';
 import initEscapeModal from './modal-escape';
+import closeIcon from '@/assets/images/header/close.svg';
 
 const track = document.querySelector('.characters__list');
 const trackButtonNext = document.querySelector(
@@ -21,6 +22,7 @@ const characterLinkContainer = document.querySelector(
 const body = document.querySelector('body');
 const logo = document.querySelector('.logo');
 const buttonClose = document.querySelector('.characters__button-close');
+
 const nicknames = document.querySelectorAll('.characters__nickname');
 const selectedChars = document.querySelectorAll('.characters__selected');
 const settingsLink = document.querySelector('a[href="#settings"]');
@@ -88,7 +90,7 @@ export const createButtonClose = () => {
   characterLink.style.display = 'none';
   const characterButtonClose = document.createElement('button');
   characterButtonClose.classList.add('header__close-button--characters');
-  characterButtonClose.innerHTML = `<img src="/not-a-fight-club/src/assets/images/header/close.svg" alt="close"/>`;
+  characterButtonClose.innerHTML = `<img src="${closeIcon}" alt="close"/>`;
   characterLinkContainer.appendChild(characterButtonClose);
   characterButtonClose.addEventListener('click', () => {
     characterButtonClose.style.display = 'none';

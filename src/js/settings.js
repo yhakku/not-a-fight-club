@@ -1,5 +1,6 @@
 import { state } from './state';
 import { changeGreeting, setInvalidState, toggleSectionVisible } from './ui.js';
+import closeIcon from '@/assets/images/header/close.svg';
 
 const initSettings = () => {
   const body = document.querySelector('body');
@@ -138,7 +139,7 @@ const initSettings = () => {
     settingsLink.style.display = 'none';
     const settingButtonClose = document.createElement('button');
     settingButtonClose.classList.add('header__close-button--settings');
-    settingButtonClose.innerHTML = `<img src="/not-a-fight-club/src/assets/images/header/close.svg" alt="close"/>`;
+    settingButtonClose.innerHTML = `<img src="${closeIcon}" alt="close"/>`;
     settingLinkContainer.appendChild(settingButtonClose);
     settingButtonClose.addEventListener('click', () => {
       settingButtonClose.style.display = 'none';
