@@ -1,5 +1,4 @@
 import { state } from './state';
-import initChars from './characters.js';
 import { changeGreeting, setInvalidState, toggleSectionVisible } from './ui.js';
 
 const initSettings = () => {
@@ -27,7 +26,7 @@ const initSettings = () => {
 
   let nickname = state.nickname;
 
-  if (state.nickname) {
+  if (nickname) {
     input.placeholder = nickname;
   } else {
     location.hash = '#login';
@@ -176,8 +175,8 @@ const initSettings = () => {
 
   function closeModal() {
     toggleSectionVisible(body, logo, true);
-    body.classList.remove('overlay');
-    logo.classList.remove('hidden');
+    // body.classList.remove('overlay');
+    // logo.classList.remove('hidden');
 
     if (currentHash === '#settings') {
       location.hash = state.prevHash;
@@ -193,9 +192,9 @@ const initSettings = () => {
 
   checkbox.addEventListener('change', toggleDescriptionFight);
 
-  if (location.hash === '#settings') {
-    createButtonClose();
-  }
+  // if (location.hash === '#settings') {
+  //   createButtonClose();
+  // }
 };
 
 export default initSettings;

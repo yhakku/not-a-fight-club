@@ -10,10 +10,10 @@ const router = () => {
   const backToLogin = () => {
     menu.classList.add('hidden');
     logo.classList.remove('hidden');
-    document.querySelector('body').classList.remove('overlay');
+    body.classList.remove('overlay');
   };
 
-  const hiddenUi = (route) => {
+  const hiddenUI = (route) => {
     document.querySelectorAll('[data-route]').forEach((section) => {
       if (section.dataset.route !== route) {
         section.classList.add('hidden');
@@ -25,13 +25,13 @@ const router = () => {
 
   switch (route) {
     case 'fight':
-      hiddenUi('fight');
+      hiddenUI('fight');
       menu.classList.remove('hidden');
       body.classList.remove('overlay');
       body.classList.add('fight-background');
       break;
     case 'characters':
-      hiddenUi('characters');
+      hiddenUI('characters');
       logo.classList.add('hidden');
       menu.classList.remove('hidden');
       menu.style.marginLeft = 'auto';
@@ -39,14 +39,14 @@ const router = () => {
       toggleSlideToOpenModal();
       break;
     case 'settings':
-      hiddenUi('settings');
+      hiddenUI('settings');
       logo.classList.add('hidden');
       menu.classList.remove('hidden');
       menu.style.marginLeft = 'auto';
       body.classList.add('overlay');
       break;
     default:
-      hiddenUi('login');
+      hiddenUI('login');
       body.classList.remove('fight-background');
       backToLogin();
       break;

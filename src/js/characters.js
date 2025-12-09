@@ -114,49 +114,47 @@ const initChars = () => {
     }
   };
 
-  if (state.nickname) {
-    nicknames.forEach((nickname) => {
-      nickname.innerHTML = state.nickname;
-    });
-
-    const defaultChar = state.avatarId ?? 0;
-    selectedChars[defaultChar].checked = true;
-
-    selectedChars.forEach((selectedChar, index) => {
-      selectedChar.addEventListener('change', () => {
-        if (selectedChar.checked) {
-          selectedChars.forEach((notSelectedChar, j) => {
-            if (j !== index) {
-              notSelectedChar.checked = false;
-            }
-          });
-        }
-        state.avatarId = index;
-      });
-    });
-  }
-
   let currentHash = location.hash;
 
   window.addEventListener('hashchange', () => {
     const prevHash = currentHash;
     currentHash = location.hash;
 
+    if (state.nickname) {
+      nicknames.forEach((nickname) => {
+        nickname.innerHTML = state.nickname;
+      });
+    }
+
     if (currentHash === '#characters') {
       settingsLink.classList.add('disabled');
       createButtonClose();
       updateStatsOnModalOpen();
 
-      if (state.prevHash === null) {
-        state.prevHash = prevHash;
-      }
+      const defaultChar = state.avatarId ?? 0;
+      selectedChars[defaultChar].checked = true;
+
+      selectedChars.forEach((selectedChar, index) => {
+        selectedChar.addEventListener('change', () => {
+          if (selectedChar.checked) {
+            selectedChars.forEach((notSelectedChar, j) => {
+              if (j !== index) {
+                notSelectedChar.checked = false;
+              }
+            });
+          }
+          state.avatarId = index;
+        });
+      });
+
+      if (state.prevHash === null) state.prevHash = prevHash;
     } else {
       settingsLink.classList.remove('disabled');
       characterLink.style.display = 'flex';
       deleteButtonClose();
     }
 
-    updateStatsOnModalOpen();
+    // updateStatsOnModalOpen();
   });
 
   if (buttonClose) {
@@ -167,20 +165,29 @@ const initChars = () => {
   initEscapeModal(closeModal);
   updateStatsUI();
 
+  const hideTrackButton = () => {
+    if (track.style.transform !== 'translateX(0%)') {
+      trackButtonNext.style.opacity = '0';
+      trackButtonNext.style.visibility = 'hidden';
+      trackButtonPrev.style.opacity = '1';
+      trackButtonPrev.style.visibility = 'visible';
+    } else {
+      trackButtonPrev.style.opacity = '0';
+      trackButtonPrev.style.visibility = 'hidden';
+      trackButtonNext.style.opacity = '1';
+      trackButtonNext.style.visibility = 'visible';
+    }
+  };
+
   trackButtonNext.addEventListener('click', () => {
-    countSlide <= 0 ? (countSlide += 1) : (countSlide = 1);
+    countSlide <= 0 ? (countSlide += 1) : countSlide - 1;
     track.style.transform = `translateX(-${countSlide * 100}%)`;
     track.style.transition = '0.3s';
 
     buttonsPagination[countSlide].classList.add('active');
     buttonsPagination[countSlide - 1].classList.remove('active');
 
-    if (track.style.transform !== 'translateX(0%)') {
-      trackButtonNext.style.opacity = '0';
-      trackButtonNext.style.visibility = 'hidden';
-      trackButtonPrev.style.opacity = '1';
-      trackButtonPrev.style.visibility = 'visible';
-    }
+    hideTrackButton();
   });
 
   trackButtonPrev.addEventListener('click', () => {
@@ -191,12 +198,7 @@ const initChars = () => {
     buttonsPagination[countSlide].classList.add('active');
     buttonsPagination[countSlide + 1].classList.remove('active');
 
-    if (track.style.transform === 'translateX(0%)') {
-      trackButtonPrev.style.opacity = '0';
-      trackButtonPrev.style.visibility = 'hidden';
-      trackButtonNext.style.opacity = '1';
-      trackButtonNext.style.visibility = 'visible';
-    }
+    hideTrackButton();
   });
 
   buttonsPagination.forEach((button, index) => {
@@ -205,22 +207,10 @@ const initChars = () => {
       track.style.transition = '0.3s';
       countSlide = index;
 
-      if (track.style.transform === `translateX(-${countSlide * 100}%)`) {
-        trackButtonNext.style.opacity = '0';
-        trackButtonNext.style.visibility = 'hidden';
-        trackButtonPrev.style.opacity = '1';
-        trackButtonPrev.style.visibility = 'visible';
-      }
+      hideTrackButton();
 
-      if (track.style.transform === `translateX(0%)`) {
-        trackButtonPrev.style.opacity = '0';
-        trackButtonPrev.style.visibility = 'hidden';
-        trackButtonNext.style.opacity = '1';
-        trackButtonNext.style.visibility = 'visible';
-      }
-
-      buttonsPagination.forEach((btn, i) => {
-        if (i === index) {
+      buttonsPagination.forEach((btn, j) => {
+        if (j === index) {
           btn.classList.add('active');
         } else {
           btn.classList.remove('active');
@@ -229,9 +219,9 @@ const initChars = () => {
     });
   });
 
-  if (location.hash === '#characters') {
-    createButtonClose();
-  }
+  // if (location.hash === '#characters') {
+  //   createButtonClose();
+  // }
 };
 
 export default initChars;

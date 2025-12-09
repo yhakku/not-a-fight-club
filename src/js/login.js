@@ -1,12 +1,10 @@
-import { state, saveState, loadState } from './state.js';
+import { state } from './state.js';
 import {
   showGreeting,
   toggleFormVisible,
   toggleButtons,
   setInvalidState,
 } from './ui.js';
-import initChars from './characters.js';
-import initSettings from './settings.js';
 
 const initLogin = () => {
   const title = document.querySelector('.login__title');
