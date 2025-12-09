@@ -37,6 +37,8 @@ export function updateStatsUI() {
   const wins = document.querySelectorAll('.characters__result-w');
   const loses = document.querySelectorAll('.characters__result-l');
 
+  if (!state.characters || !Array.isArray(state.characters)) return;
+
   state.characters.forEach((char, index) => {
     if (wins[index]) {
       wins[index].innerHTML = char.stats.win;
