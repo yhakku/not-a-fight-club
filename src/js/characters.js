@@ -3,7 +3,7 @@ import initOverlayClose from './modal-overlay';
 import { resetFightByCharacterChange } from './fight';
 import { updateStatsUI } from './ui';
 import initEscapeModal from './modal-escape';
-import closeIcon from '@/assets/images/header/close.svg';
+import closeIcon from '/src/assets/images/header/close.svg';
 
 const track = document.querySelector('.characters__list');
 const trackButtonNext = document.querySelector(

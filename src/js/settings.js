@@ -1,6 +1,6 @@
 import { state } from './state';
 import { changeGreeting, setInvalidState, toggleSectionVisible } from './ui.js';
-import closeIcon from '@/assets/images/header/close.svg';
+import closeIcon from '/src/assets/images/header/close.svg';
 
 const initSettings = () => {
   const body = document.querySelector('body');
