@@ -175,8 +175,6 @@ const initSettings = () => {
 
   function closeModal() {
     toggleSectionVisible(body, logo, true);
-    // body.classList.remove('overlay');
-    // logo.classList.remove('hidden');
 
     if (currentHash === '#settings') {
       location.hash = state.prevHash;
@@ -191,10 +189,6 @@ const initSettings = () => {
   }
 
   checkbox.addEventListener('change', toggleDescriptionFight);
-
-  // if (location.hash === '#settings') {
-  //   createButtonClose();
-  // }
 };
 
 export default initSettings;

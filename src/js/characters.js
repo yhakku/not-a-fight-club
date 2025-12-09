@@ -153,8 +153,6 @@ const initChars = () => {
       characterLink.style.display = 'flex';
       deleteButtonClose();
     }
-
-    // updateStatsOnModalOpen();
   });
 
   if (buttonClose) {
@@ -218,10 +216,6 @@ const initChars = () => {
       });
     });
   });
-
-  // if (location.hash === '#characters') {
-  //   createButtonClose();
-  // }
 };
 
 export default initChars;
