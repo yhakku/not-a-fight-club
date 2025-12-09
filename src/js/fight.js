@@ -456,7 +456,14 @@ const getRandomEnemy = () => {
 };
 
 const getCharacter = () => {
-  let charsId = state.characters.map((character) => character.id);
+  let charsId = state.characters.map((character) => {
+    console.log('character.id:', character.id);
+    return character.id;
+  });
+
+  console.log('charsId:', charsId);
+  console.log('state.avatarId:', state.avatarId);
+  console.log('state.characters:', state.characters);
 
   for (let charId of charsId) {
     if (charId === state.avatarId) {
