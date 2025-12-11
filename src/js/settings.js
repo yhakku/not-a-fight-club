@@ -35,6 +35,7 @@ const initSettings = () => {
 
   if (location.hash === '#settings') {
     characterLink.classList.add('disabled');
+    createButtonClose();
   }
 
   form.addEventListener('submit', (event) => {
@@ -135,7 +136,7 @@ const initSettings = () => {
     }
   });
 
-  const createButtonClose = () => {
+  function createButtonClose() {
     settingsLink.style.display = 'none';
     const settingButtonClose = document.createElement('button');
     settingButtonClose.classList.add('header__close-button--settings');
@@ -145,7 +146,7 @@ const initSettings = () => {
       settingButtonClose.style.display = 'none';
       closeModal();
     });
-  };
+  }
 
   const deleteButtonClose = () => {
     const settingButtonClose = document.querySelector(

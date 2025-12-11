@@ -84,6 +84,9 @@ window.addEventListener('load', () => {
   if (state.prevHash === '#fight') {
     body.classList.add('fight-background');
   }
+
+  selectedChars[state.avatarId].checked = true;
+  chooseChar();
 });
 
 export const createButtonClose = () => {
@@ -105,9 +108,25 @@ export const deleteButtonClose = () => {
   characterButtonClose?.remove();
 };
 
+function chooseChar() {
+  selectedChars.forEach((selectedChar, index) => {
+    selectedChar.addEventListener('change', () => {
+      if (selectedChar.checked) {
+        selectedChars.forEach((notSelectedChar, j) => {
+          if (j !== index) {
+            notSelectedChar.checked = false;
+          }
+        });
+      }
+      state.avatarId = index;
+    });
+  });
+}
+
 const initChars = () => {
   if (location.hash === '#characters') {
     settingsLink.classList.add('disabled');
+    createButtonClose();
   }
 
   const updateStatsOnModalOpen = () => {
@@ -136,18 +155,7 @@ const initChars = () => {
       const defaultChar = state.avatarId ?? 0;
       selectedChars[defaultChar].checked = true;
 
-      selectedChars.forEach((selectedChar, index) => {
-        selectedChar.addEventListener('change', () => {
-          if (selectedChar.checked) {
-            selectedChars.forEach((notSelectedChar, j) => {
-              if (j !== index) {
-                notSelectedChar.checked = false;
-              }
-            });
-          }
-          state.avatarId = index;
-        });
-      });
+      chooseChar();
 
       if (state.prevHash === null) state.prevHash = prevHash;
     } else {
