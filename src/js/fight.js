@@ -510,7 +510,7 @@ const renderEnemy = (data) => {
   hpEnemy.style.width = `${enemyData.health}%`;
 
   if (state.battle) {
-    determineDefenceZonesEnemy();
+    // determineDefenceZonesEnemy();
     determineAttackZoneEnemy();
   }
 };
@@ -561,9 +561,17 @@ const renderPlayer = (data) => {
 let enemy;
 let character;
 
+function resetDefenceZonesEnemy() {
+  if (
+    state.battle.enemy.defenceZones.length ===
+    state.battle.enemy.countDefenceZone
+  )
+    state.battle.enemy.defenceZones = [];
+}
+
 function determineDefenceZonesEnemy() {
   const uniqueZoneIndex = new Set();
-
+  resetDefenceZonesEnemy();
   while (
     state.battle.enemy.defenceZones.length < state.battle.enemy.countDefenceZone
   ) {
@@ -821,6 +829,8 @@ export const initFight = () => {
     const critChance = 20;
     const critMultiplier = 1.5;
 
+    // resetDefenceZonesEnemy();
+    determineDefenceZonesEnemy();
     determineAttackZoneEnemy();
 
     const isCrit = () => {
