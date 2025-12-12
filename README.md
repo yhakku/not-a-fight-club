@@ -4,6 +4,9 @@ Pet project on assignment [RSSchool "Not Fight Club"](https://github.com/rolling
 This game takes as a basis the combat mechanics from the rather old browser game "Fight Club".  
 A fully completed project will allow you to create your own player, choose his avatar and launch battles.
 
+![FightPageWhithoutDesc](https://github.com/user-attachments/assets/e73bcc06-17d2-41d1-8ce4-ab9a91dcde15)
+
+
 ## Technologies
 
 - **HTML5**
@@ -24,5 +27,4 @@ npm run dev
 
 ## Author
 
-[yhukku]  
-[GitHub](https://github.com/yhukku)
+[yhukku](https://github.com/yhukku)
