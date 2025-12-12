@@ -4,6 +4,10 @@
 .container {
   max-width: root.$container-width;
   margin-inline: auto;
+
+  @include between(1024, 1900) {
+    max-width: rem(1240);
+  }
 }
 
 .button {
@@ -21,6 +25,10 @@
       background-color: root.$color-dark;
       color: root.$color-ligth;
     }
+  }
+
+  @include between(1024, 1900) {
+    font-size: rem(16);
   }
 }
 

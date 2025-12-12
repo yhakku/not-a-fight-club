@@ -8,6 +8,10 @@
   align-items: center;
   height: 100%;
 
+  @include between(1024, 1900) {
+    justify-content: center;
+  }
+
   &__body {
     display: flex;
     justify-content: space-between;
@@ -29,6 +33,10 @@
 
   &__image {
     border: root.$border-default;
+
+    @include between(1024, 1900) {
+      max-width: rem(200);
+    }
   }
 
   &__panel {
@@ -49,15 +57,19 @@
     &-info {
       display: inline-flex;
       align-items: center;
-      width: rem(20);
-      height: rem(20);
       border: none;
       background-color: transparent;
       cursor: default;
 
+      @include square(20px);
+
       & svg {
         opacity: 0.7;
         transition: opacity 0.2s ease;
+      }
+
+      @include between(1024, 1900) {
+        @include square(18px);
       }
     }
 
@@ -68,6 +80,18 @@
       opacity: 0;
       visibility: hidden;
       transition: opacity 0.2s ease;
+
+      @include between(1024, 1900) {
+        bottom: rem(5);
+        left: 95%;
+      }
+
+      @include between(1024, 1900) {
+        & svg {
+          width: rem(145);
+          height: rem(60);
+        }
+      }
     }
 
     &-tooltip-container:hover .fight__panel-tooltip,
@@ -85,6 +109,10 @@
       padding-bottom: rem(10);
       font-size: rem(40);
 
+      @include between(1024, 1900) {
+        font-size: rem(32);
+      }
+
       &--player {
         position: absolute;
         top: rem(9);
@@ -92,6 +120,11 @@
         transform: translateX(10%);
         font-size: rem(26);
         text-wrap: nowrap;
+
+        @include between(1024, 1900) {
+          font-size: rem(22);
+          right: 59%;
+        }
       }
 
       &--enemy {
@@ -100,6 +133,11 @@
         left: 57%;
         font-size: rem(26);
         text-wrap: nowrap;
+
+        @include between(1024, 1900) {
+          font-size: rem(22);
+          left: 56%;
+        }
       }
 
       &-button {
@@ -119,6 +157,10 @@
       line-height: 0.9;
       text-align: center;
       padding-bottom: rem(33);
+
+      @include between(1024, 1900) {
+        font-size: rem(14);
+      }
     }
 
     &-button {
@@ -135,6 +177,11 @@
           border: root.$border-default;
           color: root.$color-dark;
         }
+      }
+
+      @include between(1024, 1900) {
+        font-size: rem(16);
+        padding: rem(12) rem(20) rem(11) rem(20);
       }
     }
 
@@ -160,6 +207,10 @@
         display: flex;
         align-items: center;
         font-family: root.$font-family-accent;
+
+        @include between(1024, 1900) {
+          font-size: rem(14);
+        }
       }
 
       &-text::before {
@@ -202,11 +253,19 @@
     flex-direction: column;
     padding-inline: rem(40);
 
+    @include between(1024, 1900) {
+      max-width: rem(527);
+    }
+
     &--description {
       position: relative;
       display: flex;
       flex-direction: column;
       align-items: center;
+
+      @include between(1024, 1900) {
+        max-width: rem(447);
+      }
     }
 
     &--fight {
@@ -214,11 +273,19 @@
       flex-direction: column;
       align-items: flex-start;
       row-gap: rem(25);
+
+      @include between(1024, 1900) {
+        row-gap: rem(15);
+      }
     }
   }
 
   &__panel-title {
     font-size: rem(24);
+
+    @include between(1024, 1900) {
+      font-size: rem(20);
+    }
   }
 
   &__buttons {
@@ -228,6 +295,10 @@
 
   &__button {
     padding: rem(12) rem(24) rem(11) rem(24);
+
+    @include between(1024, 1900) {
+      padding: rem(10) rem(20) rem(9) rem(20);
+    }
   }
 
   &__buttons-container {
@@ -245,6 +316,18 @@
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.2s ease;
+
+    @include between(1024, 1900) {
+      top: 92%;
+      left: 75%;
+    }
+
+    & svg {
+      @include between(1024, 1900) {
+        width: rem(150);
+        height: rem(70);
+      }
+    }
   }
 
   &__fight-button {
@@ -278,6 +361,11 @@
     & svg {
       margin-left: rem(10);
       transition: transform 0.3s ease;
+
+      @include between(1024, 1900) {
+        width: rem(14);
+        height: rem(20);
+      }
     }
 
     &:not(:disabled):hover svg {
@@ -286,6 +374,11 @@
 
     &:not(:disabled):hover path {
       fill: root.$color-dark;
+    }
+
+    @include between(1024, 1900) {
+      font-size: rem(16);
+      padding: rem(11) rem(16) rem(11) rem(16);
     }
   }
 
@@ -318,6 +411,11 @@
     & svg {
       margin-left: rem(10);
       transition: transform 0.3s ease;
+
+      @include between(1024, 1900) {
+        width: rem(20);
+        height: rem(24);
+      }
     }
 
     &:hover svg {
@@ -326,6 +424,11 @@
 
     &:hover path {
       fill: root.$color-dark;
+    }
+
+    @include between(1024, 1900) {
+      font-size: rem(16);
+      padding: rem(9) rem(14) rem(9) rem(14);
     }
   }
 
@@ -367,6 +470,11 @@
 
     &:not(:disabled):hover path {
       fill: root.$color-dark;
+    }
+
+    @include between(1024, 1900) {
+      font-size: rem(16);
+      padding: rem(10) rem(24) rem(10) rem(23);
     }
   }
 
