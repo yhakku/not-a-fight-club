@@ -579,9 +579,8 @@ function determineDefenceZonesEnemy() {
 
 function determineAttackZoneEnemy() {
   const randomZoneIndex = Math.floor(Math.random() * zones.length);
-  if (!state.battle.enemy.attackZone) {
-    return (state.battle.enemy.attackZone = zones[randomZoneIndex]);
-  }
+
+  return (state.battle.enemy.attackZone = zones[randomZoneIndex]);
 }
 
 const validateChoices = () => {
@@ -821,6 +820,8 @@ export const initFight = () => {
 
     const critChance = 20;
     const critMultiplier = 1.5;
+
+    determineAttackZoneEnemy();
 
     const isCrit = () => {
       let actualCritChance = Math.floor(Math.random() * 100);
