@@ -1,0 +1,60 @@
+@use '../helpers/' as *;
+@use '../variables/' as root;
+
+.logs {
+  max-width: rem(1120);
+  width: 100%;
+  max-height: rem(300);
+  height: 100%;
+  padding: rem(20) rem(30);
+  border: root.$border-default;
+  background-color: root.$color-ligth;
+
+  @include between(1024, 1900) {
+    max-height: rem(230);
+  }
+
+  & {
+    scrollbar-color: root.$color-dark transparent;
+  }
+
+  &::-webkit-scrollbar {
+    width: rem(1);
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: root.$color-dark;
+  }
+
+  &__list {
+    height: 100%;
+    overflow-y: auto;
+  }
+
+  &__item {
+    font-family: root.$font-family-accent;
+    margin-bottom: rem(10);
+
+    @include between(1024, 1900) {
+      font-size: rem(16);
+      margin-bottom: rem(8);
+    }
+  }
+
+  &__item:last-child {
+    margin-bottom: 0;
+  }
+
+  &__accent {
+    font-family: root.$font-family-base;
+    font-size: rem(18);
+
+    @include between(1024, 1900) {
+      font-size: rem(16);
+    }
+  }
+}

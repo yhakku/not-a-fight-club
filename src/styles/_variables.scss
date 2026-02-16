@@ -1,0 +1,16 @@
+@use 'helpers' as *;
+
+$color-dark: #272727;
+$color-ligth: #fff;
+$color-placeholder: #949494;
+$color-invalid: #ff3939;
+
+$border-default: rem(2) solid #272727;
+$border-light: rem(1) solid #272727;
+
+$font-family-base: 'JujutsuKaisen', sans-serif;
+$font-family-accent: 'NATS', sans-serif;
+
+$transition-duration: 0.3s;
+
+$container-width: rem(1440);

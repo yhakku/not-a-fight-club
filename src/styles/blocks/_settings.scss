@@ -1,0 +1,28 @@
+@use '../helpers/' as *;
+@use '../variables/' as root;
+
+.settings {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: flex-start;
+  max-width: rem(956);
+  width: 100%;
+  max-height: rem(481);
+  height: 100%;
+  margin: 0 auto;
+  padding-top: rem(60);
+  padding-inline: rem(60);
+  background-color: root.$color-ligth;
+  border: root.$border-default;
+
+  &__button-close {
+    position: absolute;
+
+    @include square(rem(44));
+
+    right: -2.5%;
+    top: -4.5%;
+  }
+}

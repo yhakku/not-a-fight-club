@@ -1,0 +1,57 @@
+@use 'helpers' as *;
+@use 'variables' as root;
+
+.container {
+  max-width: root.$container-width;
+  margin-inline: auto;
+
+  @include between(1024, 1900) {
+    max-width: rem(1240);
+  }
+}
+
+.button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-block: rem(10);
+  background-color: root.$color-ligth;
+  border: root.$border-default;
+  border-radius: rem(30);
+  transition: root.$transition-duration;
+
+  @include hover(false) {
+    & {
+      background-color: root.$color-dark;
+      color: root.$color-ligth;
+    }
+  }
+
+  @include between(1024, 1900) {
+    font-size: rem(16);
+  }
+}
+
+.hidden {
+  @include visually-hidden;
+}
+
+.disabled {
+  pointer-events: none;
+}
+
+.selected {
+  background-color: root.$color-dark;
+  color: root.$color-ligth;
+}
+
+.waiting-attack + .fight__tooltip {
+  opacity: 0 !important;
+  visibility: hidden !important;
+}
+
+.active {
+  svg {
+    fill: #000;
+  }
+}

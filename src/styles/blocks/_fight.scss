@@ -1,0 +1,521 @@
+@use '../helpers/' as *;
+@use '../variables/' as root;
+
+.fight {
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  align-items: center;
+  height: 100%;
+
+  @include between(1024, 1900) {
+    justify-content: center;
+  }
+
+  &__body {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding-bottom: rem(40);
+  }
+
+  &__card {
+    display: flex;
+    flex-direction: column;
+    row-gap: rem(10);
+    transition: all 0.2s ease;
+  }
+
+  &__image-container {
+    position: relative;
+    max-width: rem(260);
+  }
+
+  &__image {
+    border: root.$border-default;
+
+    @include between(1024, 1900) {
+      max-width: rem(200);
+    }
+  }
+
+  &__panel {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    row-gap: rem(15);
+
+    &-tooltip-container {
+      position: relative;
+      display: flex;
+      align-items: center;
+      column-gap: rem(7);
+      cursor: default;
+    }
+
+    &-info {
+      display: inline-flex;
+      align-items: center;
+      border: none;
+      background-color: transparent;
+      cursor: default;
+
+      @include square(20px);
+
+      & svg {
+        opacity: 0.7;
+        transition: opacity 0.2s ease;
+      }
+
+      @include between(1024, 1900) {
+        @include square(18px);
+      }
+    }
+
+    &-tooltip {
+      position: absolute;
+      bottom: rem(8);
+      left: 97%;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.2s ease;
+
+      @include between(1024, 1900) {
+        bottom: rem(5);
+        left: 95%;
+      }
+
+      @include between(1024, 1900) {
+        & svg {
+          width: rem(145);
+          height: rem(60);
+        }
+      }
+    }
+
+    &-tooltip-container:hover .fight__panel-tooltip,
+    &-tooltip-container button:focus + .fight__panel-tooltip {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    &-tooltip-container:hover svg,
+    &-tooltip-container button:focus svg {
+      opacity: 1;
+    }
+
+    &-versus {
+      padding-bottom: rem(10);
+      font-size: rem(40);
+
+      @include between(1024, 1900) {
+        font-size: rem(32);
+      }
+
+      &--player {
+        position: absolute;
+        top: rem(9);
+        right: 60%;
+        transform: translateX(10%);
+        font-size: rem(26);
+        text-wrap: nowrap;
+
+        @include between(1024, 1900) {
+          font-size: rem(22);
+          right: 59%;
+        }
+      }
+
+      &--enemy {
+        position: absolute;
+        top: rem(9);
+        left: 57%;
+        font-size: rem(26);
+        text-wrap: nowrap;
+
+        @include between(1024, 1900) {
+          font-size: rem(22);
+          left: 56%;
+        }
+      }
+
+      &-button {
+        position: absolute;
+        top: rem(9);
+        left: 50%;
+        transform: translateX(-50%);
+      }
+    }
+
+    &-description {
+      display: flex;
+      justify-content: center;
+      max-width: rem(539.08);
+      font-family: root.$font-family-accent;
+      font-size: rem(18);
+      line-height: 0.9;
+      text-align: center;
+      padding-bottom: rem(33);
+
+      @include between(1024, 1900) {
+        font-size: rem(14);
+      }
+    }
+
+    &-button {
+      display: flex;
+      background-color: root.$color-dark;
+      padding: rem(16) rem(24) rem(15) rem(24);
+      border: root.$border-default;
+      border-radius: rem(50);
+      color: root.$color-ligth;
+
+      @include hover(false) {
+        & {
+          background-color: root.$color-ligth;
+          border: root.$border-default;
+          color: root.$color-dark;
+        }
+      }
+
+      @include between(1024, 1900) {
+        font-size: rem(16);
+        padding: rem(12) rem(20) rem(11) rem(20);
+      }
+    }
+
+    &-checkbox {
+      position: absolute;
+      right: 2%;
+      bottom: 5%;
+
+      &-input {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+
+        &:focus-visible + .fight__panel-checkbox-text {
+          outline: rem(2) solid root.$color-dark;
+          outline-offset: rem(4);
+        }
+      }
+
+      &-text {
+        position: relative;
+        display: flex;
+        align-items: center;
+        font-family: root.$font-family-accent;
+
+        @include between(1024, 1900) {
+          font-size: rem(14);
+        }
+      }
+
+      &-text::before {
+        content: '';
+        display: inline-block;
+        width: rem(12);
+        height: rem(12);
+        background-color: transparent;
+        border: rem(1) solid root.$color-dark;
+        border-radius: rem(3);
+        margin-right: rem(5);
+      }
+
+      &-text::after {
+        content: '';
+        position: absolute;
+        left: rem(1);
+        top: 35%;
+        transform: translateY(-40%);
+        width: rem(10);
+        height: rem(11);
+        background-image: url(../../assets/images/fight/check.svg);
+        opacity: 0;
+        transition: opacity 0.2s ease;
+      }
+
+      &-input:checked + &-text::after {
+        opacity: 1;
+      }
+
+      &-input:checked + &-text::before {
+        scale: 1.1;
+      }
+    }
+  }
+
+  &__panel-container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding-inline: rem(40);
+
+    @include between(1024, 1900) {
+      max-width: rem(527);
+    }
+
+    &--description {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      @include between(1024, 1900) {
+        max-width: rem(447);
+      }
+    }
+
+    &--fight {
+      display: none;
+      flex-direction: column;
+      align-items: flex-start;
+      row-gap: rem(25);
+
+      @include between(1024, 1900) {
+        row-gap: rem(15);
+      }
+    }
+  }
+
+  &__panel-title {
+    font-size: rem(24);
+
+    @include between(1024, 1900) {
+      font-size: rem(20);
+    }
+  }
+
+  &__buttons {
+    display: flex;
+    column-gap: rem(10);
+  }
+
+  &__button {
+    padding: rem(12) rem(24) rem(11) rem(24);
+
+    @include between(1024, 1900) {
+      padding: rem(10) rem(20) rem(9) rem(20);
+    }
+  }
+
+  &__buttons-container {
+    display: flex;
+  }
+
+  &__tooltip-container {
+    position: relative;
+  }
+
+  &__tooltip {
+    position: absolute;
+    top: 90%;
+    left: 80%;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease;
+
+    @include between(1024, 1900) {
+      top: 92%;
+      left: 75%;
+    }
+
+    & svg {
+      @include between(1024, 1900) {
+        width: rem(150);
+        height: rem(70);
+      }
+    }
+  }
+
+  &__fight-button {
+    display: flex;
+    align-items: center;
+    align-self: flex-start;
+    background-color: root.$color-dark;
+    padding: rem(14) rem(22) rem(14) rem(22);
+    margin-right: rem(10);
+    border: root.$border-default;
+    border-radius: rem(50);
+    color: root.$color-ligth;
+    transition: all 0.3s ease;
+
+    &:disabled {
+      background-color: #555555;
+      border: rem(2) solid #555555;
+      cursor: not-allowed;
+    }
+
+    &:not(:disabled):hover {
+      color: root.$color-dark;
+      background-color: root.$color-ligth;
+      border: root.$border-default;
+    }
+
+    &:not(:disabled):active {
+      scale: 0.95;
+    }
+
+    & svg {
+      margin-left: rem(10);
+      transition: transform 0.3s ease;
+
+      @include between(1024, 1900) {
+        width: rem(14);
+        height: rem(20);
+      }
+    }
+
+    &:not(:disabled):hover svg {
+      transform: skewX(-12deg) skewY(-12deg);
+    }
+
+    &:not(:disabled):hover path {
+      fill: root.$color-dark;
+    }
+
+    @include between(1024, 1900) {
+      font-size: rem(16);
+      padding: rem(11) rem(16) rem(11) rem(16);
+    }
+  }
+
+  &__fight-button:disabled:hover + .fight__tooltip {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  &__reload-button {
+    display: flex;
+    align-items: center;
+    align-self: flex-start;
+    background-color: root.$color-dark;
+    padding: rem(14) rem(22) rem(14) rem(22);
+    border: root.$border-default;
+    border-radius: rem(50);
+    color: root.$color-ligth;
+    transition: all 0.3s ease;
+
+    &:hover {
+      color: root.$color-dark;
+      background-color: root.$color-ligth;
+      border: root.$border-default;
+    }
+
+    &:active {
+      scale: 0.95;
+    }
+
+    & svg {
+      margin-left: rem(10);
+      transition: transform 0.3s ease;
+
+      @include between(1024, 1900) {
+        width: rem(20);
+        height: rem(24);
+      }
+    }
+
+    &:hover svg {
+      transform: rotate(180deg);
+    }
+
+    &:hover path {
+      fill: root.$color-dark;
+    }
+
+    @include between(1024, 1900) {
+      font-size: rem(16);
+      padding: rem(9) rem(14) rem(9) rem(14);
+    }
+  }
+
+  &__reset-button {
+    display: flex;
+    align-items: center;
+    align-self: flex-start;
+    background-color: root.$color-dark;
+    padding: rem(14) rem(33) rem(14) rem(32);
+    margin-right: rem(10);
+    border: root.$border-default;
+    border-radius: rem(50);
+    color: root.$color-ligth;
+
+    &:disabled {
+      background-color: #555555;
+      border: rem(2) solid #555555;
+      cursor: not-allowed;
+    }
+
+    &:not(:disabled):hover {
+      color: root.$color-dark;
+      background-color: root.$color-ligth;
+      border: root.$border-default;
+    }
+
+    &:not(:disabled):active {
+      scale: 0.95;
+    }
+
+    & svg {
+      margin-left: rem(10);
+      transition: transform 0.3s ease;
+    }
+
+    &:not(:disabled):hover svg {
+      transform: translateX(rem(10));
+    }
+
+    &:not(:disabled):hover path {
+      fill: root.$color-dark;
+    }
+
+    @include between(1024, 1900) {
+      font-size: rem(16);
+      padding: rem(10) rem(24) rem(10) rem(23);
+    }
+  }
+
+  &__hint-container {
+    position: absolute;
+    left: 40%;
+    bottom: 70%;
+    transform: translate(12%, 3%);
+
+    &--enemy {
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.2s ease;
+    }
+
+    &--player {
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.2s ease;
+    }
+  }
+}
+
+@keyframes hint-movement {
+  from {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(0, 0);
+  }
+
+  to {
+    transform: translate(20%, -20%);
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+.fight__hint-container--enemy:has(> .fight__hint-enemy[src]) {
+  animation: hint-movement 1.2s ease-in-out;
+}
+
+.fight__hint-container--player:has(> .fight__hint-player[src]) {
+  animation: hint-movement 1.2s ease-in-out;
+}
